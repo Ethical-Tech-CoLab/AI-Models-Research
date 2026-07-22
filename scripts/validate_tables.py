@@ -54,7 +54,7 @@ from _common import (
 
 PROFILE_DIR: Path = DOCS_DIR / "model-profiles"
 
-#: The thirty-eight headings of the model profile template, in order.
+#: The thirty-nine headings of the model profile template, in order.
 #: Defined in CONTRIBUTING.md section 5.
 PROFILE_HEADINGS: tuple[str, ...] = (
     "Overview",
@@ -183,14 +183,17 @@ def check_schema(reporter: Reporter) -> None:
         reporter: Collector for violations.
     """
     reporter.note_check("--check-schema")
+    jsonschema: Any | None
     try:
-        import jsonschema
+        import jsonschema as jsonschema_module
     except ImportError:
-        jsonschema = None  # type: ignore[assignment]
+        jsonschema = None
         print(
             "validate_tables.py: jsonschema is not installed; running reduced structural "
             "checks only. Install it with: pip install -r requirements.txt"
         )
+    else:
+        jsonschema = jsonschema_module
 
     for dataset in ("models", "benchmarks", "sources"):
         path = DATASETS[dataset]
@@ -360,15 +363,15 @@ def check_style(reporter: Reporter) -> None:
     for dataset, path in DATASETS.items():
         header, rows = read_csv(path)
         for index, row in enumerate(rows):
-            line = csv_line_number(index)
+            line_number = csv_line_number(index)
             for field in header:
                 value = row.get(field) or ""
                 if EM_DASH in value:
-                    reporter.add(path, line, f"em dash in field {field!r}")
+                    reporter.add(path, line_number, f"em dash in field {field!r}")
                 if is_missing(value):
                     reporter.add(
                         path,
-                        line,
+                        line_number,
                         f"field {field!r} in {dataset} is empty or uses a rejected placeholder. "
                         f"Use a reserved string from data-sources.md section 1.2",
                     )
@@ -413,7 +416,7 @@ def check_profiles(reporter: Reporter) -> None:
             reporter.add(
                 path,
                 0,
-                "template sections are out of order. The thirty-eight headings must appear in "
+                "template sections are out of order. The thirty-nine headings must appear in "
                 "the order given in CONTRIBUTING.md section 5",
             )
 

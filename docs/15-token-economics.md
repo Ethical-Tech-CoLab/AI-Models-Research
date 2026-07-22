@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Converts prices into costs. Defines the billable token classes, the cache and batch discount structures, and the formulas for total API cost, effective tokens per task, cache savings, reasoning overhead, and cost per accepted task. Answers research question RQ8 by showing that ranking models on advertised price per million tokens is not a ranking on cost. Hosts the generated pricing table.

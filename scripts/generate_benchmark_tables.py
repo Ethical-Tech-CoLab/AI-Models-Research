@@ -44,19 +44,43 @@ from _common import (
 #: because a result that appears in no table is a result nobody reads.
 CATEGORIES: dict[str, tuple[str, ...]] = {
     "coding": (
-        "swe_bench", "swe_bench_verified", "swe_bench_pro", "terminal_bench",
-        "livecodebench", "humaneval", "mbpp",
+        "swe_bench",
+        "swe_bench_verified",
+        "swe_bench_pro",
+        "terminal_bench",
+        "livecodebench",
+        "humaneval",
+        "mbpp",
     ),
     "reasoning": (
-        "mmlu", "mmlu_pro", "gpqa_diamond", "humanitys_last_exam", "arc_agi_1",
-        "arc_agi_2", "arc_agi_3", "frontiermath", "aime", "math", "gsm8k",
+        "mmlu",
+        "mmlu_pro",
+        "gpqa_diamond",
+        "humanitys_last_exam",
+        "arc_agi_1",
+        "arc_agi_2",
+        "arc_agi_3",
+        "frontiermath",
+        "aime",
+        "math",
+        "gsm8k",
     ),
     "multimodal": ("mmmu", "mmmu_pro", "mathvista", "docvqa", "chartqa", "videomme"),
     "long-context": (
-        "longbench", "longcodebench", "ruler", "mrcr", "needle_in_a_haystack",
+        "longbench",
+        "longcodebench",
+        "ruler",
+        "mrcr",
+        "needle_in_a_haystack",
     ),
     "agents": (
-        "browsecomp", "webarena", "osworld", "gaia", "agentbench", "bfcl", "toolbench",
+        "browsecomp",
+        "webarena",
+        "osworld",
+        "gaia",
+        "agentbench",
+        "bfcl",
+        "toolbench",
     ),
     "factuality": ("facts", "simpleqa", "truthfulqa", "halueval", "halluhard"),
 }
@@ -75,9 +99,20 @@ TARGETS: dict[str, tuple[Path, str]] = {
 }
 
 HEADER: tuple[str, ...] = (
-    "Benchmark", "Subset", "Model", "Score", "Metric", "Unit", "Harness",
-    "Sampling policy", "n", "Tools", "Reported by", "Evidence grade",
-    "Evaluation date", "Published",
+    "Benchmark",
+    "Subset",
+    "Model",
+    "Score",
+    "Metric",
+    "Unit",
+    "Harness",
+    "Sampling policy",
+    "n",
+    "Tools",
+    "Reported by",
+    "Evidence grade",
+    "Evaluation date",
+    "Published",
 )
 
 EMPTY_NOTE = (

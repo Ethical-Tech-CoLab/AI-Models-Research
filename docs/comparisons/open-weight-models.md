@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 4, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Compares models whose weights are downloadable, on specification, licence terms, hardware requirement, and independently measured performance. Because these models can be instrumented directly, this comparison can carry Grade A evidence on memory, throughput, and energy that the frontier comparison cannot.

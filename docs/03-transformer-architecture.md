@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 The mechanical chapter. Explains the components of contemporary decoder-only models and the variants that matter for capability, memory, or throughput, with equations where an equation is clearer than prose. Covers self-attention, causal masking, multi-head, multi-query, grouped-query, sliding-window and sparse attention, positional methods, mixture-of-experts layers and expert routing, state-space and hybrid architectures, and the inference-side structures that follow from these choices: the KV cache, prefix caching, speculative decoding, continuous batching, quantization, and distillation. Each variant is presented with what it changes and what it costs, not as a chronology of papers.

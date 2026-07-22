@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Documents benchmarks that evaluate models inside action loops: web browsing and information seeking, simulated web environments, full desktop environments, general assistant tasks, and structured function-calling suites. Hosts the generated agent results table.

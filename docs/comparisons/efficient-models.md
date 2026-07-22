@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 4, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Compares smaller and cheaper models on the axes that make them worth selecting: cost per accepted task, latency, memory footprint, and on-device or constrained-hardware deployment. Efficiency is defined here as work delivered per unit of cost, not as parameter count, because a small model that fails a task is not efficient.

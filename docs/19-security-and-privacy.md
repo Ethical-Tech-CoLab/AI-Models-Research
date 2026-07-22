@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Covers the security and privacy properties that bear on model selection: data retention and training-use terms for commercial APIs, regional processing and residency, prompt injection and tool-use exposure in agent deployments, training-data extraction and memorisation, and the deployment options that change the threat model. Records commercial terms as dated snapshots, since they change without notice.

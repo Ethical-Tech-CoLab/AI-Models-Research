@@ -74,6 +74,7 @@ DATASETS: dict[str, Path] = {
     "sources": DATA_DIR / "sources.csv",
 }
 
+# fmt: off
 #: Expected header for each dataset. Held here rather than derived from the
 #: JSON Schemas because three of the six datasets have no schema file, and a
 #: header check must work for all six.
@@ -122,13 +123,17 @@ EXPECTED_HEADERS: dict[str, tuple[str, ...]] = {
     ),
 }
 
+# fmt: on
+
 #: The eleven conditions that must accompany any published energy figure.
 #: See research-methodology.md section 6.4.
+# fmt: off
 ENERGY_REQUIRED_CONDITIONS: tuple[str, ...] = (
     "hardware", "model_version", "precision", "prompt_tokens", "output_tokens",
     "batch_size", "utilization_percent", "serving_framework", "pue",
     "measurement_method", "uncertainty",
 )
+# fmt: on
 
 
 @dataclass(frozen=True, order=True)

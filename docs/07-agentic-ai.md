@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Covers models used inside action loops: tool calling, planning, multi-step execution, computer use, and multi-agent arrangements. Distinguishes the model's contribution from the scaffold's, which is the central measurement problem in this area, since published agent results are properties of a model-and-scaffold pair. Answers research question RQ5 on the predictive value of agentic benchmarks for deployed reliability.

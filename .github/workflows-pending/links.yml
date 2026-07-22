@@ -1,0 +1,52 @@
+name: Link check
+
+# The only workflow in this repository that makes network calls. Internal links
+# are checked offline by scripts/validate_links.py on every pull request; this
+# workflow checks that external sources still resolve, which matters because a
+# dead source URL means a claim can no longer be verified.
+#
+# Runs on a schedule rather than on every pull request, because external link
+# rot is not caused by a contributor's change and should not block their merge.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "data/sources.csv"
+      - "references.bib"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  external:
+    name: Check external sources resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 3
+            --timeout 30
+            --accept 200,206,301,302,403,999
+            --exclude-path site
+            --exclude-path .venv
+            './**/*.md' 'data/sources.csv'
+          fail: false
+          output: lychee-report.md
+
+      - name: Open an issue when a source URL has rotted
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Dead source URL detected by the scheduled link check"
+          content-filepath: lychee-report.md
+          labels: source-correction

@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Distinguishes the several distinct phenomena that the word hallucination is used for: unsupported generation in a grounded setting, incorrect recall in a closed-book setting, fabricated citations and identifiers, and confident assertion under uncertainty. Explains how each is measured, why measured rates are not comparable across those settings, and what calibration and abstention contribute. Answers research question RQ3.

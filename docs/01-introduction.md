@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 States the problem this handbook addresses, defines its audience, and explains how to read the rest of it. The problem is that the public record on model capability mixes three kinds of claim that have different reliability: independently verified measurement, institutional disclosure, and provider marketing. This chapter sets out the consequences of that mixing for research, for procurement, and for policy, and introduces the evidence-grading scheme that the rest of the handbook applies.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Estimate accelerator memory for serving a model of known size.
+r"""Estimate accelerator memory for serving a model of known size.
 
 The estimate is arithmetic over disclosed quantities. It is not a measurement,
 and it is not a substitute for one: real memory use depends on the serving
@@ -124,9 +124,7 @@ def weight_memory_gib(params_billions: float, precision: str) -> float:
     return params_billions * BILLION * bytes_per_element(precision) / GIB
 
 
-def kv_cache_gib(
-    layers: int, kv_heads: int, head_dim: int, seq_len: int, precision: str
-) -> float:
+def kv_cache_gib(layers: int, kv_heads: int, head_dim: int, seq_len: int, precision: str) -> float:
     """Compute KV cache memory for a single sequence, in gibibytes.
 
     Args:
@@ -285,7 +283,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="activation and framework overhead as a fraction of weights plus KV cache",
     )
     parser.add_argument(
-        "--accelerator-gib", type=float, help="memory per accelerator, to report how many are needed"
+        "--accelerator-gib",
+        type=float,
+        help="memory per accelerator, to report how many are needed",
     )
     return parser
 

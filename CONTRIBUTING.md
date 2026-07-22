@@ -151,7 +151,7 @@ Section-specific requirements:
 - **Independent evidence** and **Provider-reported evidence.** These two sections separate Grade A and Grade B material from Grade C material. Do not mix them.
 - **Sources.** Numbered footnote definitions, each resolving to a `source_id`.
 
-`scripts/validate_tables.py --check-profiles` verifies that every profile file contains all thirty-eight headings in order and that no section is empty.
+`scripts/validate_tables.py --check-profiles` verifies that every profile file contains all thirty-nine headings in order and that no section is empty.
 
 ## 6. Benchmark documentation template
 

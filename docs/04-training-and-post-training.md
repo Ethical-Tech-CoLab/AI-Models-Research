@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Explains how a foundation model is produced and then shaped. Covers pretraining, data curation, supervised fine-tuning, instruction tuning, and the preference and reinforcement methods that follow: reinforcement learning from human feedback, reinforcement learning from AI feedback, direct preference optimization, proximal policy optimization, group relative policy optimization, rejection sampling, process and outcome supervision, and reinforcement learning with verifiable rewards. Covers synthetic data, curriculum learning, and the role of test-time compute as a post-training design choice rather than an inference detail.

@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Covers models that accept or produce more than text: image, document, audio, and video input, and the tokenization and cost consequences of each. Explains how non-text input is converted to tokens, why image and video token accounting differs between providers, and what multimodal benchmarks do and do not establish.

@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Establishes what may and may not be said about the energy cost of AI models. Defines the accounting boundary explicitly, covering direct accelerator energy, host energy, networking, storage, cooling and power usage effectiveness, grid carbon intensity, embodied emissions, and water consumption. Distinguishes training energy from inference energy and per-token from per-query and per-accepted-task measures. Answers research question RQ9. Publishes no universal per-model energy value.

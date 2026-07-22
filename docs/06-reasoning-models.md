@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Examines models that expend additional inference compute before answering. Covers chain-of-thought prompting, trained reasoning behaviour, hidden versus visible reasoning traces, caller-selectable reasoning effort, and the accuracy-per-token and accuracy-per-second trade-offs these create. Answers research question RQ4: whether reasoning-mode inference improves accuracy enough to justify its token and latency cost, and under what task conditions.

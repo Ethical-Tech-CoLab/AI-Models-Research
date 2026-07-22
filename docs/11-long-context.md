@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Separates advertised context length from measured usable context. Covers the methods that extend context, the retrieval and position effects that degrade performance well before the advertised limit, and the evaluation designs that detect that degradation. Answers research question RQ6. Hosts the generated table comparing advertised context against independently measured effective context.

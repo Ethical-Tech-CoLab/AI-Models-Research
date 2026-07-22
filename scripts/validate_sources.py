@@ -44,7 +44,6 @@ from _common import (
     is_missing,
     markdown_files,
     read_csv,
-    relative,
 )
 
 SOURCE_TYPES: frozenset[str] = frozenset(
@@ -235,9 +234,7 @@ def check_dates(reporter: Reporter) -> None:
                 if not value:
                     reporter.add(path, line, f"{field} is empty; an absolute date is required")
                 elif not DATE_PATTERN.match(value):
-                    reporter.add(
-                        path, line, f"{field} {value!r} is not in YYYY-MM-DD form"
-                    )
+                    reporter.add(path, line, f"{field} {value!r} is not in YYYY-MM-DD form")
                 elif not is_date(value):
                     reporter.add(path, line, f"{field} {value!r} is not a real calendar date")
 

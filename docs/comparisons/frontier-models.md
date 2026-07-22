@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 4, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Compares the closed-weight models positioned by their providers at the capability frontier, on specification and on results that were produced under compatible conditions. The comparison is constrained by the verification asymmetry: for these models, parameter counts, memory footprint, and energy per token are not observable, so the comparison is necessarily thinner than the open-weight one.

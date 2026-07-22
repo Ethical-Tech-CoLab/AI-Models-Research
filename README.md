@@ -178,6 +178,7 @@ The generator rewrites the content between the two markers and leaves the rest o
 | [scripts/](scripts/) | Validation and table-generation scripts. All are runnable from the repository root |
 | [notebooks/](notebooks/) | Analysis notebooks that read only from `data/` |
 | [assets/](assets/) | Generated diagrams, charts, and table images |
+| [web/](web/) | Source of the interactive companion page: a live cost-per-accepted-task calculator and four charts, each labelled with its evidence grade. Self-contained HTML, no build step, no external requests |
 | [research-methodology.md](research-methodology.md) | Search strategy, inclusion and exclusion criteria, extraction protocol, and quality control |
 | [data-sources.md](data-sources.md) | The source register, the seed bibliography, and the outstanding verification queue |
 | [glossary.md](glossary.md) | Terms and acronyms used across the repository |
@@ -190,7 +191,7 @@ Start at [docs/index.md](docs/index.md) or the full table of contents in [SUMMAR
 
 Python 3.11 or later is required.
 
-**macOS and Linux**
+On macOS and Linux:
 
 ```bash
 git clone https://github.com/Ethical-Tech-CoLab/AI-Models-Research.git
@@ -200,7 +201,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Windows (PowerShell)**
+On Windows, using PowerShell:
 
 ```powershell
 git clone https://github.com/Ethical-Tech-CoLab/AI-Models-Research.git

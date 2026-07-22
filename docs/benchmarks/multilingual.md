@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Documents the language coverage of the benchmark set used in this repository, the benchmarks designed specifically for multilingual evaluation, and the interaction between tokenizer efficiency and both cost and measured performance in non-English languages. Records where translated benchmarks are used and what translation introduces.

@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Converts the handbook into a procedure. Given a task specification, a quality bar, a latency budget, a cost ceiling, and a deployment constraint, the framework produces a shortlist and an evaluation plan rather than a ranking. It is explicitly a procedure for the reader to run, not a recommendation, because construct validity cannot be established on the reader's behalf.

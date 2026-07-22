@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Documents the benchmarks used to claim knowledge breadth and reasoning ability, from broad multiple-choice suites through graduate-level science questions to abstraction and competition mathematics. Several of these are saturated, several are contaminated, and several permit tool use in some reported runs and not in others, which makes them the most frequently misreported family of benchmarks in the field.

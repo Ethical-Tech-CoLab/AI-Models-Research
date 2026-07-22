@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 4, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Compares models on knowledge and reasoning benchmarks, with sampling policy visible in every row. Sampling policy is decisive here: a majority-vote result and a single-sample result on the same benchmark are not comparable, and the difference is frequently larger than the difference between models.

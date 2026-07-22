@@ -105,8 +105,15 @@ def build_table(rows: list[dict[str, str]], undated: list[dict[str, str]]) -> st
         The rendered Markdown table.
     """
     header = [
-        "Release date", "Quarter", "Provider", "Model", "Status", "Open weights",
-        "Evidence grade", "Source", "Source date",
+        "Release date",
+        "Quarter",
+        "Provider",
+        "Model",
+        "Status",
+        "Open weights",
+        "Evidence grade",
+        "Source",
+        "Source date",
     ]
     body = [
         [
@@ -139,8 +146,7 @@ def build_table(rows: list[dict[str, str]], undated: list[dict[str, str]]) -> st
     return render_table(
         header,
         body,
-        "No models recorded. Populate data/models.csv and rerun "
-        "scripts/build_release_timeline.py",
+        "No models recorded. Populate data/models.csv and rerun scripts/build_release_timeline.py",
     )
 
 

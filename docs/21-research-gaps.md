@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Records what the survey could not establish and what would be required to establish it. Each gap states the question, why the existing evidence does not answer it, and the study design that would. This chapter is the register of open questions accumulated across chapters 01 to 20 and across the sixteen model profiles, consolidated so that the handbook's own boundaries are legible.

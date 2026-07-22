@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Explains how text and other modalities become tokens, and why that mapping is a cost and equity issue rather than an implementation detail. Covers byte-pair encoding, unigram and sentencepiece methods, byte-level fallback, vocabulary size trade-offs, and the systematically higher token counts that non-English and non-Latin-script text incurs. Enumerates every token class that a caller pays for: input, cached, output, reasoning, image, audio, video, tool-call, and compaction tokens. Answers research question RQ7.

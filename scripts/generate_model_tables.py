@@ -42,8 +42,7 @@ from _common import (
 )
 
 EMPTY_NOTE = (
-    "No rows. Populate the source dataset in data/ and rerun "
-    "scripts/generate_model_tables.py"
+    "No rows. Populate the source dataset in data/ and rerun scripts/generate_model_tables.py"
 )
 
 
@@ -93,8 +92,15 @@ def build_compact() -> str:
     _, pricing = read_csv(DATASETS["pricing"])
     prices = _price_index(pricing)
     header = [
-        "Provider", "Model", "Release date", "Open weights", "Context window",
-        "Input USD / 1M", "Output USD / 1M", "Evidence grade", "Source date",
+        "Provider",
+        "Model",
+        "Release date",
+        "Open weights",
+        "Context window",
+        "Input USD / 1M",
+        "Output USD / 1M",
+        "Evidence grade",
+        "Source date",
     ]
     rows = []
     for model in sorted(models, key=_by_provider_and_release):
@@ -127,10 +133,23 @@ def build_full(open_weights: bool | None = None) -> str:
     """
     _, models = read_csv(DATASETS["models"])
     header = [
-        "Provider", "Model", "Release date", "Status", "Open weights", "Licence",
-        "Architecture", "Total params (B)", "Active params (B)", "Modalities in",
-        "Context window", "Max output", "Reasoning mode", "Tool use",
-        "Deployment", "Evidence grade", "Source date",
+        "Provider",
+        "Model",
+        "Release date",
+        "Status",
+        "Open weights",
+        "Licence",
+        "Architecture",
+        "Total params (B)",
+        "Active params (B)",
+        "Modalities in",
+        "Context window",
+        "Max output",
+        "Reasoning mode",
+        "Tool use",
+        "Deployment",
+        "Evidence grade",
+        "Source date",
     ]
     rows = []
     for model in sorted(models, key=_by_provider_and_release):
@@ -169,9 +188,17 @@ def build_pricing() -> str:
     """
     _, rows_in = read_csv(DATASETS["pricing"])
     header = [
-        "Model", "Provider", "Currency", "Input / 1M", "Cached input / 1M",
-        "Output / 1M", "Reasoning tokens billed", "Batch discount %",
-        "Effective date", "Region", "Evidence grade",
+        "Model",
+        "Provider",
+        "Currency",
+        "Input / 1M",
+        "Cached input / 1M",
+        "Output / 1M",
+        "Reasoning tokens billed",
+        "Batch discount %",
+        "Effective date",
+        "Region",
+        "Evidence grade",
     ]
     rows = [
         [
@@ -188,8 +215,12 @@ def build_pricing() -> str:
             row.get("evidence_grade", ""),
         ]
         for row in sorted(
-            rows_in, key=lambda r: (r.get("provider", ""), r.get("model_id", ""),
-                                    r.get("effective_date", ""))
+            rows_in,
+            key=lambda r: (
+                r.get("provider", ""),
+                r.get("model_id", ""),
+                r.get("effective_date", ""),
+            ),
         )
     ]
     return render_table(header, rows, EMPTY_NOTE)
@@ -203,9 +234,14 @@ def build_context_windows() -> str:
     """
     _, rows_in = read_csv(DATASETS["context-windows"])
     header = [
-        "Model", "Advertised context", "Advertised max output",
-        "Measured effective context", "Measurement benchmark",
-        "Threshold", "Evidence grade", "Source date",
+        "Model",
+        "Advertised context",
+        "Advertised max output",
+        "Measured effective context",
+        "Measurement benchmark",
+        "Threshold",
+        "Evidence grade",
+        "Source date",
     ]
     rows = [
         [
@@ -231,9 +267,19 @@ def build_selection_matrix() -> str:
     """
     _, models = read_csv(DATASETS["models"])
     header = [
-        "Model", "Provider", "Open weights", "Modalities in", "Context window",
-        "Reasoning mode", "Tool use", "Agent capability", "Deployment",
-        "Quantization", "Hardware requirement", "Evidence grade", "Source date",
+        "Model",
+        "Provider",
+        "Open weights",
+        "Modalities in",
+        "Context window",
+        "Reasoning mode",
+        "Tool use",
+        "Agent capability",
+        "Deployment",
+        "Quantization",
+        "Hardware requirement",
+        "Evidence grade",
+        "Source date",
     ]
     rows = [
         [

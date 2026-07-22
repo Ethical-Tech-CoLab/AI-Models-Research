@@ -1,0 +1,55 @@
+name: Validation
+
+# Runs the repository's own validators plus Markdown linting. This is the
+# workflow that enforces the evidence rules: a pull request that adds a number
+# without a source, a date without an absolute form, or a hand-edited generated
+# table fails here.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate data, citations, and style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate the source register and citations
+        run: python scripts/validate_sources.py
+
+      - name: Validate datasets, tables, style, and profiles
+        run: python scripts/validate_tables.py
+
+      - name: Validate internal links and navigation coverage
+        run: python scripts/validate_links.py
+
+      - name: Confirm generated tables are in sync with the data layer
+        run: |
+          python scripts/generate_model_tables.py --check
+          python scripts/generate_benchmark_tables.py --check
+          python scripts/build_release_timeline.py --check
+
+      - name: Lint Markdown
+        run: python -m pymarkdown --config pyproject.toml scan docs *.md
+
+      - name: Lint Python
+        run: |
+          ruff check scripts
+          ruff format --check scripts

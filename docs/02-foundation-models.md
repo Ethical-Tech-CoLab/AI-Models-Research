@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Defines the object of study. Sets out what distinguishes a foundation model from earlier task-specific models, traces the shift from task-specific supervised learning to pretraining followed by adaptation, and establishes the vocabulary used throughout: base model, instruction-tuned model, reasoning model, and served endpoint. Establishes that a served endpoint is not the same object as a set of weights, which is the distinction that makes most reproducibility problems in this field intelligible.

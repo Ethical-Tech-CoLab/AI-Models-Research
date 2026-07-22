@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Definitional entries for accelerator and datacentre terminology used in chapters 16 and 17: memory capacity and bandwidth, interconnect, precision formats, utilisation, power usage effectiveness, and the units used throughout. Entries are definitional: no vendor specifications appear here, because those are dated facts that belong in the chapter with a source.

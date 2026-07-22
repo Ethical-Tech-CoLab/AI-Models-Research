@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Covers what happens between a request and a response: prefill and decode, decoding strategies and their effect on reproducibility, batching policy, prefix and prompt caching, speculative decoding, quantization at serving time, and retrieval augmentation as an inference-time architecture. Explains why the serving stack, not the weights alone, determines observed behaviour.

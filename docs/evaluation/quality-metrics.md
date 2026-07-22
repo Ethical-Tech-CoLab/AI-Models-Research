@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 Defines the quality measures used in the bakeoff and in this repository's own records: exact match, pass at k, resolved rate, rubric scoring, pairwise preference, and model-judged scoring, with the failure mode and bias of each. Defines the acceptance criterion that makes cost per accepted task computable.

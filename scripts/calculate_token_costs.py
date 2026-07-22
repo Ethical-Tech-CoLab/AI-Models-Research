@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute token costs from published prices and measured token volumes.
+r"""Compute token costs from published prices and measured token volumes.
 
 Advertised price per million tokens is not cost. The quantity a reader needs is
 cost per accepted task, which depends on how many tokens a task consumes, how
@@ -178,8 +178,10 @@ def compute(usage: Usage, prices: Prices, batch: bool = False) -> CostBreakdown:
     billable_input = usage.input_fresh + usage.tool
 
     input_cost = (
-        billable_input * prices.input_fresh + usage.input_cached * prices.input_cached
-    ) * multiplier / MILLION
+        (billable_input * prices.input_fresh + usage.input_cached * prices.input_cached)
+        * multiplier
+        / MILLION
+    )
     output_cost = (usage.output + usage.reasoning) * prices.output * multiplier / MILLION
     total = input_cost + output_cost
 
@@ -291,7 +293,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--cached-tokens", type=int, default=0, help="cached input tokens")
     parser.add_argument("--output-tokens", type=int, required=True, help="visible output tokens")
     parser.add_argument("--reasoning-tokens", type=int, default=0, help="reasoning tokens")
-    parser.add_argument("--tool-tokens", type=int, default=0, help="tool definition and result tokens")
+    parser.add_argument(
+        "--tool-tokens", type=int, default=0, help="tool definition and result tokens"
+    )
     parser.add_argument(
         "--acceptance-rate",
         type=float,

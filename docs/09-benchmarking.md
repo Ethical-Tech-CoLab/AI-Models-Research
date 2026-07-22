@@ -3,7 +3,6 @@
 > **Research cut-off date: 2026-07-22.**
 > **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
 
-
 ## Scope
 
 The methodological chapter on evaluation. Explains what a benchmark score is, how harness choice, prompt formatting, answer extraction, sampling policy, and tool permissions change it, and why scores from different evaluators are frequently not comparable. Covers contamination, saturation, construct validity, and the distinction between accuracy benchmarks and preference leaderboards. Answers research question RQ2 on the predictive value of published scores under procurement conditions.
