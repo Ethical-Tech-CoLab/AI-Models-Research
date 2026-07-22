@@ -232,7 +232,7 @@ mkdocs build --strict # fails on any broken internal link or navigation warning
 
 On Windows, prefix with the activated virtual environment as shown in [section 12](#12-local-installation); the `mkdocs` commands are identical.
 
-`mkdocs build --strict` runs in continuous integration through [.github/workflows/build-docs.yml](.github/workflows/build-docs.yml). A warning is treated as a failure, so a chapter listed in the navigation but missing from disk, or present on disk but missing from the navigation, blocks the merge.
+`mkdocs build --strict` runs in continuous integration through `build-docs.yml`. A warning is treated as a failure, so a chapter listed in the navigation but missing from disk, or present on disk but missing from the navigation, blocks the merge. The three workflows are currently parked in [.github/workflows-pending/](.github/workflows-pending/README.md) and are activated with one command; see that file for why.
 
 ## 14. Citing this repository
 

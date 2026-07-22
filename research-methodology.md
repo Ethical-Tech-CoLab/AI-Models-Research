@@ -141,11 +141,11 @@ A chapter is complete only when every item below passes. This checklist is repro
 | 4 | No benchmark scores compared under incompatible settings without a warning | `validate_tables.py --check-comparability`, plus manual review |
 | 5 | No argument duplicated from another chapter | Manual review |
 | 6 | No em dashes | `validate_tables.py --check-style` |
-| 7 | All links resolve | `validate_links.py`, `.github/workflows/links.yml` |
+| 7 | All links resolve | `validate_links.py`, `links.yml` |
 | 8 | Tables are consistent with their source CSV | `validate_tables.py` |
 | 9 | Filenames match the MkDocs navigation | `mkdocs build --strict` |
-| 10 | All validation scripts pass | `.github/workflows/markdown-lint.yml` |
-| 11 | Documentation builds without warnings | `.github/workflows/build-docs.yml` |
+| 10 | All validation scripts pass | `markdown-lint.yml` |
+| 11 | Documentation builds without warnings | `build-docs.yml` |
 | 12 | The page renders correctly on GitHub | Manual review |
 
 ## 9. Revision and versioning
