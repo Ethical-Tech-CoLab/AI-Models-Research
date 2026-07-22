@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ethical-Tech-CoLab/AI-Models-Research/data/schema/sources.schema.json",
+  "title": "Source register row",
+  "description": "One row of data/sources.csv. The source register is the only route by which a source enters the repository. A footnote in a chapter, a source_id in a dataset row, and a citation key in references.bib all resolve to a row validated by this schema. See data-sources.md section 1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "title",
+    "authors",
+    "organization",
+    "publication",
+    "year",
+    "publication_date",
+    "source_type",
+    "peer_reviewed",
+    "evidence_grade",
+    "url",
+    "doi",
+    "access_date",
+    "notes"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Lowercase author-year-keyword identifier. Must equal the BibTeX citation key in references.bib and be unique across the register.",
+      "pattern": "^[a-z][a-z0-9]*[0-9]{4}[a-z0-9]+$",
+      "minLength": 8,
+      "maxLength": 64
+    },
+    "title": {
+      "type": "string",
+      "description": "Title verbatim from the source, including any subtitle.",
+      "minLength": 3
+    },
+    "authors": {
+      "type": "string",
+      "description": "Semicolon-separated 'Family, Given' entries in printed order, or a corporate author name. Expanded from the published record, never from memory.",
+      "minLength": 2
+    },
+    "organization": {
+      "type": "string",
+      "description": "Institution or company responsible for the work.",
+      "minLength": 2
+    },
+    "publication": {
+      "type": "string",
+      "description": "Venue, journal, conference, or document series. Use 'Web' for provider documentation.",
+      "minLength": 1
+    },
+    "year": {
+      "type": "integer",
+      "description": "Four-digit publication year.",
+      "minimum": 1940,
+      "maximum": 2100
+    },
+    "publication_date": {
+      "type": "string",
+      "description": "Absolute publication date. Where only a month is published, use the first day of the month and record the imprecision in notes.",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Category of source. Determines the default evidence grade before the assignment rules in research-methodology.md section 4.2 are applied.",
+      "enum": [
+        "peer_reviewed",
+        "preprint",
+        "technical_report",
+        "model_card",
+        "benchmark_methodology",
+        "dataset",
+        "documentation",
+        "pricing_page",
+        "license",
+        "standards_body",
+        "government_report",
+        "institutional_report"
+      ]
+    },
+    "peer_reviewed": {
+      "type": "boolean",
+      "description": "True only when the cited version is the peer-reviewed one. A preprint of a later-published paper is false until the citation is updated to the published version."
+    },
+    "evidence_grade": {
+      "type": "string",
+      "description": "A: independently verified. B: institutional primary research. C: provider-reported.",
+      "enum": ["A", "B", "C"]
+    },
+    "url": {
+      "type": "string",
+      "description": "Direct link to the source. Must resolve at access_date.",
+      "pattern": "^https?://"
+    },
+    "doi": {
+      "type": "string",
+      "description": "DOI where one is issued, preferred over url for citation. 'Not available' where none exists.",
+      "anyOf": [
+        { "pattern": "^10\\.[0-9]{4,9}/[-._;()/:A-Za-z0-9]+$" },
+        { "const": "Not available" }
+      ]
+    },
+    "access_date": {
+      "type": "string",
+      "description": "Date on which a contributor confirmed the URL resolved and the content matched this record.",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Preprint identifier of a published paper; page or section locator for a long source; conflicts with other sources; 'superseded_by:<source_id>'; date imprecision; verification status. Use 'None' when there is nothing to record, never an empty string.",
+      "minLength": 1
+    }
+  }
+}

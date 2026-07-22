@@ -1,0 +1,113 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-models-research"
+version = "0.1.0"
+description = "Validation and table-generation tooling for the AI Models research repository"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Ethical Tech CoLab" }]
+keywords = [
+    "large-language-models",
+    "benchmarking",
+    "evaluation",
+    "token-economics",
+    "energy",
+    "research-survey",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+validate = ["jsonschema>=4.21,<5.0", "PyYAML>=6.0,<7.0"]
+docs = ["mkdocs>=1.6,<2.0", "mkdocs-material>=9.5,<10.0", "pymdown-extensions>=10.7,<11.0"]
+analysis = ["pandas>=2.2,<3.0", "matplotlib>=3.8,<4.0", "jupyterlab>=4.1,<5.0"]
+dev = ["ruff>=0.4,<1.0", "mypy>=1.9,<2.0", "pymarkdownlnt>=0.9,<1.0"]
+
+[project.urls]
+Homepage = "https://github.com/Ethical-Tech-CoLab/AI-Models-Research"
+Repository = "https://github.com/Ethical-Tech-CoLab/AI-Models-Research"
+Issues = "https://github.com/Ethical-Tech-CoLab/AI-Models-Research/issues"
+
+[project.scripts]
+validate-sources = "validate_sources:main"
+validate-links = "validate_links:main"
+validate-tables = "validate_tables:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["scripts"]
+
+# ---------------------------------------------------------------------------
+# Linting and typing
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["scripts"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "ANN", # flake8-annotations: every function is annotated
+    "D",   # pydocstyle: every module and function is documented
+    "RET", # flake8-return
+    "SIM", # flake8-simplify
+    "PTH", # use pathlib
+    "T20", # no bare print in library code
+]
+ignore = [
+    "D203",  # conflicts with D211
+    "D213",  # conflicts with D212
+    "ANN401",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# The scripts are command-line tools: printing is their output mechanism.
+"scripts/*.py" = ["T201"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.11"
+files = ["scripts"]
+strict = true
+warn_unused_configs = true
+warn_unreachable = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["jsonschema.*", "yaml.*"]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------------------
+# Markdown linting
+#
+# MD013 (line length) is disabled because generated tables exceed any sensible
+# limit. MD033 (inline HTML) is disabled because generated regions are marked
+# with HTML comments.
+# ---------------------------------------------------------------------------
+
+[tool.pymarkdown]
+plugins.md013.enabled = false
+plugins.md033.enabled = false
+plugins.md024.siblings_only = true
+plugins.md041.enabled = false

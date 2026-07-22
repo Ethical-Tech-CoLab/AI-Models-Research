@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ethical-Tech-CoLab/AI-Models-Research/data/schema/models.schema.json",
+  "title": "Model record row",
+  "description": "One row of data/models.csv. Every model comparison table in docs/ is generated from these rows. A value that the responsible organisation has not published is recorded as 'Not publicly disclosed'; a value that is claimed but unverified is 'Insufficient independent evidence'. Empty cells are a validation error.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "undisclosed": {
+      "enum": ["Not publicly disclosed", "Insufficient independent evidence"]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    }
+  },
+  "required": [
+    "model_id",
+    "provider",
+    "model_name",
+    "release_date",
+    "status",
+    "deprecation_date",
+    "open_weights",
+    "license",
+    "license_url",
+    "architecture",
+    "parameters_total",
+    "parameters_active",
+    "expert_count",
+    "modalities_input",
+    "modalities_output",
+    "context_window_tokens",
+    "max_output_tokens",
+    "tokenizer",
+    "reasoning_mode",
+    "tool_use",
+    "agent_capability",
+    "quantization_support",
+    "deployment_options",
+    "hardware_requirements",
+    "evidence_grade",
+    "source_id",
+    "source_date",
+    "notes"
+  ],
+  "properties": {
+    "model_id": {
+      "type": "string",
+      "description": "The provider's exact API model string, recorded verbatim including any date or version suffix. Where no API string exists, the exact weights repository identifier.",
+      "minLength": 2,
+      "maxLength": 128
+    },
+    "provider": {
+      "type": "string",
+      "description": "Organisation that publishes the model.",
+      "minLength": 2
+    },
+    "model_name": {
+      "type": "string",
+      "description": "Human-readable model name as the provider writes it.",
+      "minLength": 1
+    },
+    "release_date": {
+      "description": "Date of first general availability or public release.",
+      "anyOf": [{ "$ref": "#/$defs/date" }, { "$ref": "#/$defs/undisclosed" }]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["generally_available", "preview", "deprecated", "retired"],
+      "description": "Availability status as of source_date. This field ages quickly and is always read together with source_date."
+    },
+    "deprecation_date": {
+      "description": "Announced retirement date where the provider has published one.",
+      "anyOf": [
+        { "$ref": "#/$defs/date" },
+        { "const": "Not publicly disclosed" },
+        { "const": "Not applicable" }
+      ]
+    },
+    "open_weights": {
+      "type": "boolean",
+      "description": "True where model parameters are downloadable under any licence. Open weights is not open source: see glossary.md."
+    },
+    "license": {
+      "type": "string",
+      "description": "Exact licence name, for example 'Apache-2.0' or the provider's named community licence. 'Proprietary' for closed models served only by API.",
+      "minLength": 2
+    },
+    "license_url": {
+      "type": "string",
+      "description": "Link to the licence text, or 'Not available'.",
+      "anyOf": [{ "pattern": "^https?://" }, { "const": "Not available" }]
+    },
+    "architecture": {
+      "type": "string",
+      "description": "Architecture family as disclosed, for example 'decoder-only transformer', 'sparse mixture-of-experts transformer', 'hybrid attention and state-space'. Not inferred from behaviour.",
+      "minLength": 2
+    },
+    "parameters_total": {
+      "description": "Total parameter count in billions. Recorded only where disclosed. Never estimated from benchmark behaviour or from inference cost.",
+      "anyOf": [
+        { "type": "number", "exclusiveMinimum": 0 },
+        { "$ref": "#/$defs/undisclosed" }
+      ]
+    },
+    "parameters_active": {
+      "description": "Parameters used per token in billions. For a dense model this equals parameters_total.",
+      "anyOf": [
+        { "type": "number", "exclusiveMinimum": 0 },
+        { "$ref": "#/$defs/undisclosed" }
+      ]
+    },
+    "expert_count": {
+      "description": "Number of experts per mixture-of-experts layer, or 'Not applicable' for a dense model.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        { "const": "Not applicable" },
+        { "$ref": "#/$defs/undisclosed" }
+      ]
+    },
+    "modalities_input": {
+      "type": "string",
+      "description": "Pipe-separated accepted input modalities from: text, image, audio, video, document.",
+      "pattern": "^(text|image|audio|video|document)(\\|(text|image|audio|video|document))*$"
+    },
+    "modalities_output": {
+      "type": "string",
+      "description": "Pipe-separated produced output modalities from: text, image, audio, video.",
+      "pattern": "^(text|image|audio|video)(\\|(text|image|audio|video))*$"
+    },
+    "context_window_tokens": {
+      "description": "Advertised maximum context in tokens. Advertised, not measured: measured effective context is recorded in data/context-windows.csv.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        { "$ref": "#/$defs/undisclosed" }
+      ]
+    },
+    "max_output_tokens": {
+      "description": "Advertised maximum output length in tokens.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        { "$ref": "#/$defs/undisclosed" }
+      ]
+    },
+    "tokenizer": {
+      "type": "string",
+      "description": "Tokenizer name or family where disclosed.",
+      "minLength": 2
+    },
+    "reasoning_mode": {
+      "type": "string",
+      "enum": ["none", "optional", "always_on", "separate_model", "Not publicly disclosed"],
+      "description": "Whether extended reasoning is unavailable, caller-selectable, always applied, offered as a distinct model, or undisclosed."
+    },
+    "tool_use": {
+      "type": "string",
+      "enum": ["none", "function_calling", "function_calling_parallel", "Not publicly disclosed"],
+      "description": "Structured tool-call support as documented by the provider."
+    },
+    "agent_capability": {
+      "type": "string",
+      "description": "Documented agentic features, for example computer use or long-horizon tool loops, or 'Not publicly disclosed'. Capability claims here are provider documentation, not measured performance; measured performance belongs in data/benchmarks.csv.",
+      "minLength": 2
+    },
+    "quantization_support": {
+      "type": "string",
+      "description": "Quantization formats published by the provider or by the weights repository, pipe-separated. 'Not applicable' for API-only models.",
+      "minLength": 2
+    },
+    "deployment_options": {
+      "type": "string",
+      "description": "Pipe-separated from: first_party_api, cloud_marketplace, self_hosted, on_device, private_deployment.",
+      "pattern": "^(first_party_api|cloud_marketplace|self_hosted|on_device|private_deployment)(\\|(first_party_api|cloud_marketplace|self_hosted|on_device|private_deployment))*$"
+    },
+    "hardware_requirements": {
+      "type": "string",
+      "description": "Minimum accelerator memory and configuration for self-hosting at a stated precision, or 'Not applicable' for API-only models. The precision must be named in the value.",
+      "minLength": 2
+    },
+    "evidence_grade": {
+      "type": "string",
+      "enum": ["A", "B", "C"],
+      "description": "Grade of the source supporting this row. Specifications from an official model card are B; provider performance claims are C."
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Must resolve to a row in data/sources.csv.",
+      "minLength": 8
+    },
+    "source_date": {
+      "description": "Date the source stated these values. Every status and specification claim is read relative to this date.",
+      "$ref": "#/$defs/date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Conflicts between sources, superseding records, and any qualification a reader needs. 'None' where there is nothing to record.",
+      "minLength": 1
+    }
+  }
+}

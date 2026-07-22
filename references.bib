@@ -1,0 +1,894 @@
+% =====================================================================
+% references.bib
+% AI Models: Performance, Capabilities, Accuracy, Speed, Energy Use,
+% and Token Economics
+% Ethical Tech CoLab
+%
+% Research cut-off: 2026-07-22
+%
+% STATUS: Phase 1 seed bibliography.
+%
+% Scope of this file
+%   Foundational and methodological literature that Phase 2 chapters are
+%   expected to cite. It is deliberately restricted to work whose
+%   existence, title, venue, and identifier are stable and checkable.
+%   It contains no benchmark results, no prices, no parameter counts,
+%   and no model specifications. Those enter through data/*.csv only.
+%
+% Rules for this file
+%   1. The citation key MUST equal the source_id in data/sources.csv.
+%   2. No entry is cited in prose until its matching row exists in
+%      data/sources.csv with a confirmed access_date and evidence_grade.
+%      scripts/validate_sources.py --check-citations enforces this.
+%   3. Author lists are recorded as "First Author and others" at seed
+%      time and expanded to the full list at verification, from the
+%      published record. Do not expand them from memory.
+%   4. Where a peer-reviewed version exists, cite it and keep the
+%      preprint identifier in the note field.
+%   5. Add a doi field at verification. Prefer DOI links over URLs.
+%
+% Verification queue: see data-sources.md, section 5.
+% =====================================================================
+
+
+% ---------------------------------------------------------------------
+% 1. Architecture
+% ---------------------------------------------------------------------
+
+@inproceedings{vaswani2017attention,
+  author    = {Vaswani, Ashish and others},
+  title     = {Attention Is All You Need},
+  booktitle = {Advances in Neural Information Processing Systems 30},
+  year      = {2017},
+  eprint    = {1706.03762},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{shazeer2019fast,
+  author  = {Shazeer, Noam},
+  title   = {Fast Transformer Decoding: One Write-Head is All You Need},
+  journal = {arXiv preprint},
+  year    = {2019},
+  eprint  = {1911.02150},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.NE},
+  note    = {Introduces multi-query attention.}
+}
+
+@inproceedings{ainslie2023gqa,
+  author    = {Ainslie, Joshua and others},
+  title     = {{GQA}: Training Generalized Multi-Query Transformer Models
+               from Multi-Head Checkpoints},
+  booktitle = {Proceedings of EMNLP 2023},
+  year      = {2023},
+  eprint    = {2305.13245},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{beltagy2020longformer,
+  author  = {Beltagy, Iz and Peters, Matthew E. and Cohan, Arman},
+  title   = {Longformer: The Long-Document Transformer},
+  journal = {arXiv preprint},
+  year    = {2020},
+  eprint  = {2004.05150},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note    = {Sliding-window and global sparse attention.}
+}
+
+@inproceedings{shazeer2017outrageously,
+  author    = {Shazeer, Noam and others},
+  title     = {Outrageously Large Neural Networks: The Sparsely-Gated
+               Mixture-of-Experts Layer},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2017},
+  eprint    = {1701.06538},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@article{fedus2022switch,
+  author  = {Fedus, William and Zoph, Barret and Shazeer, Noam},
+  title   = {Switch Transformers: Scaling to Trillion Parameter Models
+             with Simple and Efficient Sparsity},
+  journal = {Journal of Machine Learning Research},
+  year    = {2022},
+  eprint  = {2101.03961},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{lepikhin2021gshard,
+  author    = {Lepikhin, Dmitry and others},
+  title     = {{GShard}: Scaling Giant Models with Conditional Computation
+               and Automatic Sharding},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2021},
+  eprint    = {2006.16668},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{su2024roformer,
+  author  = {Su, Jianlin and others},
+  title   = {{RoFormer}: Enhanced Transformer with Rotary Position Embedding},
+  journal = {Neurocomputing},
+  year    = {2024},
+  eprint  = {2104.09864},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{press2022train,
+  author    = {Press, Ofir and Smith, Noah A. and Lewis, Mike},
+  title     = {Train Short, Test Long: Attention with Linear Biases
+               Enables Input Length Extrapolation},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2022},
+  eprint    = {2108.12409},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{gu2022efficiently,
+  author    = {Gu, Albert and Goel, Karan and R{\'e}, Christopher},
+  title     = {Efficiently Modeling Long Sequences with Structured
+               State Spaces},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2022},
+  eprint    = {2111.00396},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{gu2024mamba,
+  author    = {Gu, Albert and Dao, Tri},
+  title     = {Mamba: Linear-Time Sequence Modeling with Selective
+               State Spaces},
+  booktitle = {Conference on Language Modeling},
+  year      = {2024},
+  eprint    = {2312.00752},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+
+% ---------------------------------------------------------------------
+% 2. Scaling and training
+% ---------------------------------------------------------------------
+
+@article{kaplan2020scaling,
+  author  = {Kaplan, Jared and others},
+  title   = {Scaling Laws for Neural Language Models},
+  journal = {arXiv preprint},
+  year    = {2020},
+  eprint  = {2001.08361},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{hoffmann2022training,
+  author    = {Hoffmann, Jordan and others},
+  title     = {Training Compute-Optimal Large Language Models},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022},
+  eprint    = {2203.15556},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note      = {Commonly referred to as the Chinchilla scaling result.}
+}
+
+@inproceedings{brown2020language,
+  author    = {Brown, Tom B. and others},
+  title     = {Language Models are Few-Shot Learners},
+  booktitle = {Advances in Neural Information Processing Systems 33},
+  year      = {2020},
+  eprint    = {2005.14165},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{ouyang2022training,
+  author    = {Ouyang, Long and others},
+  title     = {Training language models to follow instructions with
+               human feedback},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022},
+  eprint    = {2203.02155},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{schulman2017proximal,
+  author  = {Schulman, John and others},
+  title   = {Proximal Policy Optimization Algorithms},
+  journal = {arXiv preprint},
+  year    = {2017},
+  eprint  = {1707.06347},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{rafailov2023direct,
+  author    = {Rafailov, Rafael and others},
+  title     = {Direct Preference Optimization: Your Language Model is
+               Secretly a Reward Model},
+  booktitle = {Advances in Neural Information Processing Systems 36},
+  year      = {2023},
+  eprint    = {2305.18290},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@article{shao2024deepseekmath,
+  author  = {Shao, Zhihong and others},
+  title   = {{DeepSeekMath}: Pushing the Limits of Mathematical Reasoning
+             in Open Language Models},
+  journal = {arXiv preprint},
+  year    = {2024},
+  eprint  = {2402.03300},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note    = {Introduces Group Relative Policy Optimization.}
+}
+
+@article{bai2022constitutional,
+  author  = {Bai, Yuntao and others},
+  title   = {Constitutional {AI}: Harmlessness from {AI} Feedback},
+  journal = {arXiv preprint},
+  year    = {2022},
+  eprint  = {2212.08073},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{lightman2024lets,
+  author    = {Lightman, Hunter and others},
+  title     = {Let's Verify Step by Step},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2024},
+  eprint    = {2305.20050},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  note      = {Process supervision versus outcome supervision.}
+}
+
+@article{hinton2015distilling,
+  author  = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  title   = {Distilling the Knowledge in a Neural Network},
+  journal = {arXiv preprint},
+  year    = {2015},
+  eprint  = {1503.02531},
+  archivePrefix = {arXiv},
+  primaryClass  = {stat.ML}
+}
+
+@article{villalobos2024position,
+  author  = {Villalobos, Pablo and others},
+  title   = {Will we run out of data? Limits of {LLM} scaling based on
+             human-generated data},
+  journal = {arXiv preprint},
+  year    = {2024},
+  eprint  = {2211.04325},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{sevilla2022compute,
+  author    = {Sevilla, Jaime and others},
+  title     = {Compute Trends Across Three Eras of Machine Learning},
+  booktitle = {International Joint Conference on Neural Networks},
+  year      = {2022},
+  eprint    = {2202.05924},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+
+% ---------------------------------------------------------------------
+% 3. Reasoning and agents
+% ---------------------------------------------------------------------
+
+@inproceedings{wei2022chain,
+  author    = {Wei, Jason and others},
+  title     = {Chain-of-Thought Prompting Elicits Reasoning in
+               Large Language Models},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022},
+  eprint    = {2201.11903},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{yao2023react,
+  author    = {Yao, Shunyu and others},
+  title     = {{ReAct}: Synergizing Reasoning and Acting in
+               Language Models},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2023},
+  eprint    = {2210.03629},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{lewis2020retrieval,
+  author    = {Lewis, Patrick and others},
+  title     = {Retrieval-Augmented Generation for Knowledge-Intensive
+               {NLP} Tasks},
+  booktitle = {Advances in Neural Information Processing Systems 33},
+  year      = {2020},
+  eprint    = {2005.11401},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{chollet2019measure,
+  author  = {Chollet, Fran{\c{c}}ois},
+  title   = {On the Measure of Intelligence},
+  journal = {arXiv preprint},
+  year    = {2019},
+  eprint  = {1911.01547},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  note    = {Introduces the Abstraction and Reasoning Corpus.}
+}
+
+
+% ---------------------------------------------------------------------
+% 4. Benchmarks and evaluation methodology
+% ---------------------------------------------------------------------
+
+@inproceedings{hendrycks2021measuring,
+  author    = {Hendrycks, Dan and others},
+  title     = {Measuring Massive Multitask Language Understanding},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2021},
+  eprint    = {2009.03300},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CY}
+}
+
+@inproceedings{wang2024mmlupro,
+  author    = {Wang, Yubo and others},
+  title     = {{MMLU-Pro}: A More Robust and Challenging Multi-Task
+               Language Understanding Benchmark},
+  booktitle = {Advances in Neural Information Processing Systems 37,
+               Datasets and Benchmarks Track},
+  year      = {2024},
+  eprint    = {2406.01574},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{rein2023gpqa,
+  author  = {Rein, David and others},
+  title   = {{GPQA}: A Graduate-Level Google-Proof {Q\&A} Benchmark},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2311.12022},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+@article{hendrycks2021math,
+  author  = {Hendrycks, Dan and others},
+  title   = {Measuring Mathematical Problem Solving With the
+             {MATH} Dataset},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2103.03874},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@article{cobbe2021training,
+  author  = {Cobbe, Karl and others},
+  title   = {Training Verifiers to Solve Math Word Problems},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2110.14168},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  note    = {Introduces GSM8K.}
+}
+
+@article{clark2018think,
+  author  = {Clark, Peter and others},
+  title   = {Think you have Solved Question Answering? Try {ARC},
+             the {AI2} Reasoning Challenge},
+  journal = {arXiv preprint},
+  year    = {2018},
+  eprint  = {1803.05457},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note    = {Distinct from the Abstraction and Reasoning Corpus.}
+}
+
+@article{chen2021evaluating,
+  author  = {Chen, Mark and others},
+  title   = {Evaluating Large Language Models Trained on Code},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2107.03374},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  note    = {Introduces HumanEval.}
+}
+
+@article{austin2021program,
+  author  = {Austin, Jacob and others},
+  title   = {Program Synthesis with Large Language Models},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2108.07732},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.PL},
+  note    = {Introduces MBPP.}
+}
+
+@inproceedings{jimenez2024swebench,
+  author    = {Jimenez, Carlos E. and others},
+  title     = {{SWE-bench}: Can Language Models Resolve Real-World
+               {GitHub} Issues?},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2024},
+  eprint    = {2310.06770},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{jain2024livecodebench,
+  author  = {Jain, Naman and others},
+  title   = {{LiveCodeBench}: Holistic and Contamination Free Evaluation
+             of Large Language Models for Code},
+  journal = {arXiv preprint},
+  year    = {2024},
+  eprint  = {2403.07974},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE}
+}
+
+@article{liang2023holistic,
+  author  = {Liang, Percy and others},
+  title   = {Holistic Evaluation of Language Models},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2023},
+  eprint  = {2211.09110},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note    = {HELM. Stanford Center for Research on Foundation Models.}
+}
+
+@article{srivastava2023beyond,
+  author  = {Srivastava, Aarohi and others},
+  title   = {Beyond the Imitation Game: Quantifying and Extrapolating
+             the Capabilities of Language Models},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2023},
+  eprint  = {2206.04615},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{zheng2023judging,
+  author    = {Zheng, Lianmin and others},
+  title     = {Judging {LLM-as-a-Judge} with {MT-Bench} and
+               {Chatbot Arena}},
+  booktitle = {Advances in Neural Information Processing Systems 36,
+               Datasets and Benchmarks Track},
+  year      = {2023},
+  eprint    = {2306.05685},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{chiang2024chatbot,
+  author    = {Chiang, Wei-Lin and others},
+  title     = {Chatbot Arena: An Open Platform for Evaluating {LLMs}
+               by Human Preference},
+  booktitle = {International Conference on Machine Learning},
+  year      = {2024},
+  eprint    = {2403.04132},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+@inproceedings{mitchell2019model,
+  author    = {Mitchell, Margaret and others},
+  title     = {Model Cards for Model Reporting},
+  booktitle = {Proceedings of the Conference on Fairness,
+               Accountability, and Transparency},
+  year      = {2019},
+  eprint    = {1810.03993},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@article{bommasani2023foundation,
+  author  = {Bommasani, Rishi and others},
+  title   = {The Foundation Model Transparency Index},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2310.12941},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  note    = {Stanford Center for Research on Foundation Models.}
+}
+
+@article{bommasani2021opportunities,
+  author  = {Bommasani, Rishi and others},
+  title   = {On the Opportunities and Risks of Foundation Models},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2108.07258},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+
+% ---------------------------------------------------------------------
+% 5. Factuality and hallucination
+% ---------------------------------------------------------------------
+
+@inproceedings{lin2022truthfulqa,
+  author    = {Lin, Stephanie and Hilton, Jacob and Evans, Owain},
+  title     = {{TruthfulQA}: Measuring How Models Mimic Human Falsehoods},
+  booktitle = {Proceedings of the 60th Annual Meeting of the Association
+               for Computational Linguistics},
+  year      = {2022},
+  eprint    = {2109.07958},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{li2023halueval,
+  author    = {Li, Junyi and others},
+  title     = {{HaluEval}: A Large-Scale Hallucination Evaluation
+               Benchmark for Large Language Models},
+  booktitle = {Proceedings of EMNLP 2023},
+  year      = {2023},
+  eprint    = {2305.11747},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+
+% ---------------------------------------------------------------------
+% 6. Multimodal and agentic benchmarks
+% ---------------------------------------------------------------------
+
+@inproceedings{yue2024mmmu,
+  author    = {Yue, Xiang and others},
+  title     = {{MMMU}: A Massive Multi-discipline Multimodal
+               Understanding and Reasoning Benchmark for Expert {AGI}},
+  booktitle = {IEEE/CVF Conference on Computer Vision and
+               Pattern Recognition},
+  year      = {2024},
+  eprint    = {2311.16502},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}
+
+@inproceedings{lu2024mathvista,
+  author    = {Lu, Pan and others},
+  title     = {{MathVista}: Evaluating Mathematical Reasoning of
+               Foundation Models in Visual Contexts},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2024},
+  eprint    = {2310.02255},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}
+
+@article{mialon2023gaia,
+  author  = {Mialon, Gr{\'e}goire and others},
+  title   = {{GAIA}: a benchmark for General {AI} Assistants},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2311.12983},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{zhou2024webarena,
+  author    = {Zhou, Shuyan and others},
+  title     = {{WebArena}: A Realistic Web Environment for Building
+               Autonomous Agents},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2024},
+  eprint    = {2307.13854},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+@inproceedings{xie2024osworld,
+  author    = {Xie, Tianbao and others},
+  title     = {{OSWorld}: Benchmarking Multimodal Agents for Open-Ended
+               Tasks in Real Computer Environments},
+  booktitle = {Advances in Neural Information Processing Systems 37,
+               Datasets and Benchmarks Track},
+  year      = {2024},
+  eprint    = {2404.07972},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+@inproceedings{liu2024agentbench,
+  author    = {Liu, Xiao and others},
+  title     = {{AgentBench}: Evaluating {LLMs} as Agents},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2024},
+  eprint    = {2308.03688},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+
+% ---------------------------------------------------------------------
+% 7. Long context
+% ---------------------------------------------------------------------
+
+@inproceedings{bai2024longbench,
+  author    = {Bai, Yushi and others},
+  title     = {{LongBench}: A Bilingual, Multitask Benchmark for
+               Long Context Understanding},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association
+               for Computational Linguistics},
+  year      = {2024},
+  eprint    = {2308.14508},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{hsieh2024ruler,
+  author  = {Hsieh, Cheng-Ping and others},
+  title   = {{RULER}: What's the Real Context Size of Your
+             Long-Context Language Models?},
+  journal = {arXiv preprint},
+  year    = {2024},
+  eprint  = {2404.06654},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{liu2024lost,
+  author  = {Liu, Nelson F. and others},
+  title   = {Lost in the Middle: How Language Models Use Long Contexts},
+  journal = {Transactions of the Association for Computational
+             Linguistics},
+  year    = {2024},
+  eprint  = {2307.03172},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+
+% ---------------------------------------------------------------------
+% 8. Tokenization
+% ---------------------------------------------------------------------
+
+@inproceedings{sennrich2016neural,
+  author    = {Sennrich, Rico and Haddow, Barry and Birch, Alexandra},
+  title     = {Neural Machine Translation of Rare Words with
+               Subword Units},
+  booktitle = {Proceedings of the 54th Annual Meeting of the Association
+               for Computational Linguistics},
+  year      = {2016},
+  eprint    = {1508.07909},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  note      = {Byte-pair encoding for neural sequence models.}
+}
+
+@inproceedings{kudo2018sentencepiece,
+  author    = {Kudo, Taku and Richardson, John},
+  title     = {{SentencePiece}: A simple and language independent subword
+               tokenizer and detokenizer for Neural Text Processing},
+  booktitle = {Proceedings of EMNLP 2018: System Demonstrations},
+  year      = {2018},
+  eprint    = {1808.06226},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+
+% ---------------------------------------------------------------------
+% 9. Inference, serving, and quantization
+% ---------------------------------------------------------------------
+
+@inproceedings{dao2022flashattention,
+  author    = {Dao, Tri and others},
+  title     = {{FlashAttention}: Fast and Memory-Efficient Exact Attention
+               with {IO}-Awareness},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022},
+  eprint    = {2205.14135},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{leviathan2023fast,
+  author    = {Leviathan, Yaniv and Kalman, Matan and Matias, Yossi},
+  title     = {Fast Inference from Transformers via Speculative Decoding},
+  booktitle = {International Conference on Machine Learning},
+  year      = {2023},
+  eprint    = {2211.17192},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{kwon2023efficient,
+  author    = {Kwon, Woosuk and others},
+  title     = {Efficient Memory Management for Large Language Model
+               Serving with {PagedAttention}},
+  booktitle = {Proceedings of the 29th Symposium on Operating Systems
+               Principles},
+  year      = {2023},
+  eprint    = {2309.06180},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  note      = {The vLLM serving system.}
+}
+
+@inproceedings{frantar2023gptq,
+  author    = {Frantar, Elias and others},
+  title     = {{GPTQ}: Accurate Post-Training Quantization for Generative
+               Pre-trained Transformers},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2023},
+  eprint    = {2210.17323},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{dettmers2022llmint8,
+  author    = {Dettmers, Tim and others},
+  title     = {{LLM.int8()}: 8-bit Matrix Multiplication for Transformers
+               at Scale},
+  booktitle = {Advances in Neural Information Processing Systems 35},
+  year      = {2022},
+  eprint    = {2208.07339},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{dettmers2023qlora,
+  author    = {Dettmers, Tim and others},
+  title     = {{QLoRA}: Efficient Finetuning of Quantized {LLMs}},
+  booktitle = {Advances in Neural Information Processing Systems 36},
+  year      = {2023},
+  eprint    = {2305.14314},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+
+% ---------------------------------------------------------------------
+% 10. Energy, carbon, and environmental cost
+% ---------------------------------------------------------------------
+
+@inproceedings{strubell2019energy,
+  author    = {Strubell, Emma and Ganesh, Ananya and McCallum, Andrew},
+  title     = {Energy and Policy Considerations for Deep Learning
+               in {NLP}},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association
+               for Computational Linguistics},
+  year      = {2019},
+  eprint    = {1906.02243},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{patterson2021carbon,
+  author  = {Patterson, David and others},
+  title   = {Carbon Emissions and Large Neural Network Training},
+  journal = {arXiv preprint},
+  year    = {2021},
+  eprint  = {2104.10350},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@article{luccioni2023estimating,
+  author  = {Luccioni, Alexandra Sasha and Viguier, Sylvain and
+             Ligozat, Anne-Laure},
+  title   = {Estimating the Carbon Footprint of {BLOOM}, a 176B Parameter
+             Language Model},
+  journal = {Journal of Machine Learning Research},
+  year    = {2023},
+  eprint  = {2211.02001},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{luccioni2024power,
+  author    = {Luccioni, Alexandra Sasha and Jernite, Yacine and
+               Strubell, Emma},
+  title     = {Power Hungry Processing: Watts Driving the Cost of
+               {AI} Deployment?},
+  booktitle = {Proceedings of the 2024 ACM Conference on Fairness,
+               Accountability, and Transparency},
+  year      = {2024},
+  eprint    = {2311.16863},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+
+% ---------------------------------------------------------------------
+% 11. Security and privacy
+% ---------------------------------------------------------------------
+
+@inproceedings{carlini2021extracting,
+  author    = {Carlini, Nicholas and others},
+  title     = {Extracting Training Data from Large Language Models},
+  booktitle = {30th USENIX Security Symposium},
+  year      = {2021},
+  eprint    = {2012.07805},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR}
+}
+
+
+% ---------------------------------------------------------------------
+% 12. Model technical reports
+%
+% Seeded only where the report is an archival document describing an
+% architecture. Per-model specifications, benchmark results, and prices
+% are NOT taken from these entries into prose directly; they enter
+% through data/models.csv and data/benchmarks.csv with an evidence
+% grade attached.
+% ---------------------------------------------------------------------
+
+@article{touvron2023llama2,
+  author  = {Touvron, Hugo and others},
+  title   = {{Llama 2}: Open Foundation and Fine-Tuned Chat Models},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2307.09288},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{dubey2024llama3,
+  author  = {Dubey, Abhimanyu and others},
+  title   = {The {Llama 3} Herd of Models},
+  journal = {arXiv preprint},
+  year    = {2024},
+  eprint  = {2407.21783},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+@article{jiang2023mistral,
+  author  = {Jiang, Albert Q. and others},
+  title   = {{Mistral 7B}},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2310.06825},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{geminiteam2023gemini,
+  author  = {{Gemini Team, Google}},
+  title   = {{Gemini}: A Family of Highly Capable Multimodal Models},
+  journal = {arXiv preprint},
+  year    = {2023},
+  eprint  = {2312.11805},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{deepseekai2025r1,
+  author  = {{DeepSeek-AI}},
+  title   = {{DeepSeek-R1}: Incentivizing Reasoning Capability in {LLMs}
+             via Reinforcement Learning},
+  journal = {arXiv preprint},
+  year    = {2025},
+  eprint  = {2501.12948},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}

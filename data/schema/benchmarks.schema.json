@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ethical-Tech-CoLab/AI-Models-Research/data/schema/benchmarks.schema.json",
+  "title": "Benchmark result row",
+  "description": "One reported result of one model on one benchmark, from one source. A score is not a property of a model: it is a property of a model evaluated under stated conditions. Every row therefore carries the harness, the sampling policy, and the tool permissions. Rows whose conditions are 'unstated' are recorded but are disqualified from ranked comparison by the rule in research-methodology.md section 6.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    }
+  },
+  "required": [
+    "benchmark_id",
+    "benchmark_name",
+    "benchmark_version",
+    "model_id",
+    "score",
+    "metric",
+    "unit",
+    "harness",
+    "harness_version",
+    "sampling_policy",
+    "samples_n",
+    "tool_permissions",
+    "subset",
+    "reported_by",
+    "evaluation_date",
+    "publication_date",
+    "evidence_grade",
+    "source_id",
+    "notes"
+  ],
+  "properties": {
+    "benchmark_id": {
+      "type": "string",
+      "description": "Stable lowercase identifier, for example 'mmlu_pro', 'swe_bench_verified', 'gpqa_diamond'. One identifier per distinct benchmark, never shared between a benchmark and a variant of it.",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "benchmark_name": {
+      "type": "string",
+      "description": "Benchmark name as its maintainers write it.",
+      "minLength": 2
+    },
+    "benchmark_version": {
+      "type": "string",
+      "description": "Version or release identifier of the benchmark. 'unstated' where the source did not report one. Benchmarks are revised, and a score against an unstated version is not comparable across time.",
+      "minLength": 1
+    },
+    "model_id": {
+      "type": "string",
+      "description": "Must resolve to a model_id in data/models.csv.",
+      "minLength": 2
+    },
+    "score": {
+      "type": "number",
+      "description": "Reported value in the units given by 'unit'. Recorded exactly as published, without rounding or rescaling."
+    },
+    "metric": {
+      "type": "string",
+      "description": "The quantity measured, for example 'accuracy', 'pass@1', 'resolved_rate', 'elo', 'exact_match', 'f1', 'win_rate'.",
+      "minLength": 2
+    },
+    "unit": {
+      "type": "string",
+      "enum": ["percent", "fraction", "count", "elo", "score"],
+      "description": "Unit of 'score'. Percent and fraction are not interchangeable and are not silently converted by the generators."
+    },
+    "harness": {
+      "type": "string",
+      "description": "Evaluation harness used, for example 'HELM', 'lm-evaluation-harness', 'official maintainer harness', or 'unstated'. Prompt formatting and answer extraction differ between harnesses and change scores.",
+      "minLength": 3
+    },
+    "harness_version": {
+      "type": "string",
+      "description": "Version of the harness, or 'unstated'.",
+      "minLength": 1
+    },
+    "sampling_policy": {
+      "type": "string",
+      "enum": [
+        "single_sample",
+        "greedy",
+        "best_of_n",
+        "majority_vote_n",
+        "pass_at_k",
+        "mean_of_n_runs",
+        "unstated"
+      ],
+      "description": "How the reported figure was obtained from model samples. Materially changes the score and is required for any comparison."
+    },
+    "samples_n": {
+      "description": "Value of n or k where the sampling policy takes one; 'Not applicable' for single-sample and greedy; 'unstated' where the source omitted it.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        { "const": "Not applicable" },
+        { "const": "unstated" }
+      ]
+    },
+    "tool_permissions": {
+      "type": "string",
+      "enum": [
+        "none",
+        "retrieval",
+        "code_execution",
+        "browsing",
+        "code_execution_and_browsing",
+        "full_agent_scaffold",
+        "unstated"
+      ],
+      "description": "External capability available to the model during evaluation. A tool-permitted score and a no-tool score measure different constructs and are never ranked in the same column."
+    },
+    "subset": {
+      "type": "string",
+      "description": "Named split or subset evaluated, for example 'diamond', 'verified', 'test'. 'full' where the whole benchmark was run.",
+      "minLength": 1
+    },
+    "reported_by": {
+      "type": "string",
+      "description": "Party that produced the result. Where this is the model's provider, evidence_grade is C.",
+      "minLength": 2
+    },
+    "evaluation_date": {
+      "description": "Date the evaluation was run, where disclosed; otherwise 'unstated'. Distinct from publication_date because models behind an API change between the two.",
+      "anyOf": [{ "$ref": "#/$defs/date" }, { "const": "unstated" }]
+    },
+    "publication_date": {
+      "description": "Date the result was published.",
+      "$ref": "#/$defs/date"
+    },
+    "evidence_grade": {
+      "type": "string",
+      "enum": ["A", "B", "C"],
+      "description": "A where an independent party ran the evaluation under a disclosed methodology; B for benchmark maintainers and institutional reports; C for provider-reported results."
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Must resolve to a row in data/sources.csv.",
+      "minLength": 8
+    },
+    "notes": {
+      "type": "string",
+      "description": "Contamination concerns, scaffold description, deviations from the standard protocol, conflicting figures from other sources, or 'None'.",
+      "minLength": 1
+    }
+  }
+}

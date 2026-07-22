@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.pymarkdown
+
+# MkDocs build output
+site/
+
+# Jupyter
+.ipynb_checkpoints/
+# Notebook outputs are stripped before commit so that diffs stay reviewable.
+# See CONTRIBUTING.md. Do not commit executed notebooks with embedded data.
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local research working files that must not enter the repository.
+# Evidence enters only through data/*.csv with a source_id. Scratch copies of
+# papers, exports, and leaderboard dumps are kept outside version control so
+# that no ungraded figure can be cited by accident.
+scratch/
+*.local.csv
+*.local.md
+downloads/
+pdfs/
+
+# Secrets. No script in this repository requires an API key; this entry exists
+# so that a contributor experimenting locally cannot commit one.
+.env
+.env.*
+*.key
+credentials.json

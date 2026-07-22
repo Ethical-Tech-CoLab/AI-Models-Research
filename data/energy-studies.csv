@@ -1,0 +1,1 @@
+study_id,model_id,hardware,model_version,precision,prompt_tokens,output_tokens,batch_size,utilization_percent,serving_framework,pue,measurement_method,energy_per_token_j,energy_per_query_wh,uncertainty,grid_region,carbon_intensity_gco2e_per_kwh,evidence_grade,source_id,publication_date,notes

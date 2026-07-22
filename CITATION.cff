@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: >-
+  If you refer to this repository, please cite it as below. Where you cite a
+  specific result, cite the primary source recorded in data/sources.csv in
+  preference to this repository. This repository is a survey and is not the
+  primary source for any result it did not produce.
+title: >-
+  AI Models: Performance, Capabilities, Accuracy, Speed, Energy Use,
+  and Token Economics
+abstract: >-
+  A technical reference, comparative research survey, and reproducible
+  evaluation framework covering contemporary proprietary and open-weight
+  AI model families. The repository separates independently verified
+  evidence from institutional primary research and from provider-reported
+  claims, records every quantitative value with its evaluation conditions,
+  source, and date, and generates all comparison tables from a
+  machine-readable data layer. Research cut-off 2026-07-22.
+type: dataset
+authors:
+  - name: Ethical Tech CoLab
+    alias: Ethical-Tech-CoLab
+    website: https://github.com/Ethical-Tech-CoLab
+version: 0.1.0
+date-released: "2026-07-22"
+repository-code: https://github.com/Ethical-Tech-CoLab/AI-Models-Research
+url: https://github.com/Ethical-Tech-CoLab/AI-Models-Research
+license: CC-BY-4.0
+license-url: https://creativecommons.org/licenses/by/4.0/legalcode
+keywords:
+  - large language models
+  - foundation models
+  - benchmarking
+  - evaluation
+  - hallucination
+  - long context
+  - tokenization
+  - inference
+  - latency
+  - token economics
+  - energy consumption
+  - carbon footprint
+  - model selection
+  - open weights
+  - research survey

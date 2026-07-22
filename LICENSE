@@ -1,0 +1,81 @@
+AI Models: Performance, Capabilities, Accuracy, Speed, Energy Use, and Token
+Economics
+Copyright (c) 2026 Ethical Tech CoLab
+
+This repository is dual licensed. Which licence applies depends on which part
+of the repository you are using.
+
+================================================================================
+1. DOCUMENTATION AND DATA
+================================================================================
+
+The following are licensed under the Creative Commons Attribution 4.0
+International licence (CC BY 4.0):
+
+  - all Markdown files, including README.md, SUMMARY.md, CONTRIBUTING.md,
+    CHANGELOG.md, research-methodology.md, data-sources.md, glossary.md,
+    limitations.md, and everything under docs/
+  - references.bib
+  - all files under data/
+  - all files under assets/
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, provide a link to the
+licence, and indicate if changes were made.
+
+Full licence text:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Suggested attribution:
+  "AI Models: Performance, Capabilities, Accuracy, Speed, Energy Use, and
+  Token Economics" by Ethical Tech CoLab, licensed CC BY 4.0.
+  https://github.com/Ethical-Tech-CoLab/AI-Models-Research
+
+Note on third-party material: bibliographic records, benchmark names, model
+names, and quoted figures refer to works owned by others. This licence covers
+this repository's own compilation, structure, analysis, and prose. It does not
+grant rights in the underlying works, which remain with their rights holders
+and must be cited to their sources.
+
+================================================================================
+2. SOURCE CODE
+================================================================================
+
+The following are licensed under the MIT Licence:
+
+  - all files under scripts/
+  - all files under notebooks/
+  - all configuration files, including mkdocs.yml, pyproject.toml,
+    requirements.txt, and everything under .github/
+
+MIT Licence
+
+Copyright (c) 2026 Ethical Tech CoLab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+3. NO WARRANTY AS TO ACCURACY
+================================================================================
+
+Neither licence is a warranty of accuracy. Benchmark rankings, prices, context
+windows, and model availability change without notice. Every such value in this
+repository is a dated record of what a named source stated on a named date, and
+is not a statement about the present. Nothing here is legal, financial, or
+procurement advice.

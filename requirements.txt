@@ -1,0 +1,30 @@
+# Runtime and authoring dependencies.
+#
+# Constraint: no dependency in this file requires a paid API key, a network
+# call at validation time, or an account. The validation scripts run offline
+# by default; link checking against the network is opt-in and is performed by
+# .github/workflows/links.yml, not by validate_links.py.
+#
+# Python 3.11 or later.
+
+# --- Documentation site -------------------------------------------------
+mkdocs>=1.6,<2.0
+mkdocs-material>=9.5,<10.0
+pymdown-extensions>=10.7,<11.0
+
+# --- Validation ---------------------------------------------------------
+# jsonschema is optional at runtime: the validators fall back to their own
+# structural checks when it is not installed, so that a clean checkout can be
+# validated before dependencies are installed.
+jsonschema>=4.21,<5.0
+PyYAML>=6.0,<7.0
+
+# --- Analysis and notebooks --------------------------------------------
+pandas>=2.2,<3.0
+matplotlib>=3.8,<4.0
+jupyterlab>=4.1,<5.0
+
+# --- Developer tooling --------------------------------------------------
+ruff>=0.4,<1.0
+mypy>=1.9,<2.0
+pymarkdownlnt>=0.9,<1.0

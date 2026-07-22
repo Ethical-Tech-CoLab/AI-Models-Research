@@ -1,0 +1,194 @@
+site_name: "AI Models: Performance, Capabilities, Accuracy, Speed, Energy Use, and Token Economics"
+site_description: >-
+  A technical reference, comparative research survey, and reproducible
+  evaluation framework covering contemporary proprietary and open-weight
+  AI model families. Research cut-off 2026-07-22.
+site_author: Ethical Tech CoLab
+site_url: https://ethical-tech-colab.github.io/AI-Models-Research/
+
+repo_name: Ethical-Tech-CoLab/AI-Models-Research
+repo_url: https://github.com/Ethical-Tech-CoLab/AI-Models-Research
+edit_uri: edit/main/docs/
+
+copyright: >-
+  Documentation and data are licensed CC BY 4.0. Code is licensed MIT.
+  Rankings, prices, and model availability change without notice; see the
+  disclaimer in the README.
+
+docs_dir: docs
+site_dir: site
+strict: true
+
+theme:
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+    - content.tabs.link
+    - content.footnote.tooltips
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+plugins:
+  - search:
+      lang: en
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Ethical-Tech-CoLab
+      name: Ethical Tech CoLab on GitHub
+  generator: false
+
+# Files at the repository root (README, methodology, limitations, glossary,
+# data sources, contributing) live outside docs_dir and are linked to GitHub
+# rather than copied, so that a single canonical copy exists.
+nav:
+  - Home: index.md
+  - Handbook:
+      - "01. Introduction": 01-introduction.md
+      - "02. Foundation models": 02-foundation-models.md
+      - "03. Transformer architecture": 03-transformer-architecture.md
+      - "04. Training and post-training": 04-training-and-post-training.md
+      - "05. Scaling laws": 05-scaling-laws.md
+      - "06. Reasoning models": 06-reasoning-models.md
+      - "07. Agentic AI": 07-agentic-ai.md
+      - "08. Multimodal models": 08-multimodal-models.md
+      - "09. Benchmarking": 09-benchmarking.md
+      - "10. Factuality and hallucination": 10-factuality-and-hallucination.md
+      - "11. Long context": 11-long-context.md
+      - "12. Tokenization": 12-tokenization.md
+      - "13. Inference": 13-inference.md
+      - "14. Latency and throughput": 14-latency-and-throughput.md
+      - "15. Token economics": 15-token-economics.md
+      - "16. Energy use": 16-energy-use.md
+      - "17. Hardware and memory": 17-hardware-and-memory.md
+      - "18. Open versus closed models": 18-open-vs-closed-models.md
+      - "19. Security and privacy": 19-security-and-privacy.md
+      - "20. Model selection framework": 20-model-selection-framework.md
+      - "21. Research gaps": 21-research-gaps.md
+  - Model profiles:
+      - OpenAI: model-profiles/openai.md
+      - Anthropic: model-profiles/anthropic.md
+      - Google Gemini: model-profiles/google-gemini.md
+      - Meta Llama: model-profiles/meta-llama.md
+      - DeepSeek: model-profiles/deepseek.md
+      - Mistral: model-profiles/mistral.md
+      - Qwen: model-profiles/qwen.md
+      - xAI Grok: model-profiles/xai-grok.md
+      - Microsoft Phi: model-profiles/microsoft-phi.md
+      - Cohere Command: model-profiles/cohere-command.md
+      - Amazon Nova: model-profiles/amazon-nova.md
+      - AI21 Jamba: model-profiles/ai21-jamba.md
+      - Moonshot Kimi: model-profiles/moonshot-kimi.md
+      - MiniMax: model-profiles/minimax.md
+      - Zhipu GLM: model-profiles/zhipu-glm.md
+      - Other families: model-profiles/other-models.md
+  - Benchmarks:
+      - Overview: benchmarks/benchmark-overview.md
+      - Knowledge and reasoning: benchmarks/knowledge-and-reasoning.md
+      - Coding: benchmarks/coding.md
+      - Agents and computer use: benchmarks/agents-and-computer-use.md
+      - Multimodal: benchmarks/multimodal.md
+      - Long context: benchmarks/long-context.md
+      - Factuality: benchmarks/factuality.md
+      - Multilingual: benchmarks/multilingual.md
+      - Limitations: benchmarks/benchmark-limitations.md
+  - Comparisons:
+      - Frontier models: comparisons/frontier-models.md
+      - Open-weight models: comparisons/open-weight-models.md
+      - Coding models: comparisons/coding-models.md
+      - Reasoning models: comparisons/reasoning-models.md
+      - Multimodal models: comparisons/multimodal-models.md
+      - Long-context models: comparisons/long-context-models.md
+      - Efficient models: comparisons/efficient-models.md
+      - Model selection matrix: comparisons/model-selection-matrix.md
+  - Evaluation:
+      - Internal bakeoff: evaluation/internal-bakeoff.md
+      - Quality metrics: evaluation/quality-metrics.md
+      - Latency methodology: evaluation/latency-methodology.md
+      - Token cost methodology: evaluation/token-cost-methodology.md
+      - Energy methodology: evaluation/energy-methodology.md
+      - Reproducibility: evaluation/reproducibility.md
+  - Appendices:
+      - Formulas: appendices/formulas.md
+      - Benchmark glossary: appendices/benchmark-glossary.md
+      - Hardware glossary: appendices/hardware-glossary.md
+      - Model release timeline: appendices/model-release-timeline.md
+      - Source quality framework: appendices/source-quality-framework.md
+  - Project documents:
+      - Research methodology: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md
+      - Data sources: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/data-sources.md
+      - Limitations: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/limitations.md
+      - Glossary: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/glossary.md
+      - Contributing: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CONTRIBUTING.md
+      - Changelog: https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md
