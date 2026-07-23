@@ -2752,32 +2752,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scope" class="md-nav__link">
+  <a href="#reading-these-names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scope
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Research checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Completion criteria
+        Reading these names
       
     </span>
   </a>
@@ -3152,32 +3130,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scope" class="md-nav__link">
+  <a href="#reading-these-names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scope
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Research checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Completion criteria
+        Reading these names
       
     </span>
   </a>
@@ -3220,19 +3176,117 @@
 <h1 id="benchmark-glossary">Benchmark glossary<a class="headerlink" href="#benchmark-glossary" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong> Definitional entries only. No scores appear here; results live in <code>data/benchmarks.csv</code> with their evaluation conditions attached.</p>
 </blockquote>
-<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Short definitional entries for every benchmark named anywhere in this repository, each stating the construct measured, the maintainer, and the file where it is documented in full. Entries are definitional only: no scores appear here.</p>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add one entry per benchmark documented in docs/benchmarks/, after its construction source is registered.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State the maintainer and the construct for each entry, and link to the file that documents it fully.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Distinguish benchmarks with similar names explicitly, since name collisions in this area are a documented source of error.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Record no scores in this file; the glossary is definitional.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This file is complete when every checklist item above is closed and the quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>What it tests</th>
+<th>Primary use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPQA Diamond</td>
+<td>Graduate-level, expert-written science questions</td>
+<td>Scientific knowledge and reasoning</td>
+</tr>
+<tr>
+<td>Humanity's Last Exam</td>
+<td>Difficult multidisciplinary academic questions</td>
+<td>Broad frontier reasoning</td>
+</tr>
+<tr>
+<td>ARC-AGI-2 and ARC-AGI-3</td>
+<td>Abstract reasoning puzzles designed to resist memorisation</td>
+<td>Novel abstraction and adaptation</td>
+</tr>
+<tr>
+<td>SWE-Bench Verified</td>
+<td>Repository issues with human-validated test conditions</td>
+<td>Software repair</td>
+</tr>
+<tr>
+<td>SWE-Bench Pro</td>
+<td>Harder and more diverse repository tasks</td>
+<td>Agentic coding</td>
+</tr>
+<tr>
+<td>Terminal-Bench</td>
+<td>Tasks executed in a terminal environment</td>
+<td>Tool use, coding, systems work</td>
+</tr>
+<tr>
+<td>BrowseComp</td>
+<td>Difficult information retrieval and browsing</td>
+<td>Search planning and synthesis</td>
+</tr>
+<tr>
+<td>OSWorld</td>
+<td>Realistic computer interaction</td>
+<td>Desktop computer use</td>
+</tr>
+<tr>
+<td>WebArena</td>
+<td>Tasks on realistic websites</td>
+<td>Web navigation and action</td>
+</tr>
+<tr>
+<td>Vibe Code Bench</td>
+<td>End-to-end application construction</td>
+<td>Building a working product rather than a snippet</td>
+</tr>
+<tr>
+<td>MMMU-Pro</td>
+<td>Multidisciplinary multimodal questions</td>
+<td>Visual and textual reasoning</td>
+</tr>
+<tr>
+<td>FACTS Suite</td>
+<td>Grounding, parametric, search, and multimodal factuality</td>
+<td>Factual reliability</td>
+</tr>
+<tr>
+<td>SimpleQA Verified</td>
+<td>Short factual questions with verified answers</td>
+<td>Parametric factual accuracy</td>
+</tr>
+<tr>
+<td>HalluHard</td>
+<td>Difficult multi-turn conversations with citation checking</td>
+<td>Multi-turn hallucination under hard domains</td>
+</tr>
+<tr>
+<td>MRCR</td>
+<td>Multi-round coreference and long-context retrieval</td>
+<td>Long-context recall and tracking</td>
+</tr>
+<tr>
+<td>LongCodeBench</td>
+<td>Real code tasks at very long context</td>
+<td>Effective long-context coding</td>
+</tr>
+<tr>
+<td>LongProc</td>
+<td>Long procedural generation with structured output</td>
+<td>Instruction retention and long-form coherence</td>
+</tr>
+<tr>
+<td>HELM</td>
+<td>Holistic evaluation framework</td>
+<td>Multi-metric model comparison</td>
+</tr>
+<tr>
+<td>MedHELM</td>
+<td>Clinical and medical tasks organised by workflow</td>
+<td>Health-domain applicability</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reading-these-names">Reading these names<a class="headerlink" href="#reading-these-names" title="Permanent link">&para;</a></h2>
+<p>Several entries differ from similarly named benchmarks in ways that matter. ARC-AGI is not the AI2 Reasoning Challenge. SWE-Bench Verified and SWE-Bench Pro are distinct constructions from the original SWE-Bench, and a score against one is not a score against another. A benchmark version must be recorded with every result, because these constructions are revised.</p>
+<p>Full documentation for each, under the nine required headings, is in the <a href="../../benchmarks/benchmark-overview/">benchmarks section</a>. An entry appears in that section only after its construction methodology has been located and registered.</p>
 
 
 

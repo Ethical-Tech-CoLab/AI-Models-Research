@@ -1026,10 +1026,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-latency-anatomy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Latency anatomy
       
     </span>
   </a>
@@ -1037,10 +1037,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-tokens-per-second-is-not-task-completion-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Tokens per second is not task completion time
       
     </span>
   </a>
@@ -1048,10 +1048,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-fast-against-slow-reasoning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Fast against slow reasoning
       
     </span>
   </a>
@@ -1059,10 +1059,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-operational-reporting-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Operational reporting requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-this-repository-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What this repository records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3185,10 +3218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-latency-anatomy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Latency anatomy
       
     </span>
   </a>
@@ -3196,10 +3229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-tokens-per-second-is-not-task-completion-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Tokens per second is not task completion time
       
     </span>
   </a>
@@ -3207,10 +3240,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-fast-against-slow-reasoning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Fast against slow reasoning
       
     </span>
   </a>
@@ -3218,10 +3251,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-operational-reporting-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Operational reporting requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-this-repository-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What this repository records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3264,33 +3330,92 @@
 <h1 id="latency-and-throughput">Latency and throughput<a class="headerlink" href="#latency-and-throughput" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Decomposes response time into queueing, prefill, time to first token, and time per output token, adds tool latency for agent loops, and treats percentile reporting, concurrency, batching, and cold starts as necessary conditions on any figure. Provides worked calculations. Establishes that latency is a property of a served system rather than of a model.</p>
-<h2 id="arguments-this-chapter-owns">Arguments this chapter owns<a class="headerlink" href="#arguments-this-chapter-owns" title="Permanent link">&para;</a></h2>
-<p>Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.</p>
+<p>This chapter decomposes response time, states the conditions any latency figure must carry, and explains why latency is a property of a served system rather than of a model.</p>
+<p>Developed elsewhere: the measurement protocol in <a href="../evaluation/latency-methodology/">latency methodology</a>; serving mechanisms in <a href="../13-inference/">13. Inference</a>; the cost consequences in <a href="../15-token-economics/">15. Token economics</a>.</p>
+<h2 id="1-latency-anatomy">1. Latency anatomy<a class="headerlink" href="#1-latency-anatomy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Meaning</th>
+<th>Main drivers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Queueing</td>
+<td>Time before compute begins</td>
+<td>Provider capacity, priority tier, concurrency</td>
+</tr>
+<tr>
+<td>Prefill</td>
+<td>Processing the input and building the key-value cache</td>
+<td>Input length, attention design, cache hits, hardware</td>
+</tr>
+<tr>
+<td>Time to first token</td>
+<td>The startup delay a user perceives</td>
+<td>Queueing plus prefill plus routing</td>
+</tr>
+<tr>
+<td>Decode</td>
+<td>Sequential generation of output tokens</td>
+<td>Model size, active parameters, precision, batching</td>
+</tr>
+<tr>
+<td>Tool time</td>
+<td>Search, code, browser, database, or external API calls</td>
+<td>Tool speed, retries, network, permissions</td>
+</tr>
+<tr>
+<td>Post-processing</td>
+<td>Validation, citation checks, safety, formatting</td>
+<td>System architecture</td>
+</tr>
+</tbody>
+</table>
+<p>Reasoning tokens appear in decode time whether or not the caller can see them, which is why a reasoning model can be slow without appearing to produce more output.</p>
+<h2 id="2-tokens-per-second-is-not-task-completion-time">2. Tokens per second is not task completion time<a class="headerlink" href="#2-tokens-per-second-is-not-task-completion-time" title="Permanent link">&para;</a></h2>
+<p>Generation speed is interpretable only once time to first token and the workload conditions are specified. Google reports 363 output tokens per second for Gemini 3.1 Flash-Lite in its own evaluation.<sup id="fnref:deepmind2026flashlite"><a class="footnote-ref" href="#fn:deepmind2026flashlite">1</a></sup> xAI reports 80 tokens per second for Grok 4.5 on its launch page.<sup id="fnref:xai2026launch"><a class="footnote-ref" href="#fn:xai2026launch">2</a></sup></p>
+<p>Those two figures come from different test environments and different model classes and are not a controlled head-to-head comparison. Both are provider-reported. They indicate that fast tiers exist and are positioned for interactive and high-volume use; they do not measure how long a task takes.</p>
+<p>A model streaming at a high token rate can still be slow if it emits excessive reasoning tokens or needs repeated attempts. A slower model can finish sooner if it needs fewer steps, fewer tool calls, and less rework. The decision-relevant quantity is end-to-end task completion time, including tools and retries.</p>
+<h2 id="3-fast-against-slow-reasoning">3. Fast against slow reasoning<a class="headerlink" href="#3-fast-against-slow-reasoning" title="Permanent link">&para;</a></h2>
+<p>Configurable reasoning moves the latency-quality frontier rather than sitting at a point on it. Low or disabled reasoning suits extraction, rewriting, classification, and deterministic tool routing. High reasoning effort earns its cost on mathematics, scientific analysis, difficult coding, and planning, where an incorrect result costs more than the additional compute.</p>
+<p>The optimal policy is adaptive: estimate difficulty, then allocate compute only where the expected quality gain justifies the added time, cost, and energy. Research on test-time compute identifies diminishing returns and overthinking, in which longer chains introduce new errors, lose the objective, or exhaust the context budget. The correct stopping rule is therefore quality-conditioned, using verifier signals, uncertainty, progress, and task complexity, rather than a fixed token allowance.</p>
+<h2 id="4-operational-reporting-requirements">4. Operational reporting requirements<a class="headerlink" href="#4-operational-reporting-requirements" title="Permanent link">&para;</a></h2>
+<p>A latency figure without these is not usable, and this repository does not record one.</p>
 <ul>
-<li>The latency decomposition and its notation.</li>
-<li>The rule that a latency figure without percentile, concurrency, and region is not usable.</li>
-<li>The relationship between batching, throughput, and per-request latency.</li>
+<li>Report p50, p90, and p95 time to first token, never a mean alone.</li>
+<li>Report p50 and p95 end-to-end completion time, including tools and retries.</li>
+<li>Separate cold starts from warm requests, and cache hits from cache misses.</li>
+<li>Compare models at the same latency and cost budget, not at their own defaults.</li>
+<li>Track output tokens, tool calls, failed steps, and retries per accepted task.</li>
+<li>Test at the concurrency you expect, because batching raises throughput while raising individual latency.</li>
 </ul>
-<h2 id="developed-elsewhere">Developed elsewhere<a class="headerlink" href="#developed-elsewhere" title="Permanent link">&para;</a></h2>
+<h2 id="5-what-this-repository-records">5. What this repository records<a class="headerlink" href="#5-what-this-repository-records" title="Permanent link">&para;</a></h2>
+<p>No latency or throughput rows exist at this revision. The two provider figures in section 2 are recorded in prose with the reporting party named, and are not entered into a dataset, because neither states percentile, concurrency, region, prompt length, or output length. A dataset row would imply a comparability the measurements do not have.</p>
+<h2 id="6-open-research-questions">6. Open research questions<a class="headerlink" href="#6-open-research-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Measurement protocol: <a href="../evaluation/latency-methodology/">evaluation/latency-methodology.md</a></li>
-<li>Serving mechanisms: <a href="../13-inference/">13-inference.md</a></li>
-<li>Cost per second and per token: <a href="../15-token-economics/">15-token-economics.md</a></li>
+<li>Do independent third-party latency measurements exist for these endpoints under a disclosed methodology?</li>
+<li>How much of the observed difference between providers is serving infrastructure rather than model?</li>
+<li>What is the distribution, not the mean, of time to first token under production concurrency?</li>
+<li>How does end-to-end task completion time compare across models once retries and tool calls are counted?</li>
 </ul>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define every latency term with a formula and cross-reference the formulas appendix.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Produce at least one worked example from end to end, using stated inputs, and label it as a worked example rather than a measurement.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Record independent third-party latency measurements where the methodology is disclosed; grade vendor claims C and label them.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the Mermaid diagram of latency decomposition.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State the cold-start conditions under which any measurement in this repository was taken.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to <code>data/sources.csv</code>, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:deepmind2026flashlite">
+<p>Google DeepMind (2026). Gemini 3.1 Flash-Lite model card. Grade B for the specification; the throughput figure is provider-reported and Grade C at the point of use. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:deepmind2026flashlite" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:xai2026launch">
+<p>xAI (2026). Introducing Grok 4.5. Grade C, provider-reported launch page. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:xai2026launch" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

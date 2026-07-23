@@ -914,10 +914,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-four-different-accuracy-problems" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Four different accuracy problems
       
     </span>
   </a>
@@ -925,10 +925,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-evidence-from-hard-domains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Evidence from hard domains
       
     </span>
   </a>
@@ -936,10 +936,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-calibration-and-abstention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Calibration and abstention
       
     </span>
   </a>
@@ -947,10 +947,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-reliability-is-a-system-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Reliability is a system property
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-this-repository-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What this repository records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3185,10 +3218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-four-different-accuracy-problems" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Four different accuracy problems
       
     </span>
   </a>
@@ -3196,10 +3229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-evidence-from-hard-domains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Evidence from hard domains
       
     </span>
   </a>
@@ -3207,10 +3240,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-calibration-and-abstention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Calibration and abstention
       
     </span>
   </a>
@@ -3218,10 +3251,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-reliability-is-a-system-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Reliability is a system property
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-this-repository-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What this repository records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3264,32 +3330,120 @@
 <h1 id="factuality-and-hallucination">Factuality and hallucination<a class="headerlink" href="#factuality-and-hallucination" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Distinguishes the several distinct phenomena that the word hallucination is used for: unsupported generation in a grounded setting, incorrect recall in a closed-book setting, fabricated citations and identifiers, and confident assertion under uncertainty. Explains how each is measured, why measured rates are not comparable across those settings, and what calibration and abstention contribute. Answers research question RQ3.</p>
-<h2 id="arguments-this-chapter-owns">Arguments this chapter owns<a class="headerlink" href="#arguments-this-chapter-owns" title="Permanent link">&para;</a></h2>
-<p>Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.</p>
+<p>This chapter separates the distinct phenomena that the word hallucination is used for, explains how each is measured, and states why a single hallucination rate for a model is not a well-defined quantity. It answers research question RQ3.</p>
+<p>Developed elsewhere: benchmark construction in <a href="../benchmarks/factuality/">factuality benchmarks</a>; retrieval as a mitigation in <a href="../13-inference/">13. Inference</a>; the effect on selection in <a href="../20-model-selection-framework/">20. Model selection framework</a>.</p>
+<h2 id="1-four-different-accuracy-problems">1. Four different accuracy problems<a class="headerlink" href="#1-four-different-accuracy-problems" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Question</th>
+<th>How it is evaluated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parametric factuality</td>
+<td>Is the answer correct from internal model knowledge?</td>
+<td>Closed-book factual question answering</td>
+</tr>
+<tr>
+<td>Groundedness</td>
+<td>Does every material claim follow from the supplied sources?</td>
+<td>Claim-level entailment against provided evidence</td>
+</tr>
+<tr>
+<td>Procedural correctness</td>
+<td>Did the model follow the required method and constraints?</td>
+<td>Schema validation, unit tests, workflow checks</td>
+</tr>
+<tr>
+<td>Epistemic behaviour</td>
+<td>Does the model recognise when evidence is insufficient?</td>
+<td>Calibration, selective accuracy, abstention</td>
+</tr>
+</tbody>
+</table>
+<p>Google DeepMind's factuality programme separates grounding, parametric knowledge, search, and multimodal evidence rather than reporting one rate.<sup id="fnref:deepmind2024facts"><a class="footnote-ref" href="#fn:deepmind2024facts">1</a></sup> <sup id="fnref:deepmind2025factssuite"><a class="footnote-ref" href="#fn:deepmind2025factssuite">2</a></sup> That separation is the right default, because a model can fail differently in each setting: search reduces stale-knowledge errors while introducing source selection, citation, and synthesis errors, and retrieval improves grounding while still failing when evidence is contradictory or dispersed.</p>
+<h2 id="2-evidence-from-hard-domains">2. Evidence from hard domains<a class="headerlink" href="#2-evidence-from-hard-domains" title="Permanent link">&para;</a></h2>
+<p>HalluHard evaluates 950 difficult multi-turn conversations in legal, research, medical, and coding settings, and checks whether cited material actually supports the generated claims. The strongest web-enabled configuration tested still hallucinated on about 30 percent of conversations, and rates without web access were substantially higher.<sup id="fnref:fan2026halluhard"><a class="footnote-ref" href="#fn:fan2026halluhard">3</a></sup> The same work reports that early errors can cascade as a conversation lengthens, which makes multi-turn reliability a property of the system rather than of a single answer.</p>
+<p>Software generation carries a distinct and concrete risk. Research at NYU's OSIRIS Lab on package hallucination, in which a model recommends dependencies that do not exist, found invented package names in roughly 4.6 to 6.1 percent of tested package suggestions across frontier systems, with some fabricated names recurring across models.<sup id="fnref:osiris2026package"><a class="footnote-ref" href="#fn:osiris2026package">4</a></sup> That is a supply-chain exposure rather than a quality nuisance: a name that several models hallucinate can be registered by an attacker and then installed by automation.</p>
+<h2 id="3-calibration-and-abstention">3. Calibration and abstention<a class="headerlink" href="#3-calibration-and-abstention" title="Permanent link">&para;</a></h2>
+<p>Fluency is not calibration. Confidence can be expressed through verbal hedging, an explicit probability, token log-probabilities, agreement across samples, or a separate verifier, and these signals do not always agree with one another.<sup id="fnref:bowman2023eight"><a class="footnote-ref" href="#fn:bowman2023eight">5</a></sup> Uncertainty estimators can correlate weakly with actual hallucination depending on the error type and the model, so a production system should validate its uncertainty signal against its own domain rather than assume a confident model is right or an uncertain one is wrong.</p>
+<h2 id="4-reliability-is-a-system-property">4. Reliability is a system property<a class="headerlink" href="#4-reliability-is-a-system-property" title="Permanent link">&para;</a></h2>
+<p>No model choice removes the need for the following controls, and they matter more than the choice itself.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Implementation objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval with provenance</td>
+<td>Retrieve a small evidence set, preserve source identifiers, require claim-level citation</td>
+</tr>
+<tr>
+<td>Constrained generation</td>
+<td>Schemas, grammars, enumerated values, and deterministic validators wherever possible</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>Run the calculation, the code, the query, or the citation check against the first output</td>
+</tr>
+<tr>
+<td>Selective escalation</td>
+<td>Route low-confidence, high-risk, or contradictory cases to a stronger model or a human</td>
+</tr>
+<tr>
+<td>Abstention policy</td>
+<td>Define when the system must say the evidence is insufficient, and what would resolve it</td>
+</tr>
+<tr>
+<td>Version control</td>
+<td>Pin model snapshots and rerun regression evaluations before an upgrade</td>
+</tr>
+<tr>
+<td>Adversarial evaluation</td>
+<td>Test prompt injection, conflicting documents, missing evidence, and long-context distractors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-what-this-repository-records">5. What this repository records<a class="headerlink" href="#5-what-this-repository-records" title="Permanent link">&para;</a></h2>
+<p><code>data/benchmarks.csv</code> holds no factuality results at this revision. The generated table in <a href="../benchmarks/factuality/">factuality benchmarks</a> is therefore empty, and states that rather than presenting a blank table as an absence of failures.</p>
+<p>The reason is the grounding condition. A grounded and a closed-book measurement answer different questions, and the sources used for this revision report rates without stating the condition in a form that could be recorded per model. Recording them anyway would create exactly the single hallucination rate this chapter argues does not exist.</p>
+<h2 id="6-open-research-questions">6. Open research questions<a class="headerlink" href="#6-open-research-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The taxonomy of hallucination phenomena and the measurement appropriate to each.</li>
-<li>The argument that a single hallucination rate for a model is not a well-defined quantity.</li>
-<li>The treatment of abstention and calibration as measured behaviours rather than as model virtues.</li>
+<li>Are grounded and closed-book hallucination rates for the same model ever reported under compatible conditions?</li>
+<li>Do any providers publish an abstention or calibration measurement for their own models?</li>
+<li>What is the current package hallucination rate under a fixed prompt set, and is it falling?</li>
+<li>Does claim-level citation checking reduce measured hallucination, or move it into citation selection?</li>
 </ul>
-<h2 id="developed-elsewhere">Developed elsewhere<a class="headerlink" href="#developed-elsewhere" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Factuality benchmark construction: <a href="../benchmarks/factuality/">benchmarks/factuality.md</a></li>
-<li>Retrieval as a mitigation: <a href="../13-inference/">13-inference.md</a></li>
-<li>Suitability of factuality scores for procurement: <a href="../20-model-selection-framework/">20-model-selection-framework.md</a></li>
-</ul>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cite the primary construction sources for each factuality benchmark documented here.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Establish whether grounded and closed-book hallucination rates for the same model are reported anywhere under compatible conditions; record the answer either way.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Record whether each profiled family publishes an abstention or calibration measurement, with a source.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State the conditions under which a reported hallucination rate may be compared across families, and enforce them in the comparison tables.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to <code>data/sources.csv</code>, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:deepmind2024facts">
+<p>Google DeepMind (2024). FACTS Grounding: a benchmark for evaluating factuality. Grade B, benchmark methodology from the maintaining organisation. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:deepmind2024facts" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:deepmind2025factssuite">
+<p>Google DeepMind (2025). FACTS Benchmark Suite. Grade B, benchmark methodology. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:deepmind2025factssuite" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:fan2026halluhard">
+<p>Fan, D., Delsad, S., Flammarion, N., and Andriushchenko, M. (2026). HalluHard: a hard multi-turn hallucination benchmark. Preprint. Grade B. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:fan2026halluhard" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:osiris2026package">
+<p>NYU OSIRIS Lab (2026). LLM package hallucination research. New York University. Grade B, institutional. The specific replication study should be cited directly once located; see the verification queue. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:osiris2026package" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:bowman2023eight">
+<p>Bowman, S. R. (2023). Eight things to know about large language models. New York University. Grade B. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:bowman2023eight" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

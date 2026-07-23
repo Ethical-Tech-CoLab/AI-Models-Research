@@ -830,10 +830,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-the-scaffold-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. The scaffold problem
       
     </span>
   </a>
@@ -841,10 +841,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-where-agents-stand-against-human-performance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Where agents stand against human performance
       
     </span>
   </a>
@@ -852,10 +852,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-why-small-error-rates-compound" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Why small error rates compound
       
     </span>
   </a>
@@ -863,10 +863,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-controls-for-consequential-actions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Controls for consequential actions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3185,10 +3207,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-the-scaffold-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. The scaffold problem
       
     </span>
   </a>
@@ -3196,10 +3218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-where-agents-stand-against-human-performance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Where agents stand against human performance
       
     </span>
   </a>
@@ -3207,10 +3229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-why-small-error-rates-compound" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Why small error rates compound
       
     </span>
   </a>
@@ -3218,10 +3240,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-controls-for-consequential-actions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Controls for consequential actions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3264,33 +3308,40 @@
 <h1 id="agentic-ai">Agentic AI<a class="headerlink" href="#agentic-ai" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Covers models used inside action loops: tool calling, planning, multi-step execution, computer use, and multi-agent arrangements. Distinguishes the model's contribution from the scaffold's, which is the central measurement problem in this area, since published agent results are properties of a model-and-scaffold pair. Answers research question RQ5 on the predictive value of agentic benchmarks for deployed reliability.</p>
-<h2 id="arguments-this-chapter-owns">Arguments this chapter owns<a class="headerlink" href="#arguments-this-chapter-owns" title="Permanent link">&para;</a></h2>
-<p>Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.</p>
+<p>This chapter covers models used inside action loops, and the measurement problem that follows from it: a published agent result is a property of a model-and-scaffold pair, not of a model. It answers research question RQ5.</p>
+<p>Developed elsewhere: benchmark construction in <a href="../benchmarks/agents-and-computer-use/">agent and computer-use benchmarks</a>; context exhaustion in <a href="../11-long-context/">11. Long context</a>; tool-call token cost in <a href="../15-token-economics/">15. Token economics</a>.</p>
+<h2 id="1-the-scaffold-problem">1. The scaffold problem<a class="headerlink" href="#1-the-scaffold-problem" title="Permanent link">&para;</a></h2>
+<p>An agent plans, calls a tool, observes the result, updates state, and continues until a stopping condition. The scaffold that manages tools, context, retries, and termination is doing a substantial share of the work, and it is rarely described in enough detail to reproduce.</p>
+<p>The consequence for evidence is direct: a result attributed to a model was produced by a system, and two evaluations of the same model under different scaffolds are not comparable. Every agent result recorded in <code>data/benchmarks.csv</code> therefore carries the reporting party in its own column, and rows without a scaffold description are marked unstated.</p>
+<h2 id="2-where-agents-stand-against-human-performance">2. Where agents stand against human performance<a class="headerlink" href="#2-where-agents-stand-against-human-performance" title="Permanent link">&para;</a></h2>
+<p>The Stanford AI Index reports best model results against human baselines on interactive benchmarks. On OSWorld, which tests computer use in realistic desktop environments, the best reported model result was 66.3 percent against a human baseline of 72.35 percent. On WebArena, which tests web navigation and task completion, the best reported result was 74.3 percent against a human baseline of 78.24 percent. Terminal-Bench 2.0 reached 77.3 percent, and Vibe Code Bench, which measures end-to-end application construction, reached about 57.6 percent.<sup id="fnref:stanford2026aiindex"><a class="footnote-ref" href="#fn:stanford2026aiindex">1</a></sup></p>
+<p>Two readings follow. Agents approach human performance on these benchmarks without consistently exceeding it. And the ordering across benchmarks shows that building a functioning application remains materially harder than completing an isolated task, which is what a long-horizon workload actually requires.</p>
+<p>Human scores are frequently measured under different time, tool, and incentive conditions than model scores, so the gap is indicative rather than exact. That caveat is owned by the AI Index itself and is restated here because the numbers are meaningless without it.</p>
+<p>The <a href="../interactive/">interactive companion</a> presents this comparison with the human baselines marked.</p>
+<h2 id="3-why-small-error-rates-compound">3. Why small error rates compound<a class="headerlink" href="#3-why-small-error-rates-compound" title="Permanent link">&para;</a></h2>
+<p>Production systems fail through sequences of small errors rather than single wrong answers. An agent that is reliable per step can still fail end to end, because per-step accuracy multiplies across a trajectory. That is why a few percentage points on a long-horizon benchmark matter more than the same gap on a single-answer test, and why per-step accuracy is the wrong thing to optimise on its own.</p>
+<p>The failure surface for computer-use agents specifically includes visual misperception, stale page state, hidden confirmation steps, prompt injection, permission errors, and irreversible actions.</p>
+<h2 id="4-controls-for-consequential-actions">4. Controls for consequential actions<a class="headerlink" href="#4-controls-for-consequential-actions" title="Permanent link">&para;</a></h2>
+<p>High-impact actions require confirmation, scoped credentials, transaction limits, logging, and a recovery path. These are architecture decisions rather than model decisions, and no model choice substitutes for them.</p>
+<h2 id="5-open-research-questions">5. Open research questions<a class="headerlink" href="#5-open-research-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The definition of an agent used in this handbook and the scaffold boundary.</li>
-<li>The argument that agent benchmark results are not attributable to a model alone.</li>
-<li>The failure taxonomy for long-horizon execution: error compounding, context exhaustion, and unrecoverable tool states.</li>
+<li>What is the relationship between per-step accuracy and end-to-end success as step count grows?</li>
+<li>Does any Grade A evidence link agent benchmark performance to deployed reliability?</li>
+<li>How much of the variation between reported agent results is scaffold rather than model?</li>
+<li>How should a benchmark represent recovery from a failed action, which production systems depend on and current scoring largely ignores?</li>
 </ul>
-<h2 id="developed-elsewhere">Developed elsewhere<a class="headerlink" href="#developed-elsewhere" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Agent benchmark construction: <a href="../benchmarks/agents-and-computer-use/">benchmarks/agents-and-computer-use.md</a></li>
-<li>Context exhaustion and compaction: <a href="../11-long-context/">11-long-context.md</a></li>
-<li>Tool-call token cost: <a href="../15-token-economics/">15-token-economics.md</a></li>
-</ul>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cite the primary sources for the tool-use and reasoning-and-acting formulations.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> For every agent benchmark result recorded, capture the scaffold description in the notes field; results with no scaffold description are marked unstated.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Locate evidence on the relationship between per-step accuracy and end-to-end task success at increasing step counts, or record the gap.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the Mermaid diagram of the agent loop.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State whether any Grade A evidence links agent benchmark performance to deployed reliability; if none exists, say so in the chapter, not only in the limitations.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to <code>data/sources.csv</code>, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:stanford2026aiindex">
+<p>Stanford Institute for Human-Centered Artificial Intelligence (2026). AI Index Report 2026, Technical Performance chapter. Grade B, institutional compilation. Values are snapshots, not permanent rankings. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:stanford2026aiindex" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

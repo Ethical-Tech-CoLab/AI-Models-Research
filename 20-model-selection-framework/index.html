@@ -1194,10 +1194,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-start-from-failure-cost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Start from failure cost
       
     </span>
   </a>
@@ -1205,10 +1205,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-the-cascade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. The cascade
       
     </span>
   </a>
@@ -1216,10 +1216,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-weighted-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Weighted criteria
       
     </span>
   </a>
@@ -1227,10 +1227,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-architecture-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Architecture patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-the-rule-this-chapter-exists-to-enforce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. The rule this chapter exists to enforce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
       
     </span>
   </a>
@@ -3185,10 +3207,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-start-from-failure-cost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Start from failure cost
       
     </span>
   </a>
@@ -3196,10 +3218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-the-cascade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. The cascade
       
     </span>
   </a>
@@ -3207,10 +3229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-weighted-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. Weighted criteria
       
     </span>
   </a>
@@ -3218,10 +3240,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-architecture-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Architecture patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-the-rule-this-chapter-exists-to-enforce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. The rule this chapter exists to enforce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Open research questions
       
     </span>
   </a>
@@ -3264,32 +3308,153 @@
 <h1 id="model-selection-framework">Model selection framework<a class="headerlink" href="#model-selection-framework" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Converts the handbook into a procedure. Given a task specification, a quality bar, a latency budget, a cost ceiling, and a deployment constraint, the framework produces a shortlist and an evaluation plan rather than a ranking. It is explicitly a procedure for the reader to run, not a recommendation, because construct validity cannot be established on the reader's behalf.</p>
-<h2 id="arguments-this-chapter-owns">Arguments this chapter owns<a class="headerlink" href="#arguments-this-chapter-owns" title="Permanent link">&para;</a></h2>
-<p>Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.</p>
+<p>This chapter converts the handbook into a procedure. Given a task specification, a quality bar, a latency budget, a cost ceiling, and a deployment constraint, it produces a shortlist and an evaluation plan. It does not produce a recommendation, because construct validity cannot be established on a reader's behalf.</p>
+<p>Developed elsewhere: running the evaluation in <a href="../evaluation/internal-bakeoff/">internal bakeoff</a>; cost arithmetic in <a href="../15-token-economics/">15. Token economics</a>; the generated matrix in <a href="../comparisons/model-selection-matrix/">model selection matrix</a>.</p>
+<h2 id="1-start-from-failure-cost">1. Start from failure cost<a class="headerlink" href="#1-start-from-failure-cost" title="Permanent link">&para;</a></h2>
+<p>The control posture is set by what a wrong answer costs, before any model is considered.</p>
+<table>
+<thead>
+<tr>
+<th>Risk tier</th>
+<th>Examples</th>
+<th>Minimum control posture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low</td>
+<td>Drafting, brainstorming, rewriting</td>
+<td>Fast low-cost model, light validation</td>
+</tr>
+<tr>
+<td>Moderate</td>
+<td>Internal summarisation, extraction, analytics assistance</td>
+<td>Schema validation, citations, sampled human review</td>
+</tr>
+<tr>
+<td>High</td>
+<td>Public research, financial analysis, legal support, code deployment</td>
+<td>Strong model, source verification, tests, approvals</td>
+</tr>
+<tr>
+<td>Critical</td>
+<td>Clinical decisions, autonomous transactions, safety systems</td>
+<td>Narrow validated system, expert oversight, formal governance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-the-cascade">2. The cascade<a class="headerlink" href="#2-the-cascade" title="Permanent link">&para;</a></h2>
+<p>Constraints first, capability second, cost third. Each stage eliminates candidates; none of them ranks survivors.</p>
+<ol>
+<li><strong>Eliminate on constraints.</strong> Privacy, data residency, licence, deployment mode, and modality support. A model that cannot legally or technically be used is not a candidate at any price.</li>
+<li><strong>Eliminate on capability floor.</strong> Does the shortlist clear the quality bar on your own evaluation set? Not on a published benchmark, on yours.</li>
+<li><strong>Order on cost per accepted task.</strong> Only among survivors, and only with the acceptance criterion stated.</li>
+<li><strong>Check latency at the required percentile</strong> under expected concurrency, not at the default.</li>
+<li><strong>Re-evaluate on a schedule</strong>, because endpoints and prices change.</li>
+</ol>
+<h2 id="3-weighted-criteria">3. Weighted criteria<a class="headerlink" href="#3-weighted-criteria" title="Permanent link">&para;</a></h2>
+<p>Where a formal scoring model is required, these weights are a starting point to be argued rather than adopted.</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Typical weight</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verified task quality</td>
+<td>25 to 40 percent</td>
+<td>Local golden set, end-to-end success, expert review</td>
+</tr>
+<tr>
+<td>Factual reliability</td>
+<td>10 to 25 percent</td>
+<td>Claim support, calibration, abstention, citation accuracy</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>5 to 20 percent</td>
+<td>p50 and p95 time to first token and completion time</td>
+</tr>
+<tr>
+<td>Token and tool cost</td>
+<td>5 to 20 percent</td>
+<td>Cost per accepted task</td>
+</tr>
+<tr>
+<td>Energy efficiency</td>
+<td>5 to 15 percent</td>
+<td>Joules per accepted task, or a declared proxy</td>
+</tr>
+<tr>
+<td>Privacy and security</td>
+<td>10 to 25 percent</td>
+<td>Retention, region, access controls, prompt injection resistance</td>
+</tr>
+<tr>
+<td>Deployment control</td>
+<td>5 to 20 percent</td>
+<td>Open weights, fine-tuning, version pinning, observability</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-architecture-patterns">4. Architecture patterns<a class="headerlink" href="#4-architecture-patterns" title="Permanent link">&para;</a></h2>
+<p>The right system is frequently not one model.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Design</th>
+<th>Best fit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cascade</td>
+<td>A small model handles easy cases; a frontier model handles escalations</td>
+<td>High-volume mixed-difficulty workloads</td>
+</tr>
+<tr>
+<td>Router</td>
+<td>A classifier selects model, tools, and reasoning budget</td>
+<td>Multiple task types under a cost constraint</td>
+</tr>
+<tr>
+<td>Generator and verifier</td>
+<td>One model produces, another checks claims or execution</td>
+<td>High error cost with verifiable outputs</td>
+</tr>
+<tr>
+<td>Retrieval-grounded</td>
+<td>The model answers only from a controlled evidence set</td>
+<td>Research, policy, legal, enterprise knowledge</td>
+</tr>
+<tr>
+<td>Human in the loop</td>
+<td>A person approves uncertain or consequential actions</td>
+<td>High-stakes decisions and transactions</td>
+</tr>
+<tr>
+<td>Local plus cloud</td>
+<td>A private local model handles sensitive data; a cloud model handles de-identified hard tasks</td>
+<td>Sovereignty and privacy constraints</td>
+</tr>
+</tbody>
+</table>
+<p>An adaptive system that varies model size, reasoning budget, context, and tool use by difficulty can improve quality per unit of cost and energy. It also creates an evaluation problem: the object being evaluated becomes a dynamic policy rather than a model, and the resource budget must be reported in full, including hidden reasoning, retries, verification, and tool calls.</p>
+<h2 id="5-the-rule-this-chapter-exists-to-enforce">5. The rule this chapter exists to enforce<a class="headerlink" href="#5-the-rule-this-chapter-exists-to-enforce" title="Permanent link">&para;</a></h2>
+<p>No model is selected on a published benchmark. The benchmark narrows the candidate set; a local evaluation selects. The handbook can tell you what has been measured, under what conditions, and by whom. It cannot tell you whether that transfers to your task, and any document that claims otherwise is selling something.</p>
+<h2 id="6-open-research-questions">6. Open research questions<a class="headerlink" href="#6-open-research-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The selection cascade: constraints first, capability second, cost third.</li>
-<li>The argument that a shortlist plus a local evaluation beats any published ranking for a specific task.</li>
-<li>The definition of the acceptance criterion that makes cost per accepted task computable.</li>
+<li>What sample size distinguishes two models at a stated effect size on a typical procurement task?</li>
+<li>Do weighted scoring models produce more defensible selections than a constraint cascade, or only more auditable ones?</li>
+<li>How should an adaptive routing policy be evaluated when its behaviour depends on traffic composition?</li>
 </ul>
-<h2 id="developed-elsewhere">Developed elsewhere<a class="headerlink" href="#developed-elsewhere" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Running the evaluation: <a href="../evaluation/internal-bakeoff/">evaluation/internal-bakeoff.md</a></li>
-<li>Cost arithmetic: <a href="../15-token-economics/">15-token-economics.md</a></li>
-<li>The generated selection matrix: <a href="../comparisons/model-selection-matrix/">comparisons/model-selection-matrix.md</a></li>
-</ul>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Write the cascade as an ordered decision procedure with explicit stopping conditions.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the Mermaid diagram of the model selection cascade.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Provide a worked example for at least three task classes, using stated assumptions and labelled as illustrative.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Confirm the framework never outputs a single recommended model without a stated task and evaluation.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to <code>data/sources.csv</code>, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
 
 
 

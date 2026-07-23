@@ -2496,10 +2496,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#1-why-a-local-evaluation-is-not-optional" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        1. Why a local evaluation is not optional
       
     </span>
   </a>
@@ -2507,10 +2507,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#2-protocol" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        2. Protocol
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Procedure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contributing-a-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contributing a result
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open research questions
       
     </span>
   </a>
@@ -3163,10 +3196,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#1-why-a-local-evaluation-is-not-optional" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        1. Why a local evaluation is not optional
       
     </span>
   </a>
@@ -3174,10 +3207,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#2-protocol" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        2. Protocol
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Procedure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contributing-a-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contributing a result
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open research questions
       
     </span>
   </a>
@@ -3220,20 +3286,90 @@
 <h1 id="internal-bakeoff-protocol">Internal bakeoff protocol<a class="headerlink" href="#internal-bakeoff-protocol" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>A protocol a reader can execute at their own cost to evaluate a shortlist of models on their own task. This repository runs no paid evaluations in continuous integration, so this protocol is how Grade A evidence for closed-weight models enters the repository: a reader runs it, documents the conditions, and contributes the results back.</p>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specify task set construction, including how to avoid contaminating a public benchmark with proprietary tasks.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specify the sample size required to distinguish two models at a stated effect size, with the statistical basis cited.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specify the blinding and randomisation procedure for human judgement.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specify the exact record to be produced, matching the columns of data/benchmarks.csv, so contributed results are directly ingestible.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specify the cost estimate procedure so a reader knows the price of the protocol before running it.</li>
+<p>A protocol for comparing models under production-like conditions. This repository runs no paid evaluations, so this protocol is the route by which Grade A evidence for closed-weight models can enter it: a reader executes it, records the conditions, and contributes the result.</p>
+<h2 id="1-why-a-local-evaluation-is-not-optional">1. Why a local evaluation is not optional<a class="headerlink" href="#1-why-a-local-evaluation-is-not-optional" title="Permanent link">&para;</a></h2>
+<p>Published benchmarks narrow a candidate set. They do not establish that performance transfers to your task, your prompts, your documents, your languages, or your acceptance criterion. Every ranking in this handbook is conditioned on evaluation settings that are not yours.</p>
+<h2 id="2-protocol">2. Protocol<a class="headerlink" href="#2-protocol" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dataset</td>
+<td>At least 200 representative cases for a moderate-risk workflow, stratified by difficulty, language, input length, and source quality</td>
+</tr>
+<tr>
+<td>Models</td>
+<td>Pin exact model identifiers and dates. Record region, service tier, reasoning level, temperature, and maximum output</td>
+</tr>
+<tr>
+<td>Prompts</td>
+<td>One frozen production prompt per task, plus a small prompt-robustness set</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>Identical retrieval, browser, code, and database capability across models, or the differences reported explicitly</td>
+</tr>
+<tr>
+<td>Trials</td>
+<td>At least three trials for stochastic tasks, more for high-variance agents</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Deterministic checks where possible, blinded expert review for open-ended output</td>
+</tr>
+<tr>
+<td>Factuality</td>
+<td>Decompose responses into claims and verify support, not overall impression</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>Record time to first token, generation time, tool time, and end-to-end time at p50 and p95</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Record uncached input, cached input, output, reasoning, tool fees, retries, and human review time</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>For self-hosted systems measure wall power or accelerator plus host power. For APIs use provider disclosure or a clearly labelled proxy</td>
+</tr>
+<tr>
+<td>Acceptance</td>
+<td>Define the pass threshold before testing. Report cost and energy only after dividing by accepted outputs</td>
+</tr>
+<tr>
+<td>Governance</td>
+<td>Log prompts, outputs, tools, model version, reviewer decision, and the reason for each failure</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-procedure">3. Procedure<a class="headerlink" href="#3-procedure" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Define the task contract.</strong> Inputs, allowed tools, required output, prohibited behaviour, latency target, and error tolerance.</li>
+<li><strong>Build the evaluation set.</strong> Common cases, difficult cases, long inputs, multilingual cases, adversarial inputs, and known historical failures.</li>
+<li><strong>Run controlled comparisons.</strong> Hold prompts, tools, reasoning budget, sampling, and validation constant, or report what differed.</li>
+<li><strong>Measure end-to-end outcomes.</strong> Success, unsupported claims, tokens, cost, latency, retries, tool calls, and human correction time.</li>
+<li><strong>Test reliability.</strong> Repeat across runs and prompt variants. Inspect variance, not only the mean.</li>
+<li><strong>Evaluate safety and governance.</strong> Data leakage, prompt injection, permission boundaries, refusal behaviour, and audit logs.</li>
+<li><strong>Pilot with monitoring.</strong> Limited traffic, canary versions, rollback, and a clear escalation path.</li>
+<li><strong>Re-evaluate continuously.</strong> Pin versions and rerun the suite before any upgrade.</li>
+</ol>
+<h2 id="4-contributing-a-result">4. Contributing a result<a class="headerlink" href="#4-contributing-a-result" title="Permanent link">&para;</a></h2>
+<p>A contributed result enters <code>data/benchmarks.csv</code> only with harness, sampling policy, tool permissions, evaluation date, and reporting party. A result missing those is recorded with them marked unstated, and is thereby excluded from ranked comparison. Use the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/.github/ISSUE_TEMPLATE/benchmark-update.md">benchmark update issue template</a>.</p>
+<h2 id="5-open-research-questions">5. Open research questions<a class="headerlink" href="#5-open-research-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>What sample size distinguishes two models at a stated effect size for a typical procurement task?</li>
+<li>What inter-rater agreement is achievable on blinded expert review of open-ended output?</li>
+<li>How should the acceptance criterion be specified so that two teams applying it to identical outputs agree?</li>
 </ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This file is complete when every checklist item above is closed and the quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
 
 
 

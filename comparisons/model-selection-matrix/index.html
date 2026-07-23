@@ -3284,19 +3284,274 @@
 </thead>
 <tbody>
 <tr>
-<td><em>No rows. Populate the source dataset in data/ and rerun scripts/generate_model_tables.py</em></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>Qwen 3.6 family</td>
+<td>Alibaba</td>
+<td>yes</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Multilingual, coding, and multimodal agents</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Qwen 3.7 family</td>
+<td>Alibaba</td>
+<td>yes</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Agent-focused positioning</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Claude Fable 5</td>
+<td>Anthropic</td>
+<td>no</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Positioned for long-running agents</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Claude Opus 4.8</td>
+<td>Anthropic</td>
+<td>no</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Positioned for complex agentic coding and enterprise workflows</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Claude Sonnet 5</td>
+<td>Anthropic</td>
+<td>no</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Fast balanced tier</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>DeepSeek V4 Flash</td>
+<td>DeepSeek</td>
+<td>yes</td>
+<td>text</td>
+<td>1000000</td>
+<td>optional</td>
+<td>Not publicly disclosed</td>
+<td>Thinking and non-thinking modes documented by the provider</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>DeepSeek V4 Pro</td>
+<td>DeepSeek</td>
+<td>yes</td>
+<td>text</td>
+<td>1000000</td>
+<td>optional</td>
+<td>Not publicly disclosed</td>
+<td>Reasoning and agent positioning stated by the provider</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Flash-Lite</td>
+<td>Google</td>
+<td>no</td>
+<td>text|image</td>
+<td>Not publicly disclosed</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Positioned for high-volume low-latency serving</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro</td>
+<td>Google</td>
+<td>no</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Search and code execution tools documented by the provider</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>C</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Llama 4 Maverick</td>
+<td>Meta</td>
+<td>yes</td>
+<td>text|image</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Natively multimodal open-weight model</td>
+<td>self_hosted|cloud_marketplace</td>
+<td>Not publicly disclosed</td>
+<td>Single H100 host target stated by the provider; precision not stated</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Llama 4 Scout</td>
+<td>Meta</td>
+<td>yes</td>
+<td>text|image</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>Natively multimodal open-weight model</td>
+<td>self_hosted|cloud_marketplace</td>
+<td>Not publicly disclosed</td>
+<td>INT4 deployment on one H100 target stated by the provider</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Meta Muse Spark 1.1</td>
+<td>Meta</td>
+<td>no</td>
+<td>text|image</td>
+<td>1000000</td>
+<td>Not publicly disclosed</td>
+<td>function_calling</td>
+<td>Multimodal agents, computer use, and context management</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Mistral Medium 3.5</td>
+<td>Mistral</td>
+<td>yes</td>
+<td>text</td>
+<td>256000</td>
+<td>optional</td>
+<td>Not publicly disclosed</td>
+<td>Coding agents documented by the provider</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Self-hosting on as few as four GPUs per the provider; GPU model and precision not stated</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Mistral Small 4</td>
+<td>Mistral</td>
+<td>yes</td>
+<td>text|image</td>
+<td>256000</td>
+<td>optional</td>
+<td>Not publicly disclosed</td>
+<td>Configurable reasoning and efficient serving</td>
+<td>first_party_api|self_hosted</td>
+<td>Not publicly disclosed</td>
+<td>Not publicly disclosed</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>GPT-5.6 Luna</td>
+<td>OpenAI</td>
+<td>no</td>
+<td>text|image</td>
+<td>1050000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Fast tier positioned for high volume</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol</td>
+<td>OpenAI</td>
+<td>no</td>
+<td>text|image</td>
+<td>1050000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Extensive hosted tool surface documented by the provider</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>GPT-5.6 Terra</td>
+<td>OpenAI</td>
+<td>no</td>
+<td>text|image</td>
+<td>1050000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Similar tool surface to the Sol tier per provider documentation</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
+</tr>
+<tr>
+<td>Grok 4.5</td>
+<td>xAI</td>
+<td>no</td>
+<td>text</td>
+<td>500000</td>
+<td>optional</td>
+<td>function_calling</td>
+<td>Positioned for coding and agentic knowledge work</td>
+<td>first_party_api</td>
+<td>Not applicable</td>
+<td>Not applicable</td>
+<td>B</td>
+<td>2026-07-22</td>
 </tr>
 </tbody>
 </table>

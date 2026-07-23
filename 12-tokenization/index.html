@@ -970,10 +970,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-tokens-are-not-words" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Tokens are not words
       
     </span>
   </a>
@@ -981,10 +981,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-every-billable-class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Every billable class
       
     </span>
   </a>
@@ -992,10 +992,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-what-this-repository-records" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. What this repository records
       
     </span>
   </a>
@@ -1003,10 +1003,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-open-research-questions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3185,10 +3196,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arguments-this-chapter-owns" class="md-nav__link">
+  <a href="#1-tokens-are-not-words" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arguments this chapter owns
+        1. Tokens are not words
       
     </span>
   </a>
@@ -3196,10 +3207,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#developed-elsewhere" class="md-nav__link">
+  <a href="#2-every-billable-class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Developed elsewhere
+        2. Every billable class
       
     </span>
   </a>
@@ -3207,10 +3218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-checklist" class="md-nav__link">
+  <a href="#3-what-this-repository-records" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Research checklist
+        3. What this repository records
       
     </span>
   </a>
@@ -3218,10 +3229,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#completion-criteria" class="md-nav__link">
+  <a href="#4-open-research-questions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Completion criteria
+        4. Open research questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
       
     </span>
   </a>
@@ -3264,32 +3286,42 @@
 <h1 id="tokenization">Tokenization<a class="headerlink" href="#tokenization" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>Research cut-off date: 2026-07-22.</strong>
-<strong>Status: Phase 2, not yet written.</strong> This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md">the changelog</a> for phase status.</p>
+<strong>Status: written.</strong></p>
 </blockquote>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
-<p>Explains how text and other modalities become tokens, and why that mapping is a cost and equity issue rather than an implementation detail. Covers byte-pair encoding, unigram and sentencepiece methods, byte-level fallback, vocabulary size trade-offs, and the systematically higher token counts that non-English and non-Latin-script text incurs. Enumerates every token class that a caller pays for: input, cached, output, reasoning, image, audio, video, tool-call, and compaction tokens. Answers research question RQ7.</p>
-<h2 id="arguments-this-chapter-owns">Arguments this chapter owns<a class="headerlink" href="#arguments-this-chapter-owns" title="Permanent link">&para;</a></h2>
-<p>Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.</p>
+<p>This chapter explains how text and other modalities become tokens, and why that mapping is a cost and equity issue rather than an implementation detail. It answers research question RQ7.</p>
+<p>Developed elsewhere: the cost formulas in <a href="../15-token-economics/">15. Token economics</a>; language coverage in <a href="../benchmarks/multilingual/">multilingual benchmarks</a>; modality accounting in <a href="../08-multimodal-models/">08. Multimodal models</a>.</p>
+<h2 id="1-tokens-are-not-words">1. Tokens are not words<a class="headerlink" href="#1-tokens-are-not-words" title="Permanent link">&para;</a></h2>
+<p>A token is produced by a model-specific tokenizer. English prose averages several characters per token, but the ratio varies with vocabulary, code, numerals, symbols, and language. The same sentence yields different counts across providers.</p>
+<p>This has a direct economic consequence. A language fragmented into more tokens costs more to process, occupies more of the context window for the same meaning, and takes longer to generate. The penalty falls hardest on languages least represented in tokenizer training, which is the opposite of an equitable distribution.</p>
+<p>Tokenizer changes also move cost without moving price. Anthropic states that Claude Sonnet 5 uses a tokenizer that can produce about 30 percent more tokens for the same text than its predecessor, so an unchanged per-token rate still raises the cost of an equivalent request.<sup id="fnref:anthropic2026sonnet"><a class="footnote-ref" href="#fn:anthropic2026sonnet">1</a></sup> That is developed as a pricing argument in <a href="../15-token-economics/">15. Token economics</a> and appears here only as the mechanism.</p>
+<h2 id="2-every-billable-class">2. Every billable class<a class="headerlink" href="#2-every-billable-class" title="Permanent link">&para;</a></h2>
+<p>A pricing table listing text tokens alone does not reveal the cost of a real workload. The classes a caller pays for are enumerated in <a href="../15-token-economics/">15. Token economics</a>, and the ones specific to tokenizer design are these:</p>
 <ul>
-<li>Definitions of every billable token class used in the cost formulas.</li>
-<li>The multilingual token-inequality argument and its cost consequence.</li>
-<li>The argument that token counts are not comparable across tokenizers, and therefore neither are per-token prices without a token-count measurement.</li>
+<li><strong>Input</strong> covers everything placed in the context, including tool definitions and retrieved evidence, not only the user's message.</li>
+<li><strong>Reasoning</strong> tokens are produced by the same tokenizer and billed at output rates where they are billed at all, so tokenizer inefficiency compounds with reasoning length.</li>
+<li><strong>Image, audio, and video</strong> inputs are converted to billable units by provider-specific rules. Those rules were not extracted for this revision and are recorded as not publicly disclosed in <code>data/models.csv</code>.</li>
+<li><strong>Compaction</strong> tokens are generated when a long history is summarised, and are therefore subject to the same per-language penalty as the original text.</li>
 </ul>
-<h2 id="developed-elsewhere">Developed elsewhere<a class="headerlink" href="#developed-elsewhere" title="Permanent link">&para;</a></h2>
+<h2 id="3-what-this-repository-records">3. What this repository records<a class="headerlink" href="#3-what-this-repository-records" title="Permanent link">&para;</a></h2>
+<p><code>data/models.csv</code> records the tokenizer field as not publicly disclosed for most models in this survey, because the sources used did not name one. That is itself a finding: a caller cannot compute the cost of their own corpus without knowing which tokenizer will be applied to it, and most providers do not say.</p>
+<p>No token-count measurement across languages has been performed for this survey. Any claim about multilingual cost inequity in this handbook is therefore a claim about the mechanism, supported by the tokenizer literature, and not a measured per-provider figure.</p>
+<h2 id="4-open-research-questions">4. Open research questions<a class="headerlink" href="#4-open-research-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Cost formulas: <a href="../15-token-economics/">15-token-economics.md</a></li>
-<li>Multilingual benchmark coverage: <a href="../benchmarks/multilingual/">benchmarks/multilingual.md</a></li>
-<li>Modality token accounting: <a href="../08-multimodal-models/">08-multimodal-models.md</a></li>
+<li>What is the token count for one fixed multilingual corpus under each provider's tokenizer?</li>
+<li>How much of the published price spread between providers survives normalisation by token count for equivalent meaning?</li>
+<li>Do providers publish a token counting tool, and does it agree with billed usage?</li>
+<li>What are the per-modality conversion rules, and how do they compare across providers for the same document?</li>
 </ul>
-<h2 id="research-checklist">Research checklist<a class="headerlink" href="#research-checklist" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cite the primary sources for byte-pair encoding and for sentencepiece.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Record the tokenizer used by each profiled family where it is disclosed.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Locate a Grade A source measuring token count for equivalent text across languages under a named tokenizer; record the exact corpus and tokenizer.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Confirm that every token class enumerated here appears in the cost formulas and in scripts/calculate_token_costs.py.</li>
-</ul>
-<h2 id="completion-criteria">Completion criteria<a class="headerlink" href="#completion-criteria" title="Permanent link">&para;</a></h2>
-<p>This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to <code>data/sources.csv</code>, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the <a href="https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control">research methodology</a> passes.</p>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:anthropic2026sonnet">
+<p>Anthropic (2026). Claude Sonnet 5 documentation and pricing notes. Claude Platform Documentation. Grade B, official documentation of the provider's own commercial terms. Accessed 2026-07-22.&#160;<a class="footnote-backref" href="#fnref:anthropic2026sonnet" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 
