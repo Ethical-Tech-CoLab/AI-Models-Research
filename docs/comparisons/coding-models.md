@@ -29,5 +29,7 @@ Generated from the data layer by `scripts/generate_benchmark_tables.py`. Do not 
 <!-- BEGIN GENERATED: coding-benchmarks -->
 | Benchmark | Subset | Model | Score | Metric | Unit | Harness | Sampling policy | n | Tools | Reported by | Evidence grade | Evaluation date | Published |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| _No results for this category. Populate data/benchmarks.csv and rerun scripts/generate_benchmark_tables.py_ | | | | | | | | | | | | | |
+| SWE-Bench Pro | full | claude-fable-5 | 80.0 | resolved_rate | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
+| SWE-Bench Verified | verified | gemini-3-1-pro | 80.6 | resolved_rate | percent | unstated | unstated | unstated | unstated | Google | C | unstated | 2026-01-01 |
+| Terminal-Bench | full | gpt-5.6-sol | 88.8 | accuracy | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
 <!-- END GENERATED: coding-benchmarks -->

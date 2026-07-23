@@ -1,31 +1,45 @@
 # Research gaps
 
 > **Research cut-off date: 2026-07-22.**
-> **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
+> **Status: written.**
 
 ## Scope
 
-Records what the survey could not establish and what would be required to establish it. Each gap states the question, why the existing evidence does not answer it, and the study design that would. This chapter is the register of open questions accumulated across chapters 01 to 20 and across the sixteen model profiles, consolidated so that the handbook's own boundaries are legible.
+This chapter consolidates what the survey could not establish and what would be required to establish it. Structural limitations that no further study can close are recorded in the [limitations document](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/limitations.md) instead; outstanding source acquisitions are in the [data sources register](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/data-sources.md).
 
-## Arguments this chapter owns
+## 1. Field-level gaps
 
-Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.
+| Gap | Why it matters |
+|---|---|
+| Comparable energy disclosure | Named commercial models rarely publish measured joules per token under a standardised workload |
+| Agent reliability | Benchmarks do not capture multi-day workflows, changing environments, permissions, and recovery |
+| Evaluation contamination | Public benchmarks become training targets and lose diagnostic value |
+| Effective long context | Better tests are needed for dispersed reasoning, long outputs, memory, and compaction |
+| Multilingual equity | Tokenization, cost, accuracy, and safety remain uneven across languages and scripts |
+| Model updates | Endpoint behaviour changes without a new public model name, defeating reproducibility |
+| Human baselines | Human scores are measured under different time, tool, and incentive conditions than model scores |
+| Environmental systems accounting | Embodied carbon, water, grid constraints, and rebound effects remain underreported |
 
-- The consolidated register of open research questions.
-- The mapping from each gap to the evidence that would close it.
+## 2. Gaps in this repository's own data
 
-## Developed elsewhere
+These are specific and closable, and each names what would close it.
 
-- Structural limitations that no study can close: [https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/limitations.md](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/limitations.md)
-- Outstanding source acquisitions: [https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/data-sources.md](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/data-sources.md)
+1. **No energy rows.** `data/energy-studies.csv` is empty because neither Grade A study restates all eleven required conditions in a transcribable form. Closed by reading the two primary papers and extracting the conditions.
+2. **No latency rows.** The two provider throughput figures state no percentile, concurrency, region, or prompt length. Closed by an independent measurement under the protocol in [latency methodology](evaluation/latency-methodology.md).
+3. **No factuality rows.** Reported rates do not state the grounding condition per model. Closed by locating per-model results with the condition attached.
+4. **All benchmark rows have unstated conditions.** Nine provider-reported results, none disclosing harness, sampling policy, or tool permissions. Closed only if providers disclose, or if a third party re-runs under a published harness.
+5. **No release dates.** Every model row records the release date as not publicly disclosed, so the release timeline diagram is empty and the contamination argument has no axis to run along. Closed by extracting announcement dates from provider changelogs.
+6. **Tokenizer unknown for most models.** A caller cannot compute the cost of their own corpus without it.
+7. **Cached-input and batch rates unknown.** Recorded as not publicly disclosed for every priced model, which blocks the cache-savings formula from being applied to real schedules.
+8. **Family-level rows for Qwen.** Two rows describe families rather than model identifiers and must be split once the model list is extracted.
+9. **Every bibliography entry is unverified.** Titles, venues, and identifiers were transcribed and must be confirmed against the published record.
 
-## Research checklist
+## 3. Direction
 
-- [ ] Collect the 'Open research questions' section from all sixteen model profiles.
-- [ ] Collect every gap recorded in chapters 01 to 20.
-- [ ] For each gap, state the study design, the data required, and whether the data could exist given current disclosure practice.
-- [ ] Distinguish gaps that further research could close from limitations that are structural, and link the latter to the limitations document rather than restating them.
+The likely near-term direction is adaptive systems that vary model size, reasoning budget, context, and tool use by task difficulty. That improves quality per unit of cost and energy while making evaluation harder, because the object being evaluated becomes a policy rather than a model. Future benchmarks should report the complete resource budget, including hidden reasoning, retries, verification, and tool calls.
 
-## Completion criteria
+Open-weight models will continue to narrow capability gaps while supporting sovereign and specialised deployment. Hosted frontier models will retain advantages in integrated tools and rapid updates, and buyers should demand stronger transparency and version stability in exchange.
 
-This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to `data/sources.csv`, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the [research methodology](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control) passes.
+## 4. The conclusion this handbook reaches
+
+Model selection is empirical engineering and governance, not brand preference. The right system is the least resource-intensive configuration that reliably meets the task contract and the risk threshold. That requires local evaluation, explicit evidence standards, controlled reasoning budgets, token and energy measurement, and continuous monitoring. Frontier capability is valuable. Unverified capability is not reliability.

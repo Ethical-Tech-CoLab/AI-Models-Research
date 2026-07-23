@@ -1,35 +1,73 @@
 # Benchmarking
 
 > **Research cut-off date: 2026-07-22.**
-> **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
+> **Status: written.** Benchmark results recorded in this repository are Grade C and carry unstated evaluation conditions, which disqualifies them from ranked comparison. That is a finding about the state of public reporting, not a gap in the data collection.
 
 ## Scope
 
-The methodological chapter on evaluation. Explains what a benchmark score is, how harness choice, prompt formatting, answer extraction, sampling policy, and tool permissions change it, and why scores from different evaluators are frequently not comparable. Covers contamination, saturation, construct validity, and the distinction between accuracy benchmarks and preference leaderboards. Answers research question RQ2 on the predictive value of published scores under procurement conditions.
+This chapter explains what a benchmark score is, what changes it, and why scores from different evaluators are frequently not comparable. It answers research question RQ2 on the predictive value of published scores under procurement conditions.
 
-## Arguments this chapter owns
+Developed elsewhere: per-benchmark documentation in [benchmark overview](benchmarks/benchmark-overview.md); the catalogue of failure modes in [benchmark limitations](benchmarks/benchmark-limitations.md); running your own evaluation in [internal bakeoff](evaluation/internal-bakeoff.md).
 
-Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.
+## 1. Performance is not a scalar
 
-- The anatomy of a benchmark result and the conditions that must accompany it.
-- The incomparable-settings argument, which the rest of the handbook applies as a rule.
-- The distinction between accuracy measurement and aggregate preference.
-- The contamination argument in its general form.
+The holistic evaluation framework argued that a model should be assessed across accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency rather than on a single number.[^liang2022holistic] That argument is stronger now that models use tools, accept several modalities, and vary their reasoning effort per request, because a single score hides differences in reliability, cost, and behaviour that determine whether a system works in production. Stanford's capability evaluations continue to report across multiple scenarios for the same reason.[^crfm2026helmcapabilities]
 
-## Developed elsewhere
+| Dimension | What it asks | Representative measures |
+|---|---|---|
+| Task accuracy | Correct answers, successful repairs, completed workflows | Exact match, pass rate, expert score, task success |
+| Reliability | Consistency across runs, prompts, and subgroups | Variance, failure rate, calibration, abstention |
+| Agent performance | Ability to plan and execute multi-step actions | End-to-end success, tool errors, recovery rate |
+| Long-context competence | Use of dispersed information over long inputs | Retrieval, aggregation, instruction retention, coherence |
+| Speed | Responsiveness and completion time | Time to first token, time per output token, percentile latency |
+| Efficiency | Resources required for a useful result | Tokens, joules, and cost per accepted task |
+| Operational fit | Deployability under real constraints | Privacy, region, licence, fine-tuning, uptime, observability |
 
-- Per-benchmark documentation: [benchmarks/benchmark-overview.md](benchmarks/benchmark-overview.md)
-- Per-benchmark limitations: [benchmarks/benchmark-limitations.md](benchmarks/benchmark-limitations.md)
-- Running an evaluation: [evaluation/internal-bakeoff.md](evaluation/internal-bakeoff.md)
+## 2. Why rankings disagree
 
-## Research checklist
+Evaluations change the computational and informational conditions under which a model operates, so they change the ordering.
 
-- [ ] Cite the holistic-evaluation literature for the harness-sensitivity claim, with the specific finding rather than the report in general.
-- [ ] Locate a Grade A source quantifying score variation for one model on one benchmark across harnesses; record the exact conditions.
-- [ ] Cite the preference-leaderboard literature for the formatting and length effects on human preference.
-- [ ] Add the Mermaid diagram of the model evaluation pipeline.
-- [ ] Confirm the contamination argument is developed here and only referenced in chapters 04 and 07 and in the benchmark files.
+- A model tested with web search and code execution is not comparable to a closed-book model.
+- A model allowed maximum reasoning effort, or several samples, has a larger inference budget than a model tested once at default settings.
+- Agent benchmarks are sensitive to the scaffolding that manages tools, context, retries, and termination, so the result belongs to a model-and-scaffold pair rather than to a model.
+- Prompt formulation alters scores and can reorder models, especially on open-ended and instruction-following tasks.
+- Contamination inflates performance when evaluation items or near variants appear in training data.
+- Judging by another model introduces judge bias, positional effects, verbosity preference, and family favouritism.[^asirvatham2026gpt]
+- Pass-at-k and majority voting spend more compute than single-attempt evaluation and are not equivalent to it.
+- Provider tables mix internal tasks with public benchmarks and may evaluate competitor models under the publishing provider's own harness.
+- A high average conceals severe failures in minority languages, long inputs, rare domains, and adversarial cases.
 
-## Completion criteria
+## 3. The state of the reported evidence
 
-This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to `data/sources.csv`, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the [research methodology](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control) passes.
+The Stanford AI Index documents rapid capability gains alongside a persistent gap from human performance on difficult interactive tasks, and reports that progress is benchmark-dependent: models approach saturation on some mathematics and knowledge tests while remaining weak on application construction, long-horizon agents, and open-world computer use.[^stanford2026aiindex]
+
+Best reported results against human baselines are documented in [07. Agentic AI](07-agentic-ai.md) and visualised in the [interactive companion](interactive/index.html), which owns that comparison so that this chapter does not restate it.
+
+## 4. What this repository records, and why it cannot rank
+
+`data/benchmarks.csv` holds nine provider-reported results at this revision, drawn from two launch pages. Every one of them has `unstated` in the harness, sampling policy, and tool permission columns, because neither source disclosed them.
+
+Under the incomparable-settings rule, a result whose conditions are unknown is never placed in a ranked column beside a result whose conditions are known. Since all nine are unstated, no ranking is possible from the current dataset, and the generated comparison tables present them with their conditions visible rather than sorted into a league table.
+
+Two of those rows deserve particular care: they are figures for a competitor's model, published by a different provider, evaluated under the publishing provider's own harness. They are recorded with the reporting party named, because a competitor-reported figure is a different evidentiary object from a self-reported one and neither is independent.
+
+## 5. Interpretation rule
+
+Treat vendor benchmark numbers as hypotheses for local testing. They are useful for narrowing a candidate set and are not sufficient for procurement.
+
+## 6. Open research questions
+
+- How large is the score variation attributable to harness and prompt formatting alone, for a fixed model on a fixed benchmark?
+- Do any providers publish the harness, sampling policy, and tool permissions behind their launch tables, and if not, what would induce them to?
+- Is there measurable correlation between benchmark performance and deployed task success for any documented workload?
+- How should a benchmark be designed so that it resists becoming a training target without becoming secret?
+
+## Sources
+
+[^liang2022holistic]: Liang, P., and others (2022). Holistic evaluation of language models. Preprint. Grade B. Accessed 2026-07-22.
+
+[^crfm2026helmcapabilities]: Stanford Center for Research on Foundation Models (2026). HELM Capabilities. Grade A, maintainer-run standardised evaluation. Accessed 2026-07-22.
+
+[^asirvatham2026gpt]: Asirvatham, H., and others (2026). GPT as a measurement tool. Harvard University. Grade B, institutional. Accessed 2026-07-22.
+
+[^stanford2026aiindex]: Stanford Institute for Human-Centered Artificial Intelligence (2026). AI Index Report 2026, Technical Performance chapter. Grade B, institutional compilation. Accessed 2026-07-22.

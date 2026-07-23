@@ -1,33 +1,44 @@
 # Tokenization
 
 > **Research cut-off date: 2026-07-22.**
-> **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
+> **Status: written.**
 
 ## Scope
 
-Explains how text and other modalities become tokens, and why that mapping is a cost and equity issue rather than an implementation detail. Covers byte-pair encoding, unigram and sentencepiece methods, byte-level fallback, vocabulary size trade-offs, and the systematically higher token counts that non-English and non-Latin-script text incurs. Enumerates every token class that a caller pays for: input, cached, output, reasoning, image, audio, video, tool-call, and compaction tokens. Answers research question RQ7.
+This chapter explains how text and other modalities become tokens, and why that mapping is a cost and equity issue rather than an implementation detail. It answers research question RQ7.
 
-## Arguments this chapter owns
+Developed elsewhere: the cost formulas in [15. Token economics](15-token-economics.md); language coverage in [multilingual benchmarks](benchmarks/multilingual.md); modality accounting in [08. Multimodal models](08-multimodal-models.md).
 
-Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.
+## 1. Tokens are not words
 
-- Definitions of every billable token class used in the cost formulas.
-- The multilingual token-inequality argument and its cost consequence.
-- The argument that token counts are not comparable across tokenizers, and therefore neither are per-token prices without a token-count measurement.
+A token is produced by a model-specific tokenizer. English prose averages several characters per token, but the ratio varies with vocabulary, code, numerals, symbols, and language. The same sentence yields different counts across providers.
 
-## Developed elsewhere
+This has a direct economic consequence. A language fragmented into more tokens costs more to process, occupies more of the context window for the same meaning, and takes longer to generate. The penalty falls hardest on languages least represented in tokenizer training, which is the opposite of an equitable distribution.
 
-- Cost formulas: [15-token-economics.md](15-token-economics.md)
-- Multilingual benchmark coverage: [benchmarks/multilingual.md](benchmarks/multilingual.md)
-- Modality token accounting: [08-multimodal-models.md](08-multimodal-models.md)
+Tokenizer changes also move cost without moving price. Anthropic states that Claude Sonnet 5 uses a tokenizer that can produce about 30 percent more tokens for the same text than its predecessor, so an unchanged per-token rate still raises the cost of an equivalent request.[^anthropic2026sonnet] That is developed as a pricing argument in [15. Token economics](15-token-economics.md) and appears here only as the mechanism.
 
-## Research checklist
+## 2. Every billable class
 
-- [ ] Cite the primary sources for byte-pair encoding and for sentencepiece.
-- [ ] Record the tokenizer used by each profiled family where it is disclosed.
-- [ ] Locate a Grade A source measuring token count for equivalent text across languages under a named tokenizer; record the exact corpus and tokenizer.
-- [ ] Confirm that every token class enumerated here appears in the cost formulas and in scripts/calculate_token_costs.py.
+A pricing table listing text tokens alone does not reveal the cost of a real workload. The classes a caller pays for are enumerated in [15. Token economics](15-token-economics.md), and the ones specific to tokenizer design are these:
 
-## Completion criteria
+- **Input** covers everything placed in the context, including tool definitions and retrieved evidence, not only the user's message.
+- **Reasoning** tokens are produced by the same tokenizer and billed at output rates where they are billed at all, so tokenizer inefficiency compounds with reasoning length.
+- **Image, audio, and video** inputs are converted to billable units by provider-specific rules. Those rules were not extracted for this revision and are recorded as not publicly disclosed in `data/models.csv`.
+- **Compaction** tokens are generated when a long history is summarised, and are therefore subject to the same per-language penalty as the original text.
 
-This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to `data/sources.csv`, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the [research methodology](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control) passes.
+## 3. What this repository records
+
+`data/models.csv` records the tokenizer field as not publicly disclosed for most models in this survey, because the sources used did not name one. That is itself a finding: a caller cannot compute the cost of their own corpus without knowing which tokenizer will be applied to it, and most providers do not say.
+
+No token-count measurement across languages has been performed for this survey. Any claim about multilingual cost inequity in this handbook is therefore a claim about the mechanism, supported by the tokenizer literature, and not a measured per-provider figure.
+
+## 4. Open research questions
+
+- What is the token count for one fixed multilingual corpus under each provider's tokenizer?
+- How much of the published price spread between providers survives normalisation by token count for equivalent meaning?
+- Do providers publish a token counting tool, and does it agree with billed usage?
+- What are the per-modality conversion rules, and how do they compare across providers for the same document?
+
+## Sources
+
+[^anthropic2026sonnet]: Anthropic (2026). Claude Sonnet 5 documentation and pricing notes. Claude Platform Documentation. Grade B, official documentation of the provider's own commercial terms. Accessed 2026-07-22.

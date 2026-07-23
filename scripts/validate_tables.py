@@ -146,29 +146,71 @@ def check_headers(reporter: Reporter) -> None:
             )
 
 
-def _coerce(value: str) -> Any:
+def _declared_types(schema: dict[str, Any], field: str) -> set[str]:
+    """Collect every JSON type a field may take under its schema.
+
+    A field defined through ``anyOf`` accepts several types, and one of them is
+    frequently a reserved string such as ``Not publicly disclosed``. The set is
+    therefore a union rather than a single type.
+
+    Args:
+        schema: The full schema document.
+        field: Property name.
+
+    Returns:
+        The declared type names, empty when the field constrains no type.
+    """
+    spec = schema.get("properties", {}).get(field)
+    if not isinstance(spec, dict):
+        return set()
+    found: set[str] = set()
+
+    def walk(node: Any) -> None:
+        if not isinstance(node, dict):
+            return
+        declared = node.get("type")
+        if isinstance(declared, str):
+            found.add(declared)
+        elif isinstance(declared, list):
+            found.update(declared)
+        if "const" in node or "enum" in node:
+            found.add("string")
+        for branch in node.get("anyOf", []):
+            walk(branch)
+
+    walk(spec)
+    return found
+
+
+def _coerce(value: str, types: set[str]) -> Any:
     """Convert a CSV cell to the JSON type its schema expects.
 
-    CSV has no types, so a schema check needs the string interpreted first.
-    Only unambiguous conversions are made: anything else stays a string.
+    CSV has no types, so a schema check needs the string interpreted first. The
+    conversion is driven by the schema rather than by the shape of the text: a
+    benchmark version of ``2.1`` is a string, and reading it as a number would
+    reject valid data. A field that accepts a string is therefore left alone
+    unless it also accepts a number.
 
     Args:
         value: Raw cell value.
+        types: JSON types the field may take, from ``_declared_types``.
 
     Returns:
         A bool, int, float, or the original string.
     """
     text = value.strip()
-    if text in {"true", "false"}:
+    if "boolean" in types and text in {"true", "false"}:
         return text == "true"
-    try:
-        return int(text)
-    except ValueError:
-        pass
-    try:
-        return float(text)
-    except ValueError:
-        return text
+    if "integer" in types or "number" in types:
+        try:
+            return int(text)
+        except ValueError:
+            pass
+        try:
+            return float(text)
+        except ValueError:
+            return text
+    return text
 
 
 def check_schema(reporter: Reporter) -> None:
@@ -207,7 +249,11 @@ def check_schema(reporter: Reporter) -> None:
                     reporter.add(path, line, f"required field {field!r} is empty or missing")
             if jsonschema is None:
                 continue
-            document = {key: _coerce(value) for key, value in row.items() if value is not None}
+            document = {
+                key: _coerce(value, _declared_types(schema, key))
+                for key, value in row.items()
+                if value is not None
+            }
             validator = jsonschema.Draft202012Validator(schema)
             for error in sorted(validator.iter_errors(document), key=lambda e: list(e.path)):
                 field = ".".join(str(part) for part in error.path) or "row"
@@ -299,6 +345,37 @@ def check_energy(reporter: Reporter) -> None:
                 )
 
 
+#: A cell that is nothing but a measurement: an optional currency symbol, a
+#: number, and an optional unit suffix. A benchmark *name* containing a digit,
+#: such as "ARC-AGI-2" or "Terminal-Bench 2.0", does not match, which is the
+#: whole point: a name is not a result.
+NUMERIC_CELL_PATTERN: re.Pattern[str] = re.compile(
+    r"^[*_`\s]*[$€£]?\s*\d[\d,]*(?:\.\d+)?\s*(?:%|pts?|points?|x|×)?[*_`\s]*$",
+    re.IGNORECASE,
+)
+
+
+def _table_has_numeric_body(lines: list[str], header_line: int) -> bool:
+    """Report whether the rows under a table header report any measurement.
+
+    Args:
+        lines: All lines of the file.
+        header_line: One-indexed line number of the header row.
+
+    Returns:
+        True when at least one body cell is a bare number. A table of
+        definitions has none, and is therefore not a ranked comparison even
+        when its entries carry digits in their names.
+    """
+    for candidate in lines[header_line + 1 :]:
+        if not TABLE_ROW_PATTERN.match(candidate):
+            break
+        cells = candidate.strip().strip("|").split("|")
+        if any(NUMERIC_CELL_PATTERN.match(cell) for cell in cells):
+            return True
+    return False
+
+
 def check_comparability(reporter: Reporter) -> None:
     """Flag ranked benchmark tables that omit evaluation conditions.
 
@@ -330,6 +407,12 @@ def check_comparability(reporter: Reporter) -> None:
             has_score = any(hint in joined for hint in SCORE_COLUMN_HINTS)
             has_conditions = any(hint in joined for hint in CONDITION_COLUMN_HINTS)
             if not has_score or has_conditions:
+                continue
+            # A definitional table can carry a score-like word in a heading
+            # ("Benchmark", "What it tests") while reporting no results at all.
+            # A ranked comparison necessarily contains numbers, so require at
+            # least one numeric cell in the body before flagging the table.
+            if not _table_has_numeric_body(lines, number):
                 continue
             context = "\n".join(lines[max(0, number - 6) : number]).lower()
             if any(marker in context for marker in WARNING_MARKERS):

@@ -80,17 +80,20 @@ Every file under [docs/model-profiles/](docs/model-profiles/), [docs/comparisons
 
 ## 5. Key findings
 
-**No findings are published at Phase 1.** Publishing summary findings before the underlying chapters and datasets exist would produce exactly the unsourced ranking claims this repository is designed to displace.
+Each finding below answers a research question, rests on at least one Grade A or Grade B source, carries an absolute date, and is developed in exactly one chapter. Findings that would require ranking models are absent, because every benchmark result currently recorded has unstated evaluation conditions.
 
-A finding is admitted to this section only when all five conditions hold:
+| # | Finding | RQ | Owned by |
+|---|---|---|---|
+| F1 | Inference optimisation changes energy use by a larger factor than model choice does. Fernandez and colleagues report reductions of up to 73 percent against an unoptimised baseline across hardware, serving frameworks, batching, and decoding strategies. Grade A. | RQ9 | [16](docs/16-energy-use.md) |
+| F2 | Reasoning budget, not model size, dominates energy per query. Oviedo and colleagues estimate a median of 0.34 watt-hours for a representative frontier-scale query and 4.32 watt-hours at fifteen times the token use, roughly thirteen times higher. Grade A, analytical estimates rather than measurements of a named service. | RQ4, RQ9 | [16](docs/16-energy-use.md) |
+| F3 | Advertised context capacity exceeds reliable capacity. Stanford's long-context evaluation states that support for long inputs does not imply long-context capability, and two independent benchmarks report degradation as context scales toward one million tokens. Grade A and Grade B. | RQ6 | [11](docs/11-long-context.md) |
+| F4 | Agents approach but do not reach human performance on interactive benchmarks. The AI Index reports a best model result of 66.3 percent on OSWorld against a human baseline of 72.35 percent, and 74.3 percent on WebArena against 78.24 percent. Grade B. | RQ5 | [07](docs/07-agentic-ai.md) |
+| F5 | Hallucination persists in hard domains even with web access. HalluHard reports that the strongest web-enabled configuration tested still hallucinated on about 30 percent of difficult multi-turn conversations. Grade B. | RQ3 | [10](docs/10-factuality-and-hallucination.md) |
+| F6 | Output tokens dominate cost. Across every price schedule recorded here, the output rate is several times the input rate, and output is generated sequentially, so verbosity drives cost, latency, and energy at once. Grade B. | RQ8 | [15](docs/15-token-economics.md) |
+| F7 | A per-token price is not comparable across providers without a token-count measurement. Anthropic states that the Claude Sonnet 5 tokenizer can produce about 30 percent more tokens for the same text than its predecessor. Grade B. | RQ7, RQ8 | [12](docs/12-tokenization.md) |
+| F8 | No published benchmark result in this survey can be used for ranking. All nine recorded results are provider-reported with unstated harness, sampling policy, and tool permissions. Grade C, recorded and labelled. | RQ2 | [09](docs/09-benchmarking.md) |
 
-1. It answers one of the research questions in [section 2](#2-research-questions).
-2. It is supported by at least one Grade A or Grade B source recorded in `data/sources.csv`.
-3. Where it compares models, the compared results were produced under stated and compatible evaluation conditions, or the incompatibility is stated in the finding itself.
-4. It carries an absolute date and a named evaluation setting.
-5. It is not restated elsewhere in the repository; the finding links to the single chapter that owns the argument.
-
-Findings are added during Phase 5 and recorded in [CHANGELOG.md](CHANGELOG.md) with the commit that introduced the supporting evidence.
+Findings that would require energy, latency, or factuality datasets are not published, because those datasets are empty for the reasons given in [21. Research gaps](docs/21-research-gaps.md).
 
 ## 6. Model families covered
 
@@ -164,7 +167,24 @@ This table is generated from `data/models.csv` and `data/pricing.csv` by `script
 <!-- BEGIN GENERATED: compact-comparison -->
 | Provider | Model | Release date | Open weights | Context window | Input USD / 1M | Output USD / 1M | Evidence grade | Source date |
 |---|---|---|---|---|---|---|---|---|
-| _No rows. Populate the source dataset in data/ and rerun scripts/generate_model_tables.py_ | | | | | | | | |
+| Alibaba | Qwen 3.6 family | Not publicly disclosed | yes | 1000000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Alibaba | Qwen 3.7 family | Not publicly disclosed | yes | 1000000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Anthropic | Claude Fable 5 | Not publicly disclosed | no | 1000000 | 10.00 | 50.00 | B | 2026-07-22 |
+| Anthropic | Claude Opus 4.8 | Not publicly disclosed | no | 1000000 | 5.00 | 25.00 | B | 2026-07-22 |
+| Anthropic | Claude Sonnet 5 | Not publicly disclosed | no | 1000000 | 3.00 | 15.00 | B | 2026-07-22 |
+| DeepSeek | DeepSeek V4 Flash | Not publicly disclosed | yes | 1000000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| DeepSeek | DeepSeek V4 Pro | Not publicly disclosed | yes | 1000000 | 0.435 | 0.87 | B | 2026-07-22 |
+| Google | Gemini 3.1 Flash-Lite | Not publicly disclosed | no | Not publicly disclosed | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Google | Gemini 3.1 Pro | Not publicly disclosed | no | 1000000 | Not publicly disclosed | Not publicly disclosed | C | 2026-07-22 |
+| Meta | Llama 4 Maverick | Not publicly disclosed | yes | Not publicly disclosed | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Meta | Llama 4 Scout | Not publicly disclosed | yes | Not publicly disclosed | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Meta | Meta Muse Spark 1.1 | Not publicly disclosed | no | 1000000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Mistral | Mistral Medium 3.5 | Not publicly disclosed | yes | 256000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| Mistral | Mistral Small 4 | Not publicly disclosed | yes | 256000 | Not publicly disclosed | Not publicly disclosed | B | 2026-07-22 |
+| OpenAI | GPT-5.6 Luna | Not publicly disclosed | no | 1050000 | 1.00 | 6.00 | B | 2026-07-22 |
+| OpenAI | GPT-5.6 Sol | Not publicly disclosed | no | 1050000 | 5.00 | 30.00 | B | 2026-07-22 |
+| OpenAI | GPT-5.6 Terra | Not publicly disclosed | no | 1050000 | 2.50 | 15.00 | B | 2026-07-22 |
+| xAI | Grok 4.5 | Not publicly disclosed | no | 500000 | 2.00 | 6.00 | B | 2026-07-22 |
 <!-- END GENERATED: compact-comparison -->
 
 The generator rewrites the content between the two markers and leaves the rest of this file untouched. Do not edit the region by hand.
@@ -283,10 +303,10 @@ Nothing in this repository is legal, financial, or procurement advice. Licence s
 | Phase | Contents | Status |
 |---|---|---|
 | 1 | Directory structure, configuration, schemas, methodology, source-quality framework, README, seed bibliography, validation scripts, continuous integration | Complete |
-| 2 | Chapters 01 to 21 | Not started. Each chapter file currently carries a scope statement and a research checklist |
+| 2 | Chapters 01 to 21 | Partial. Thirteen files written from registered sources: chapters 01, 02, 07, 09, 10, 11, 12, 14, 15, 16, 18, 20, 21, plus the bakeoff protocol and the benchmark glossary. The remainder carry a scope statement and a research checklist |
 | 3 | Sixteen model-family profiles | Not started. Each file carries the fixed template and a research checklist |
-| 4 | CSV population, validation, generated tables | Not started. CSV files contain validated headers only |
-| 5 | Navigation completion, link and lint passes, citation validation, research completeness report, data-gap register | Not started |
+| 4 | CSV population, validation, generated tables | Partial. 41 sources, 18 models, 8 pricing rows, 14 context-window rows, and 9 benchmark results are recorded; energy, latency, and factuality datasets are empty for stated reasons |
+| 5 | Navigation completion, link and lint passes, citation validation, research completeness report, data-gap register | Partial. The full gate passes; the data-gap register is in chapter 21 |
 
 Outstanding data gaps and unverified sources are tracked in [data-sources.md](data-sources.md#5-verification-queue).
 

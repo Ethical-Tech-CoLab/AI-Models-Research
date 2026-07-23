@@ -29,5 +29,7 @@ Generated from the data layer by `scripts/generate_benchmark_tables.py`. Do not 
 <!-- BEGIN GENERATED: reasoning-benchmarks -->
 | Benchmark | Subset | Model | Score | Metric | Unit | Harness | Sampling policy | n | Tools | Reported by | Evidence grade | Evaluation date | Published |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| _No results for this category. Populate data/benchmarks.csv and rerun scripts/generate_benchmark_tables.py_ | | | | | | | | | | | | | |
+| ARC-AGI-2 | full | gemini-3-1-pro | 77.1 | accuracy | percent | unstated | unstated | unstated | unstated | Google | C | unstated | 2026-01-01 |
+| GPQA Diamond | diamond | gpt-5.6-sol | 94.6 | accuracy | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
+| GPQA Diamond | diamond | gemini-3-1-pro | 94.3 | accuracy | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
 <!-- END GENERATED: reasoning-benchmarks -->

@@ -1,34 +1,65 @@
 # Latency and throughput
 
 > **Research cut-off date: 2026-07-22.**
-> **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
+> **Status: written.**
 
 ## Scope
 
-Decomposes response time into queueing, prefill, time to first token, and time per output token, adds tool latency for agent loops, and treats percentile reporting, concurrency, batching, and cold starts as necessary conditions on any figure. Provides worked calculations. Establishes that latency is a property of a served system rather than of a model.
+This chapter decomposes response time, states the conditions any latency figure must carry, and explains why latency is a property of a served system rather than of a model.
 
-## Arguments this chapter owns
+Developed elsewhere: the measurement protocol in [latency methodology](evaluation/latency-methodology.md); serving mechanisms in [13. Inference](13-inference.md); the cost consequences in [15. Token economics](15-token-economics.md).
 
-Other files link here rather than restating these. Duplicated argumentation is a defect under the writing standards, not redundancy for the reader's convenience.
+## 1. Latency anatomy
 
-- The latency decomposition and its notation.
-- The rule that a latency figure without percentile, concurrency, and region is not usable.
-- The relationship between batching, throughput, and per-request latency.
+| Phase | Meaning | Main drivers |
+|---|---|---|
+| Queueing | Time before compute begins | Provider capacity, priority tier, concurrency |
+| Prefill | Processing the input and building the key-value cache | Input length, attention design, cache hits, hardware |
+| Time to first token | The startup delay a user perceives | Queueing plus prefill plus routing |
+| Decode | Sequential generation of output tokens | Model size, active parameters, precision, batching |
+| Tool time | Search, code, browser, database, or external API calls | Tool speed, retries, network, permissions |
+| Post-processing | Validation, citation checks, safety, formatting | System architecture |
 
-## Developed elsewhere
+Reasoning tokens appear in decode time whether or not the caller can see them, which is why a reasoning model can be slow without appearing to produce more output.
 
-- Measurement protocol: [evaluation/latency-methodology.md](evaluation/latency-methodology.md)
-- Serving mechanisms: [13-inference.md](13-inference.md)
-- Cost per second and per token: [15-token-economics.md](15-token-economics.md)
+## 2. Tokens per second is not task completion time
 
-## Research checklist
+Generation speed is interpretable only once time to first token and the workload conditions are specified. Google reports 363 output tokens per second for Gemini 3.1 Flash-Lite in its own evaluation.[^deepmind2026flashlite] xAI reports 80 tokens per second for Grok 4.5 on its launch page.[^xai2026launch]
 
-- [ ] Define every latency term with a formula and cross-reference the formulas appendix.
-- [ ] Produce at least one worked example from end to end, using stated inputs, and label it as a worked example rather than a measurement.
-- [ ] Record independent third-party latency measurements where the methodology is disclosed; grade vendor claims C and label them.
-- [ ] Add the Mermaid diagram of latency decomposition.
-- [ ] State the cold-start conditions under which any measurement in this repository was taken.
+Those two figures come from different test environments and different model classes and are not a controlled head-to-head comparison. Both are provider-reported. They indicate that fast tiers exist and are positioned for interactive and high-volume use; they do not measure how long a task takes.
 
-## Completion criteria
+A model streaming at a high token rate can still be slow if it emits excessive reasoning tokens or needs repeated attempts. A slower model can finish sooner if it needs fewer steps, fewer tool calls, and less rework. The decision-relevant quantity is end-to-end task completion time, including tools and retries.
 
-This chapter is complete when every checklist item above is closed, when every numerical claim carries a footnote resolving to `data/sources.csv`, when every claim about a current model carries an absolute date, and when the twelve-point quality-control checklist in the [research methodology](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control) passes.
+## 3. Fast against slow reasoning
+
+Configurable reasoning moves the latency-quality frontier rather than sitting at a point on it. Low or disabled reasoning suits extraction, rewriting, classification, and deterministic tool routing. High reasoning effort earns its cost on mathematics, scientific analysis, difficult coding, and planning, where an incorrect result costs more than the additional compute.
+
+The optimal policy is adaptive: estimate difficulty, then allocate compute only where the expected quality gain justifies the added time, cost, and energy. Research on test-time compute identifies diminishing returns and overthinking, in which longer chains introduce new errors, lose the objective, or exhaust the context budget. The correct stopping rule is therefore quality-conditioned, using verifier signals, uncertainty, progress, and task complexity, rather than a fixed token allowance.
+
+## 4. Operational reporting requirements
+
+A latency figure without these is not usable, and this repository does not record one.
+
+- Report p50, p90, and p95 time to first token, never a mean alone.
+- Report p50 and p95 end-to-end completion time, including tools and retries.
+- Separate cold starts from warm requests, and cache hits from cache misses.
+- Compare models at the same latency and cost budget, not at their own defaults.
+- Track output tokens, tool calls, failed steps, and retries per accepted task.
+- Test at the concurrency you expect, because batching raises throughput while raising individual latency.
+
+## 5. What this repository records
+
+No latency or throughput rows exist at this revision. The two provider figures in section 2 are recorded in prose with the reporting party named, and are not entered into a dataset, because neither states percentile, concurrency, region, prompt length, or output length. A dataset row would imply a comparability the measurements do not have.
+
+## 6. Open research questions
+
+- Do independent third-party latency measurements exist for these endpoints under a disclosed methodology?
+- How much of the observed difference between providers is serving infrastructure rather than model?
+- What is the distribution, not the mean, of time to first token under production concurrency?
+- How does end-to-end task completion time compare across models once retries and tool calls are counted?
+
+## Sources
+
+[^deepmind2026flashlite]: Google DeepMind (2026). Gemini 3.1 Flash-Lite model card. Grade B for the specification; the throughput figure is provider-reported and Grade C at the point of use. Accessed 2026-07-22.
+
+[^xai2026launch]: xAI (2026). Introducing Grok 4.5. Grade C, provider-reported launch page. Accessed 2026-07-22.

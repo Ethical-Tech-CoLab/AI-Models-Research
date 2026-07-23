@@ -54,5 +54,7 @@ Generated from `data/benchmarks.csv` by `scripts/generate_benchmark_tables.py`. 
 <!-- BEGIN GENERATED: agent-benchmarks -->
 | Benchmark | Subset | Model | Score | Metric | Unit | Harness | Sampling policy | n | Tools | Reported by | Evidence grade | Evaluation date | Published |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| _No results for this category. Populate data/benchmarks.csv and rerun scripts/generate_benchmark_tables.py_ | | | | | | | | | | | | | |
+| BrowseComp | full | gpt-5.6-sol | 90.4 | accuracy | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
+| BrowseComp | full | gemini-3-1-pro | 85.9 | accuracy | percent | unstated | unstated | unstated | unstated | Google | C | unstated | 2026-01-01 |
+| OSWorld | full | gpt-5.6-sol | 62.6 | task_success | percent | unstated | unstated | unstated | unstated | OpenAI | C | unstated | 2026-01-01 |
 <!-- END GENERATED: agent-benchmarks -->

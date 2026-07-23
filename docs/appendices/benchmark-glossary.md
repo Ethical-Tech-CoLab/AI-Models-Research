@@ -1,19 +1,32 @@
 # Benchmark glossary
 
 > **Research cut-off date: 2026-07-22.**
-> **Status: Phase 2, not yet written.** This file states the scope of the work, the arguments it owns, and the research required to complete it. It contains no findings, because none have been sourced. See [the changelog](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/CHANGELOG.md) for phase status.
+> **Status: written.** Definitional entries only. No scores appear here; results live in `data/benchmarks.csv` with their evaluation conditions attached.
 
-## Scope
+| Benchmark | What it tests | Primary use |
+|---|---|---|
+| GPQA Diamond | Graduate-level, expert-written science questions | Scientific knowledge and reasoning |
+| Humanity's Last Exam | Difficult multidisciplinary academic questions | Broad frontier reasoning |
+| ARC-AGI-2 and ARC-AGI-3 | Abstract reasoning puzzles designed to resist memorisation | Novel abstraction and adaptation |
+| SWE-Bench Verified | Repository issues with human-validated test conditions | Software repair |
+| SWE-Bench Pro | Harder and more diverse repository tasks | Agentic coding |
+| Terminal-Bench | Tasks executed in a terminal environment | Tool use, coding, systems work |
+| BrowseComp | Difficult information retrieval and browsing | Search planning and synthesis |
+| OSWorld | Realistic computer interaction | Desktop computer use |
+| WebArena | Tasks on realistic websites | Web navigation and action |
+| Vibe Code Bench | End-to-end application construction | Building a working product rather than a snippet |
+| MMMU-Pro | Multidisciplinary multimodal questions | Visual and textual reasoning |
+| FACTS Suite | Grounding, parametric, search, and multimodal factuality | Factual reliability |
+| SimpleQA Verified | Short factual questions with verified answers | Parametric factual accuracy |
+| HalluHard | Difficult multi-turn conversations with citation checking | Multi-turn hallucination under hard domains |
+| MRCR | Multi-round coreference and long-context retrieval | Long-context recall and tracking |
+| LongCodeBench | Real code tasks at very long context | Effective long-context coding |
+| LongProc | Long procedural generation with structured output | Instruction retention and long-form coherence |
+| HELM | Holistic evaluation framework | Multi-metric model comparison |
+| MedHELM | Clinical and medical tasks organised by workflow | Health-domain applicability |
 
-Short definitional entries for every benchmark named anywhere in this repository, each stating the construct measured, the maintainer, and the file where it is documented in full. Entries are definitional only: no scores appear here.
+## Reading these names
 
-## Research checklist
+Several entries differ from similarly named benchmarks in ways that matter. ARC-AGI is not the AI2 Reasoning Challenge. SWE-Bench Verified and SWE-Bench Pro are distinct constructions from the original SWE-Bench, and a score against one is not a score against another. A benchmark version must be recorded with every result, because these constructions are revised.
 
-- [ ] Add one entry per benchmark documented in docs/benchmarks/, after its construction source is registered.
-- [ ] State the maintainer and the construct for each entry, and link to the file that documents it fully.
-- [ ] Distinguish benchmarks with similar names explicitly, since name collisions in this area are a documented source of error.
-- [ ] Record no scores in this file; the glossary is definitional.
-
-## Completion criteria
-
-This file is complete when every checklist item above is closed and the quality-control checklist in the [research methodology](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/blob/main/research-methodology.md#8-quality-control) passes.
+Full documentation for each, under the nine required headings, is in the [benchmarks section](../benchmarks/benchmark-overview.md). An entry appears in that section only after its construction methodology has been located and registered.

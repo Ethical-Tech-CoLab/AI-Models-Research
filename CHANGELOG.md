@@ -4,6 +4,42 @@ All substantive changes to this repository are recorded here. A substantive chan
 
 Dates are absolute and written `YYYY-MM-DD`. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with one addition: an `Evidence` section records changes to the source register, because in a research repository a change of source is more consequential than a change of code.
 
+## [0.2.0] Phase 2 partial, 2026-07-22
+
+### Added
+
+- Thirteen chapters written from registered sources: 01 Introduction, 02 Foundation models, 07 Agentic AI, 09 Benchmarking, 10 Factuality and hallucination, 11 Long context, 12 Tokenization, 14 Latency and throughput, 15 Token economics, 16 Energy use, 18 Open versus closed models, 20 Model selection framework, 21 Research gaps.
+- The internal bakeoff protocol and the benchmark glossary.
+- Eight key findings in the README, each tied to a research question, a source of Grade A or Grade B, and the single chapter that owns it.
+- An interactive companion page at `docs/interactive/`, published to GitHub Pages alongside the handbook.
+
+### Evidence
+
+- `data/sources.csv` populated with 41 unique sources behind the 60 footnotes of the July 2026 comparative review, each with all fourteen fields and an access date of 2026-07-22.
+- `references.bib` extended with a matching entry per registered source. The duplicate seed entry for the holistic evaluation preprint was removed in favour of the registered key.
+- `data/models.csv`: 18 models. `data/pricing.csv`: 8 schedules. `data/context-windows.csv`: 14 records. `data/benchmarks.csv`: 9 provider-reported results.
+- All generated comparison tables regenerated from the populated data layer.
+- Six figures from the source review archived under `assets/charts/`.
+
+### Deliberately empty
+
+- `data/energy-studies.csv`. The two Grade A inference-energy studies do not restate all eleven required conditions in a transcribable form, so their findings appear in chapter 16 prose with assumptions attached rather than as dataset rows the comparison rules would then forbid anyone from using.
+- Latency rows. The two provider throughput figures state no percentile, concurrency, region, or prompt length.
+- Factuality rows. Reported rates do not state the grounding condition per model.
+
+All three absences are registered in chapter 21 with the specific evidence that would close them.
+
+### Fixed
+
+- `validate_tables.py` coerced CSV cells by their textual shape rather than by their schema type, so a benchmark version of `2.1` was read as a number and rejected. Coercion is now driven by the declared type, including through `anyOf` branches.
+- The comparability check fired on definitional tables whose entries carry digits in their names, such as `ARC-AGI-2`. It now requires a body cell that is entirely a measurement.
+
+### Known gaps
+
+- No model release dates are disclosed by the sources used, so the release timeline diagram is empty and the contamination argument has no time axis.
+- Model profiles remain unwritten.
+- Every bibliography entry is still pending verification against the published record.
+
 ## [Unreleased]
 
 ### Planned

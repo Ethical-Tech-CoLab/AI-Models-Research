@@ -50,9 +50,11 @@ Grade C material is recorded rather than excluded, because excluding it would le
 
 ## Current status
 
-**Phase 1 of five is complete.** The structure, methodology, source-quality framework, schemas, validation tooling, and continuous integration exist. The chapters, model profiles, and datasets do not yet contain research findings, and every entry in the bibliography is pending verification.
+**Phase 2 is under way.** Thirteen chapters are written from registered sources, and the data layer holds 41 sources, 18 models, 8 price schedules, 14 context-window records, and 9 benchmark results, all generated into the comparison tables.
 
-Each file states its own status at the top. A file marked "not yet written" contains a scope statement and a research checklist, which is what the handbook can honestly offer before its sources are verified.
+Three datasets are deliberately empty. Energy, latency, and factuality results were located but do not state the conditions this handbook requires before a figure may be published, so the findings appear in prose with their assumptions attached and the dataset rows wait. Those absences are recorded in [21. Research gaps](21-research-gaps.md).
+
+Model profiles remain unwritten, and every bibliography entry is pending verification against the published record. Each file states its own status at the top.
 
 ## Project documents
 
