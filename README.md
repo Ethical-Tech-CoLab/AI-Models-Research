@@ -178,7 +178,7 @@ The generator rewrites the content between the two markers and leaves the rest o
 | [scripts/](scripts/) | Validation and table-generation scripts. All are runnable from the repository root |
 | [notebooks/](notebooks/) | Analysis notebooks that read only from `data/` |
 | [assets/](assets/) | Generated diagrams, charts, and table images |
-| [web/](web/) | Source of the interactive companion page: a live cost-per-accepted-task calculator and four charts, each labelled with its evidence grade. Self-contained HTML, no build step, no external requests |
+| [docs/interactive/](docs/interactive/index.html) | The interactive companion page: a live cost-per-accepted-task calculator and four charts, each labelled with its evidence grade. Self-contained HTML, no build step, no external requests. Published at <https://ethical-tech-colab.github.io/AI-Models-Research/interactive/> |
 | [research-methodology.md](research-methodology.md) | Search strategy, inclusion and exclusion criteria, extraction protocol, and quality control |
 | [data-sources.md](data-sources.md) | The source register, the seed bibliography, and the outstanding verification queue |
 | [glossary.md](glossary.md) | Terms and acronyms used across the repository |

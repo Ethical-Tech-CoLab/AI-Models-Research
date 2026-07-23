@@ -21,6 +21,13 @@ It is written for graduate researchers, procurement and policy analysts, enginee
 | Quantifying environmental cost | [16. Energy use](16-energy-use.md), then [Energy methodology](evaluation/energy-methodology.md) |
 | Studying architecture or training | [03. Transformer architecture](03-transformer-architecture.md) and [04. Training and post-training](04-training-and-post-training.md) |
 
+## Interactive companion
+
+The [cost, speed, and energy instrument](interactive/index.html) puts the review's central claim
+under your own assumptions: set input, output, reasoning, and acceptance-rate values and watch cost
+per accepted task reorder the models with published rates. Four charts accompany it, each labelled
+with its evidence grade.
+
 ## The three evidence grades
 
 Every quantitative claim in this handbook carries one of three grades. The assignment rules and edge cases are in the [source quality framework](appendices/source-quality-framework.md).

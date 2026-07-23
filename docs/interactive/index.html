@@ -1,3 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Interactive companion to a July 2026 comparative review of AI model families: a live cost-per-accepted-task calculator plus charts on pricing, active parameters, agent benchmarks, and inference energy, each labelled with its evidence grade." />
+<meta name="color-scheme" content="light dark" />
+<link rel="canonical" href="https://ethical-tech-colab.github.io/AI-Models-Research/interactive/" />
 <title>Cost, Speed, and Energy per Accepted Task</title>
 
 <style>
@@ -413,7 +421,23 @@
     .card { padding: 1.1rem 1rem 0.9rem; }
     th, td { font-size: 0.75rem; }
   }
+
+  /* Theme toggle. The tokens already support an explicit data-theme stamp;
+     this button is what sets it when the page is served standalone. */
+  .theme-toggle {
+    position: fixed; top: 1rem; right: 1rem; z-index: 20;
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.45rem 0.7rem;
+    border: 1px solid var(--rule-strong); border-radius: 5px;
+    background: var(--surface); color: var(--ink-2); cursor: pointer;
+  }
+  .theme-toggle:hover { background: var(--surface-2); }
+  @media print { .theme-toggle { display: none; } }
 </style>
+</head>
+<body>
+<button class="theme-toggle" type="button" id="theme-toggle" aria-live="polite">Dark</button>
+
 
 <header class="masthead">
   <div class="wrap">
@@ -1243,3 +1267,28 @@
   });
 })();
 </script>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var btn = document.getElementById("theme-toggle");
+  var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  function current() { return root.getAttribute("data-theme") || (prefersDark ? "dark" : "light"); }
+  function label() { btn.textContent = current() === "dark" ? "Light" : "Dark"; }
+  try {
+    var saved = localStorage.getItem("amr-theme");
+    if (saved === "dark" || saved === "light") { root.setAttribute("data-theme", saved); }
+  } catch (e) { /* storage unavailable; fall back to the OS preference */ }
+  label();
+  btn.addEventListener("click", function () {
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("amr-theme", next); } catch (e) { /* not persisted */ }
+    label();
+  });
+})();
+</script>
+
+</body>
+</html>
