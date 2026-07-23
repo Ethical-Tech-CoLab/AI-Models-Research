@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Interactive companion to a July 2026 comparative review of AI model families: a live cost-per-accepted-task calculator plus charts on pricing, active parameters, agent benchmarks, and inference energy, each labelled with its evidence grade." />
+<meta name="color-scheme" content="light dark" />
+<link rel="canonical" href="https://ethical-tech-colab.github.io/AI-Models-Research/interactive/" />
+<title>Cost, Speed, and Energy per Accepted Task</title>
+
+<style>
+  /* ---------------------------------------------------------------
+     Tokens. Neutrals are biased cool-graphite toward the blue accent;
+     chart series are the validated categorical slots 1 and 2, checked
+     against these exact surfaces in both modes.
+     --------------------------------------------------------------- */
+  :root {
+    color-scheme: light;
+    --plane: #f4f6f8;
+    --surface: #fbfcfd;
+    --surface-2: #eef1f5;
+    --ink: #0e1116;
+    --ink-2: #4b535f;
+    --ink-3: #79828f;
+    --rule: #dde2e8;
+    --rule-strong: #c2cad3;
+    --s1: #2a78d6;
+    --s2: #eb6834;
+    --wash: rgba(42, 120, 214, 0.07);
+    --ring: rgba(14, 17, 22, 0.10);
+    --shadow: 0 1px 2px rgba(14, 17, 22, 0.05);
+
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    --col: 68rem;
+    --step: 0.75rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --plane: #0b0d10;
+      --surface: #15181d;
+      --surface-2: #1c2027;
+      --ink: #eef2f7;
+      --ink-2: #a7b1be;
+      --ink-3: #767f8c;
+      --rule: #232830;
+      --rule-strong: #333b45;
+      --s1: #3987e5;
+      --s2: #d95926;
+      --wash: rgba(57, 135, 229, 0.13);
+      --ring: rgba(255, 255, 255, 0.10);
+      --shadow: none;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane: #0b0d10;
+    --surface: #15181d;
+    --surface-2: #1c2027;
+    --ink: #eef2f7;
+    --ink-2: #a7b1be;
+    --ink-3: #767f8c;
+    --rule: #232830;
+    --rule-strong: #333b45;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --wash: rgba(57, 135, 229, 0.13);
+    --ring: rgba(255, 255, 255, 0.10);
+    --shadow: none;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --plane: #f4f6f8;
+    --surface: #fbfcfd;
+    --surface-2: #eef1f5;
+    --ink: #0e1116;
+    --ink-2: #4b535f;
+    --ink-3: #79828f;
+    --rule: #dde2e8;
+    --rule-strong: #c2cad3;
+    --s1: #2a78d6;
+    --s2: #eb6834;
+    --wash: rgba(42, 120, 214, 0.07);
+    --ring: rgba(14, 17, 22, 0.10);
+    --shadow: 0 1px 2px rgba(14, 17, 22, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+  }
+
+  /* --- masthead ------------------------------------------------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+    padding: 2.75rem 0 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .masthead > .wrap { padding-bottom: 0; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 0.9rem;
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 4.4vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+    font-weight: 620;
+    text-wrap: balance;
+    margin: 0 0 0.85rem;
+    max-width: 22ch;
+  }
+
+  .standfirst {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0 0 1.75rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    padding-bottom: 1.25rem;
+  }
+
+  /* --- evidence grade chips ------------------------------------- */
+  /* Grade is encoded by border treatment and label, never by colour:
+     Grade C is unverified, not "bad", so a red/amber status hue would
+     misrepresent it. */
+
+  .chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+    font-family: var(--mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2em 0.55em;
+    border-radius: 3px;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+  .chip b { font-weight: 700; }
+  .chip-a { background: var(--ink); color: var(--surface); border: 1px solid var(--ink); }
+  .chip-b { background: transparent; color: var(--ink-2); border: 1px solid var(--rule-strong); }
+  .chip-c { background: transparent; color: var(--ink-2); border: 1px dashed var(--rule-strong); }
+
+  /* --- sections -------------------------------------------------- */
+
+  section { margin: 0 0 3.5rem; scroll-margin-top: 1rem; }
+
+  h2 {
+    font-size: 1.375rem;
+    letter-spacing: -0.012em;
+    font-weight: 620;
+    margin: 0 0 0.4rem;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-size: 0.9375rem;
+    font-weight: 640;
+    margin: 0 0 0.35rem;
+  }
+
+  p { margin: 0 0 1rem; max-width: 68ch; }
+  .lede { color: var(--ink-2); margin-bottom: 1.5rem; }
+
+  a { color: inherit; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--rule-strong); }
+  a:hover { text-decoration-color: var(--s1); }
+
+  :focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; border-radius: 2px; }
+
+  .thesis {
+    border-left: 2px solid var(--s1);
+    background: var(--wash);
+    padding: 1.1rem 1.4rem;
+    margin: 0 0 2rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .thesis p { margin: 0; font-size: 1.0625rem; max-width: 60ch; }
+
+  /* --- cards ----------------------------------------------------- */
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 1.4rem 1.4rem 1.1rem;
+  }
+
+  .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
+
+  .card-sub { color: var(--ink-2); font-size: 0.875rem; max-width: 66ch; margin: 0 0 1.1rem; }
+
+  .source {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    line-height: 1.6;
+    color: var(--ink-3);
+    border-top: 1px solid var(--rule);
+    padding-top: 0.7rem;
+    margin-top: 1rem;
+  }
+
+  /* --- controls -------------------------------------------------- */
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.1rem 1.75rem;
+    padding-bottom: 1.3rem;
+    margin-bottom: 1.3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ctl label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.35rem;
+  }
+  .ctl output {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+    font-weight: 620;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .ctl .hint { display: block; font-size: 0.75rem; color: var(--ink-3); margin-top: 0.3rem; line-height: 1.45; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 1.25rem;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 3px; border-radius: 2px; background: var(--rule-strong);
+  }
+  input[type="range"]::-moz-range-track {
+    height: 3px; border-radius: 2px; background: var(--rule-strong);
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--s1); border: 2px solid var(--surface);
+    margin-top: -6px;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--s1); border: 2px solid var(--surface);
+  }
+
+  .seg {
+    display: inline-flex;
+    border: 1px solid var(--rule-strong);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .seg button {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--rule-strong); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+
+  .ghost {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .ghost:hover { background: var(--surface-2); }
+
+  /* --- chart ------------------------------------------------------ */
+
+  .chart-wrap { position: relative; overflow-x: auto; }
+  svg.chart { display: block; width: 100%; height: auto; overflow: visible; }
+  svg.chart text { font-family: var(--sans); }
+  .bar { transition: opacity 120ms ease; }
+  @media (prefers-reduced-motion: reduce) { .bar { transition: none; } }
+  .chart.dimmed .bar:not(.hot) { opacity: 0.4; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem;
+    font-size: 0.8125rem; color: var(--ink-2);
+    margin: 0.15rem 0 0.9rem;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--ink);
+    color: var(--plane);
+    border-radius: 4px;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    max-width: 17rem;
+    opacity: 0;
+    transform: translate(-50%, -100%);
+    transition: opacity 100ms ease;
+    z-index: 5;
+    font-variant-numeric: tabular-nums;
+  }
+  .tooltip.on { opacity: 1; }
+  .tooltip b { display: block; font-size: 0.8125rem; }
+  .tooltip em { font-style: normal; opacity: 0.72; }
+
+  /* --- tables ------------------------------------------------------ */
+
+  .table-wrap { overflow-x: auto; margin-top: 1rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; }
+  th, td { text-align: left; padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th {
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink-3); font-weight: 500;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
+  tbody tr:last-child td { border-bottom: 0; }
+  [hidden] { display: none !important; }
+
+  /* --- misc -------------------------------------------------------- */
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.25rem; }
+
+  .note {
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--rule-strong);
+    border-radius: 0 5px 5px 0;
+    padding: 0.85rem 1.1rem;
+    background: var(--surface);
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .note strong { color: var(--ink); }
+  .note p:last-child { margin-bottom: 0; }
+
+  ol.refs { font-size: 0.8125rem; color: var(--ink-2); padding-left: 1.25rem; max-width: 72ch; }
+  ol.refs li { margin-bottom: 0.5rem; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 34rem) {
+    .card { padding: 1.1rem 1rem 0.9rem; }
+    th, td { font-size: 0.75rem; }
+  }
+
+  /* Theme toggle. The tokens already support an explicit data-theme stamp;
+     this button is what sets it when the page is served standalone. */
+  .theme-toggle {
+    position: fixed; top: 1rem; right: 1rem; z-index: 20;
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.45rem 0.7rem;
+    border: 1px solid var(--rule-strong); border-radius: 5px;
+    background: var(--surface); color: var(--ink-2); cursor: pointer;
+  }
+  .theme-toggle:hover { background: var(--surface-2); }
+  @media print { .theme-toggle { display: none; } }
+</style>
+</head>
+<body>
+<button class="theme-toggle" type="button" id="theme-toggle" aria-live="polite">Dark</button>
+
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Ethical Tech CoLab &nbsp;/&nbsp; AI Models Research</p>
+    <h1>Cost, speed, and energy per accepted task</h1>
+    <p class="standfirst">
+      An interactive companion to a July 2026 comparative review of frontier, open-weight, and
+      efficient AI model families. Every figure below carries its source, its date, and how far it
+      has been independently verified.
+    </p>
+    <div class="meta-row">
+      <span>Research cut-off 2026-07-22</span>
+      <span>
+        <span class="chip chip-a"><b>A</b> independent</span>
+        <span class="chip chip-b"><b>B</b> institutional</span>
+        <span class="chip chip-c"><b>C</b> provider-reported</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="thesis">
+      <p>
+        There is no universally best AI model. Selection is a constrained optimisation across
+        verified task quality, factual reliability, latency, token consumption, energy per accepted
+        output, privacy, and total deployment cost.
+      </p>
+    </div>
+    <p class="lede">
+      The four instruments below let you interrogate that claim rather than take it on faith. The
+      first is the one that matters most: advertised price per million tokens is not cost, because a
+      model that has to be retried is not cheap.
+    </p>
+  </section>
+
+  <!-- =========================== CALCULATOR =========================== -->
+  <section id="cost">
+    <h2>What a request actually costs</h2>
+    <p class="lede">
+      Set the shape of your workload. The calculator applies the published input and output rates,
+      adds reasoning tokens at the output rate, and then divides by the acceptance rate to give cost
+      per accepted task. Defaults reproduce the document-analysis example in the review.
+    </p>
+
+    <div class="card">
+      <div class="controls">
+        <div class="ctl">
+          <label for="c-in">Input tokens <output id="o-in">100,000</output></label>
+          <input type="range" id="c-in" min="1000" max="400000" step="1000" value="100000" />
+        </div>
+        <div class="ctl">
+          <label for="c-out">Output tokens <output id="o-out">5,000</output></label>
+          <input type="range" id="c-out" min="200" max="60000" step="200" value="5000" />
+        </div>
+        <div class="ctl">
+          <label for="c-reason">Reasoning tokens <output id="o-reason">0&times; output</output></label>
+          <input type="range" id="c-reason" min="0" max="8" step="0.5" value="0" />
+          <span class="hint">Billed at the output rate where a provider bills them at all.</span>
+        </div>
+        <div class="ctl">
+          <label for="c-accept">Acceptance rate <output id="o-accept">100%</output></label>
+          <input type="range" id="c-accept" min="20" max="100" step="1" value="100" />
+          <span class="hint">Share of attempts that pass your quality check without manual correction.</span>
+        </div>
+      </div>
+
+      <div class="card-head">
+        <h3 id="cost-title">Nominal cost per request</h3>
+        <button class="ghost" type="button" data-table="cost-table" aria-expanded="false">Show data</button>
+      </div>
+      <div class="legend" id="cost-legend"></div>
+      <div class="chart-wrap">
+        <svg class="chart" id="cost-chart" role="img" aria-labelledby="cost-title"></svg>
+        <div class="tooltip" id="cost-tip" role="status"></div>
+      </div>
+      <div class="table-wrap" id="cost-table" hidden></div>
+
+      <p class="source" id="cost-source"></p>
+    </div>
+
+    <div class="note" style="margin-top:1.25rem">
+      <p>
+        <strong>Read the spread, not the ranking.</strong> At the default settings the cheapest and
+        most expensive options differ by roughly 26 times for the same request. Quality is not held
+        constant across that spread, so the chart is a cost measurement and not a value judgement.
+        Move the acceptance rate below 100% to see why a cheaper model can be the more expensive
+        choice.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================== PRICING =========================== -->
+  <section id="pricing">
+    <h2>Output tokens carry the cost</h2>
+    <p class="lede">
+      Output is priced three to six times above input across every published schedule in the review,
+      and it is generated sequentially. Verbosity is therefore a cost driver, a latency driver, and
+      an energy driver at once.
+    </p>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 id="price-title">Nominal API price per million tokens</h3>
+        <button class="ghost" type="button" data-table="price-table" aria-expanded="false">Show data</button>
+      </div>
+      <p class="card-sub">
+        Gemini 3.1 Pro is absent because the review did not extract a per-token rate for it; the
+        provider publishes pricing only as a live schedule.
+      </p>
+      <div class="legend" id="price-legend"></div>
+      <div class="chart-wrap">
+        <svg class="chart" id="price-chart" role="img" aria-labelledby="price-title"></svg>
+        <div class="tooltip" id="price-tip" role="status"></div>
+      </div>
+      <div class="table-wrap" id="price-table" hidden></div>
+      <p class="source" id="price-source"></p>
+    </div>
+  </section>
+
+  <!-- =========================== MOE =========================== -->
+  <section id="moe">
+    <h2>Stored parameters are not activated parameters</h2>
+    <p class="lede">
+      A mixture-of-experts model stores many parameters and activates a small subset per token. That
+      lowers compute per token relative to a dense model of the same stored size. It does not remove
+      the memory, routing, or communication cost, so active share is a compute proxy and not a
+      serving-cost measure.
+    </p>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 id="moe-title">Share of stored parameters activated per token</h3>
+        <button class="ghost" type="button" data-table="moe-table" aria-expanded="false">Show data</button>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="moe-chart" role="img" aria-labelledby="moe-title"></svg>
+        <div class="tooltip" id="moe-tip" role="status"></div>
+      </div>
+      <div class="table-wrap" id="moe-table" hidden></div>
+      <p class="source" id="moe-source"></p>
+    </div>
+  </section>
+
+  <!-- =========================== BENCHMARKS =========================== -->
+  <section id="agents">
+    <h2>Agents approach human performance without reaching it</h2>
+    <p class="lede">
+      Interactive agent benchmarks are where the remaining gap is clearest. Production systems fail
+      through sequences of small errors rather than single wrong answers, which is why a few
+      percentage points on a long-horizon task matter more than the same gap on a single-answer test.
+    </p>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 id="bench-title">Best reported model result against the human baseline</h3>
+        <button class="ghost" type="button" data-table="bench-table" aria-expanded="false">Show data</button>
+      </div>
+      <p class="card-sub">
+        Vertical marks show human baselines where the AI Index reports one. Human scores are often
+        measured under different time, tool, and incentive conditions than model scores, so the gap
+        is indicative rather than exact.
+      </p>
+      <div class="chart-wrap">
+        <svg class="chart" id="bench-chart" role="img" aria-labelledby="bench-title"></svg>
+        <div class="tooltip" id="bench-tip" role="status"></div>
+      </div>
+      <div class="table-wrap" id="bench-table" hidden></div>
+      <p class="source" id="bench-source"></p>
+    </div>
+  </section>
+
+  <!-- =========================== ENERGY =========================== -->
+  <section id="energy">
+    <h2>Reasoning budget, not model size, drives energy per query</h2>
+    <p class="lede">
+      No single energy number describes a model. Prompt length, output length, batch size,
+      precision, hardware generation, serving stack, and utilisation each change the result by large
+      factors. The two scenarios below are the only two the source states, so the toggle switches
+      between them rather than interpolating.
+    </p>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 id="energy-title">Estimated energy per frontier-scale query</h3>
+        <div class="seg" role="group" aria-label="Test-time compute scenario">
+          <button type="button" data-scenario="base" aria-pressed="true">Representative query</button>
+          <button type="button" data-scenario="scaled" aria-pressed="false">15&times; test-time tokens</button>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="energy-chart" role="img" aria-labelledby="energy-title"></svg>
+        <div class="tooltip" id="energy-tip" role="status"></div>
+      </div>
+      <p class="source" id="energy-source"></p>
+    </div>
+
+    <div class="grid-2" style="margin-top:1.25rem">
+      <div class="note">
+        <p>
+          <strong>Optimisation matters more than model choice.</strong> A peer-reviewed study of
+          inference across hardware, serving frameworks, batching, and decoding strategies found
+          that appropriate optimisations cut energy by up to 73% against an unoptimised baseline.
+          <span class="chip chip-a"><b>A</b> peer-reviewed</span>
+        </p>
+      </div>
+      <div class="note">
+        <p>
+          <strong>Do not divide sector totals by a query count.</strong> Data-centre electricity is
+          projected to reach about 945 TWh in 2030 against roughly 415 TWh in 2024, but that covers
+          every data-centre workload, not AI queries alone.
+          <span class="chip chip-b"><b>B</b> institutional</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== METHOD =========================== -->
+  <section id="method">
+    <h2>How to read any number on this page</h2>
+    <p class="lede">
+      The grade tells you how much independent scrutiny a figure has survived. It does not tell you
+      whether the figure is true. A Grade A result can be wrong and a Grade C claim can be accurate.
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <p><span class="chip chip-a"><b>A</b> independent</span></p>
+        <p class="card-sub" style="margin-bottom:0">
+          Peer-reviewed studies, standardised academic benchmarks, and reproducible third-party
+          evaluations. The only class admissible on its own for a comparative claim between
+          providers.
+        </p>
+      </div>
+      <div class="card">
+        <p><span class="chip chip-b"><b>B</b> institutional</span></p>
+        <p class="card-sub" style="margin-bottom:0">
+          Technical reports, model cards, benchmark methodology pages, and official specifications.
+          A provider is the definitive authority on its own commercial terms, so prices and context
+          limits sit here.
+        </p>
+      </div>
+      <div class="card">
+        <p><span class="chip chip-c"><b>C</b> provider-reported</span></p>
+        <p class="card-sub" style="margin-bottom:0">
+          Launch benchmark tables and vendor performance claims. Recorded because excluding them
+          would leave most commercial models undocumented. Never used alone to rank one provider
+          above another.
+        </p>
+      </div>
+      <div class="card">
+        <p><span class="chip chip-c" style="border-style:solid"><b>!</b> conditions unstated</span></p>
+        <p class="card-sub" style="margin-bottom:0">
+          Every provider benchmark figure in the review omits its harness, sampling policy, and tool
+          permissions. Results whose conditions are unknown are recorded but are never placed in a
+          ranked column beside results whose conditions are known.
+        </p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.25rem">
+      <p>
+        <strong>Prices and rankings change without notice.</strong> Every value here is a record of
+        what a named source stated on 2026-07-22, not a statement about the present. Verify against
+        current provider documentation before any procurement, budgeting, or deployment decision.
+        Nothing on this page is legal, financial, or procurement advice.
+      </p>
+    </div>
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <ol class="refs">
+      <li>Stanford Institute for Human-Centered Artificial Intelligence (2026). <em>AI Index Report 2026</em>. Grade B.</li>
+      <li>Oviedo, F., Kazhamiaka, F., Choukse, E., Kim, A., Luers, A., Nakagawa, M., Bianchini, R., and Lavista Ferres, J. M. (2026). Energy use of AI inference: efficiency pathways and test-time compute. <em>Joule</em>. Grade A.</li>
+      <li>Fernandez, J., Na, C., Tiwari, V., Bisk, Y., Luccioni, S., and Strubell, E. (2025). Energy considerations of large language model inference and efficiency optimizations. <em>Proceedings of ACL 2025</em>, 32556 to 32569. Grade A.</li>
+      <li>International Energy Agency (2025, 2026). <em>Energy and AI</em>; <em>Key questions on energy and AI</em>. Grade B.</li>
+      <li>Official provider documentation for OpenAI, Anthropic, Google DeepMind, xAI, DeepSeek, Mistral, and Meta, accessed 2026-07-22. Grade B for commercial terms, Grade C for performance claims.</li>
+    </ol>
+    <p class="lede" style="font-size:0.875rem">
+      The full source register, the extraction protocol, and the validation tooling live in the
+      research repository. Figures reproduced here are drawn from that review and inherit its
+      limitations, which are stated in full alongside it.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Ethical Tech CoLab &nbsp;/&nbsp; AI Models Research. Research cut-off 2026-07-22.
+      Figures are dated records, not current values.
+    </p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     Data. Every value is transcribed from the July 2026 review and
+     carries the grade of the source it came from. Nothing is estimated,
+     interpolated, or inferred.
+     ===================================================================== */
+
+  var MODELS = [
+    { id: "fable5",  name: "Claude Fable 5",  provider: "Anthropic", inp: 10,    out: 50   },
+    { id: "sol",     name: "GPT-5.6 Sol",     provider: "OpenAI",    inp: 5,     out: 30   },
+    { id: "opus48",  name: "Claude Opus 4.8", provider: "Anthropic", inp: 5,     out: 25   },
+    { id: "sonnet5", name: "Claude Sonnet 5", provider: "Anthropic", inp: 3,     out: 15   },
+    { id: "terra",   name: "GPT-5.6 Terra",   provider: "OpenAI",    inp: 2.5,   out: 15   },
+    { id: "grok45",  name: "Grok 4.5",        provider: "xAI",       inp: 2,     out: 6    },
+    { id: "luna",    name: "GPT-5.6 Luna",    provider: "OpenAI",    inp: 1,     out: 6    },
+    { id: "dsv4pro", name: "DeepSeek V4 Pro", provider: "DeepSeek",  inp: 0.435, out: 0.87 }
+  ];
+
+  var MOE = [
+    { name: "Mistral Medium 3.5", detail: "dense, all 128B active", active: 128,  total: 128,  share: 100 },
+    { name: "Mistral Small 4",    detail: "6B of 119B",             active: 6,    total: 119,  share: 5.0 },
+    { name: "DeepSeek V4 Flash",  detail: "13B of 284B",            active: 13,   total: 284,  share: 4.6 },
+    { name: "Llama 4 Maverick",   detail: "17B of 400B",            active: 17,   total: 400,  share: 4.3 },
+    { name: "DeepSeek V4 Pro",    detail: "49B of 1,600B",          active: 49,   total: 1600, share: 3.1 }
+  ];
+
+  var BENCH = [
+    { name: "Terminal-Bench 2.0", score: 77.3, human: null,  what: "Terminal-based coding and system tasks" },
+    { name: "WebArena",           score: 74.3, human: 78.24, what: "Web navigation and task completion" },
+    { name: "OSWorld",            score: 66.3, human: 72.35, what: "Computer use in realistic desktop environments" },
+    { name: "Vibe Code Bench",    score: 57.6, human: null,  what: "End-to-end application construction" }
+  ];
+
+  var ENERGY = {
+    base:   { label: "Representative query",   median: 0.34, lo: 0.18, hi: 0.67,
+              note: "Median estimate under realistic H100 utilisation and PUE assumptions." },
+    scaled: { label: "15× test-time tokens", median: 4.32, lo: null, hi: null,
+              note: "Raising token use by a factor of 15 for test-time scaling raises the median about 13 times." }
+  };
+
+  var SRC = {
+    cost: "Computed from nominal published rates, 2026-07-22. Provider-reported (Grade C). Excludes tool calls, long-context surcharges, cached-input discounts (not disclosed by these sources), batch discounts, enterprise agreements, and tax. Quality is not held constant.",
+    price: "Official provider documentation, accessed 2026-07-22. Commercial terms are Grade B; the review labels the assembled comparison Grade C because conditions differ by provider.",
+    moe: "Provider architecture disclosures, accessed 2026-07-22 (Grade B). Active share is a compute proxy and excludes memory, routing, and communication overhead.",
+    bench: "Stanford HAI, AI Index Report 2026, Technical Performance chapter (Grade B). Snapshots, not permanent rankings. Harness and tool permissions affect these scores.",
+    energy: "Oviedo et al. (2026), Joule (Grade A). Bottom-up analytical estimates for frontier-scale inference on an H100 node, not measurements of a named commercial service."
+  };
+
+  /* ===================== small helpers ===================== */
+
+  function css(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+  function fmt(n, dp) {
+    return n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  function money(n) {
+    if (n >= 100) return "$" + fmt(n, 0);
+    if (n >= 1) return "$" + fmt(n, 2);
+    if (n >= 0.01) return "$" + fmt(n, 3);
+    return "$" + fmt(n, 5);
+  }
+  function el(tag, attrs, text) {
+    var node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) { if (attrs[k] !== null) node.setAttribute(k, attrs[k]); }
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  /* =====================================================================
+     Horizontal bar chart.
+     Marks: 4px rounded data-ends anchored to the baseline, a 2px surface
+     gap between adjacent fills, direct labels on every bar (the relief
+     the contrast check asks for), recessive grid, per-mark hover.
+     ===================================================================== */
+
+  function barChart(opts) {
+    var svg = document.getElementById(opts.svg);
+    var tip = document.getElementById(opts.tip);
+    var rows = opts.rows;
+    var series = opts.series;            // [{key, label, color}]
+    var labelW = opts.labelW || 168;
+    var rowH = series.length > 1 ? 46 : 34;
+    var gap = 12;
+    var padR = opts.padR || 78;
+    var padT = 8;
+    var padB = 30;
+    var h = padT + rows.length * (rowH + gap) + padB;
+    var w = 760;
+    var plotW = w - labelW - padR;
+    var max = opts.max || Math.max.apply(null, rows.map(function (r) {
+      return Math.max.apply(null, series.map(function (s) { return r[s.key] || 0; }));
+    })) * 1.08;
+
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    svg.setAttribute("preserveAspectRatio", "xMinYMin meet");
+    svg.style.minWidth = (labelW + 260) + "px";
+    while (svg.firstChild) { svg.removeChild(svg.firstChild); }
+
+    var ink = css("--ink"), ink2 = css("--ink-2"), ink3 = css("--ink-3");
+    var rule = css("--rule"), surface = css("--surface");
+
+    var x = function (v) { return labelW + (v / max) * plotW; };
+
+    // recessive gridlines
+    var ticks = opts.ticks || 5;
+    for (var t = 0; t <= ticks; t++) {
+      var tv = (max / ticks) * t;
+      svg.appendChild(el("line", {
+        x1: x(tv), x2: x(tv), y1: padT, y2: h - padB,
+        stroke: rule, "stroke-width": 1
+      }));
+      svg.appendChild(el("text", {
+        x: x(tv), y: h - padB + 16, "text-anchor": "middle",
+        "font-size": 11, fill: ink3
+      }, opts.tickFmt ? opts.tickFmt(tv) : fmt(tv, 0)));
+    }
+    if (opts.axisLabel) {
+      svg.appendChild(el("text", {
+        x: labelW + plotW / 2, y: h - 2, "text-anchor": "middle",
+        "font-size": 11, fill: ink3
+      }, opts.axisLabel));
+    }
+
+    rows.forEach(function (row, i) {
+      var top = padT + i * (rowH + gap);
+
+      svg.appendChild(el("text", {
+        x: labelW - 12, y: top + rowH / 2 + 4, "text-anchor": "end",
+        "font-size": 13, fill: ink
+      }, row.name));
+
+      var barH = series.length > 1 ? (rowH - 2) / series.length - 1 : rowH - 8;
+
+      series.forEach(function (s, si) {
+        var v = row[s.key];
+        if (v === null || v === undefined) { return; }
+        var y = series.length > 1
+          ? top + si * (barH + 2)
+          : top + (rowH - barH) / 2;
+        var len = Math.max(x(v) - labelW, 2);
+
+        var d = "M" + labelW + "," + y +
+                "h" + Math.max(len - 4, 0) +
+                "a4,4 0 0 1 4,4" +
+                "v" + Math.max(barH - 8, 0) +
+                "a4,4 0 0 1 -4,4" +
+                "h" + -Math.max(len - 4, 0) + "z";
+
+        var bar = el("path", {
+          d: d, fill: s.color, class: "bar",
+          stroke: surface, "stroke-width": 2, "paint-order": "stroke"
+        });
+        bar.dataset.row = i;
+        svg.appendChild(bar);
+
+        svg.appendChild(el("text", {
+          x: x(v) + 8, y: y + barH / 2 + 4, "font-size": 12,
+          fill: ink2, "font-variant-numeric": "tabular-nums"
+        }, opts.valueFmt(v, row, s)));
+      });
+
+      if (opts.marker && row[opts.marker] != null) {
+        var mx = x(row[opts.marker]);
+        svg.appendChild(el("line", {
+          x1: mx, x2: mx, y1: top + 1, y2: top + rowH - 1,
+          stroke: ink2, "stroke-width": 3, "stroke-linecap": "round"
+        }));
+        svg.appendChild(el("text", {
+          x: mx + 8, y: top + rowH / 2 + 4, "font-size": 11, fill: ink3
+        }, opts.markerFmt(row[opts.marker])));
+      }
+
+      // full-row hit target, larger than the mark
+      var hit = el("rect", {
+        x: 0, y: top, width: w, height: rowH, fill: "transparent",
+        style: "cursor:default"
+      });
+      hit.addEventListener("mouseenter", function () {
+        svg.classList.add("dimmed");
+        Array.prototype.forEach.call(svg.querySelectorAll(".bar"), function (b) {
+          b.classList.toggle("hot", b.dataset.row === String(i));
+        });
+        tip.innerHTML = opts.tipHtml(row);
+        tip.classList.add("on");
+      });
+      hit.addEventListener("mousemove", function (ev) {
+        var box = svg.parentNode.getBoundingClientRect();
+        tip.style.left = Math.min(Math.max(ev.clientX - box.left, 90), box.width - 90) + "px";
+        tip.style.top = (ev.clientY - box.top - 12) + "px";
+      });
+      hit.addEventListener("mouseleave", function () {
+        svg.classList.remove("dimmed");
+        tip.classList.remove("on");
+      });
+      svg.appendChild(hit);
+    });
+  }
+
+  function legend(id, series) {
+    var box = document.getElementById(id);
+    if (!box) { return; }
+    box.innerHTML = series.map(function (s) {
+      return '<span><i class="swatch" style="background:' + s.color + '"></i>' + s.label + "</span>";
+    }).join("");
+  }
+
+  function table(id, head, rows) {
+    var box = document.getElementById(id);
+    box.innerHTML =
+      "<table><thead><tr>" +
+      head.map(function (h) { return '<th class="' + (h.num ? "num" : "") + '">' + h.label + "</th>"; }).join("") +
+      "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        return "<tr>" + r.map(function (c, i) {
+          return '<td class="' + (head[i].num ? "num" : "") + '">' + c + "</td>";
+        }).join("") + "</tr>";
+      }).join("") +
+      "</tbody></table>";
+  }
+
+  /* ===================== cost calculator ===================== */
+
+  var ctl = {
+    inp: document.getElementById("c-in"),
+    out: document.getElementById("c-out"),
+    reason: document.getElementById("c-reason"),
+    accept: document.getElementById("c-accept")
+  };
+
+  function costRows() {
+    var tIn = +ctl.inp.value;
+    var tOut = +ctl.out.value;
+    var mult = +ctl.reason.value;
+    var acc = +ctl.accept.value / 100;
+    var tReason = Math.round(tOut * mult);
+
+    return MODELS.map(function (m) {
+      var inCost = (tIn / 1e6) * m.inp;
+      var outCost = ((tOut + tReason) / 1e6) * m.out;
+      var total = inCost + outCost;
+      return {
+        name: m.name, provider: m.provider,
+        nominal: total,
+        accepted: total / acc,
+        inCost: inCost, outCost: outCost,
+        tIn: tIn, tOut: tOut, tReason: tReason, acc: acc
+      };
+    }).sort(function (a, b) { return b.accepted - a.accepted; });
+  }
+
+  function drawCost() {
+    var rows = costRows();
+    var acc = +ctl.accept.value / 100;
+    var showBoth = acc < 1;
+
+    var series = showBoth
+      ? [{ key: "nominal", label: "Nominal cost per request", color: css("--s1") },
+         { key: "accepted", label: "Cost per accepted task", color: css("--s2") }]
+      : [{ key: "nominal", label: "Nominal cost per request", color: css("--s1") }];
+
+    document.getElementById("cost-title").textContent = showBoth
+      ? "Nominal cost against cost per accepted task"
+      : "Nominal cost per request";
+
+    legend("cost-legend", showBoth ? series : []);
+
+    var spread = rows[0].accepted / rows[rows.length - 1].accepted;
+
+    barChart({
+      svg: "cost-chart", tip: "cost-tip", rows: rows, series: series,
+      labelW: 168, padR: 92,
+      axisLabel: "cost per request, USD",
+      tickFmt: function (v) { return v >= 1 ? "$" + fmt(v, 1) : "$" + fmt(v, 2); },
+      valueFmt: function (v) { return money(v); },
+      tipHtml: function (r) {
+        return "<b>" + r.name + "</b><em>" + r.provider + "</em>" +
+          "<br>input " + fmt(r.inCost, 4).replace(/^/, "$") +
+          " &middot; output " + "$" + fmt(r.outCost, 4) +
+          "<br>nominal " + money(r.nominal) +
+          (r.acc < 1 ? "<br>per accepted task " + money(r.accepted) +
+            " <em>(" + Math.round(r.acc * 100) + "% accepted)</em>" : "") +
+          "<br><em>provider-reported rates, Grade C</em>";
+      }
+    });
+
+    table("cost-table",
+      [{ label: "Model" }, { label: "Provider" }, { label: "Input", num: true },
+       { label: "Output", num: true }, { label: "Nominal", num: true },
+       { label: "Per accepted task", num: true }, { label: "Grade" }],
+      rows.map(function (r) {
+        return [r.name, r.provider, money(r.inCost), money(r.outCost),
+                money(r.nominal), money(r.accepted), "C provider-reported"];
+      }));
+
+    document.getElementById("cost-source").textContent =
+      "Spread cheapest to most expensive: " + fmt(spread, 1) + " times. " + SRC.cost;
+  }
+
+  function syncOutputs() {
+    document.getElementById("o-in").textContent = (+ctl.inp.value).toLocaleString("en-US");
+    document.getElementById("o-out").textContent = (+ctl.out.value).toLocaleString("en-US");
+    var m = +ctl.reason.value;
+    document.getElementById("o-reason").textContent =
+      m === 0 ? "none" : fmt(m, m % 1 ? 1 : 0) + "× output";
+    document.getElementById("o-accept").textContent = ctl.accept.value + "%";
+  }
+
+  Object.keys(ctl).forEach(function (k) {
+    ctl[k].addEventListener("input", function () { syncOutputs(); drawCost(); });
+  });
+
+  /* ===================== the static charts ===================== */
+
+  function drawPrice() {
+    var series = [
+      { key: "inp", label: "Input", color: css("--s1") },
+      { key: "out", label: "Output", color: css("--s2") }
+    ];
+    legend("price-legend", series);
+    barChart({
+      svg: "price-chart", tip: "price-tip", rows: MODELS, series: series,
+      labelW: 168, padR: 78,
+      axisLabel: "nominal price, USD per million tokens",
+      tickFmt: function (v) { return "$" + fmt(v, 0); },
+      valueFmt: function (v) { return "$" + (v < 1 ? fmt(v, 3) : fmt(v, v % 1 ? 2 : 0)); },
+      tipHtml: function (r) {
+        return "<b>" + r.name + "</b><em>" + r.provider + "</em>" +
+          "<br>input $" + fmt(r.inp, 3) + " per 1M" +
+          "<br>output $" + fmt(r.out, 2) + " per 1M" +
+          "<br>output is " + fmt(r.out / r.inp, 1) + "× the input rate" +
+          "<br><em>provider-reported, Grade C</em>";
+      }
+    });
+    table("price-table",
+      [{ label: "Model" }, { label: "Provider" }, { label: "Input / 1M", num: true },
+       { label: "Output / 1M", num: true }, { label: "Ratio", num: true }, { label: "Grade" }],
+      MODELS.map(function (m) {
+        return [m.name, m.provider, "$" + fmt(m.inp, 3), "$" + fmt(m.out, 2),
+                fmt(m.out / m.inp, 1) + "×", "C provider-reported"];
+      }));
+    document.getElementById("price-source").textContent = SRC.price;
+  }
+
+  function drawMoe() {
+    barChart({
+      svg: "moe-chart", tip: "moe-tip", rows: MOE,
+      series: [{ key: "share", label: "Active share", color: css("--s1") }],
+      labelW: 178, padR: 96, max: 112,
+      axisLabel: "parameters active per token, % of total stored",
+      tickFmt: function (v) { return fmt(v, 0) + "%"; },
+      valueFmt: function (v, r) { return fmt(v, v >= 100 ? 0 : 1) + "%  " + r.detail; },
+      tipHtml: function (r) {
+        return "<b>" + r.name + "</b>" +
+          "<br>" + fmt(r.active, 0) + "B active of " + fmt(r.total, 0) + "B stored" +
+          "<br>" + fmt(r.share, 1) + "% active per token" +
+          "<br><em>architecture disclosure, Grade B</em>";
+      }
+    });
+    table("moe-table",
+      [{ label: "Model" }, { label: "Total (B)", num: true }, { label: "Active (B)", num: true },
+       { label: "Active share", num: true }, { label: "Grade" }],
+      MOE.map(function (m) {
+        return [m.name, fmt(m.total, 0), fmt(m.active, 0), fmt(m.share, 1) + "%", "B institutional"];
+      }));
+    document.getElementById("moe-source").textContent = SRC.moe;
+  }
+
+  function drawBench() {
+    barChart({
+      svg: "bench-chart", tip: "bench-tip", rows: BENCH,
+      series: [{ key: "score", label: "Best reported result", color: css("--s1") }],
+      labelW: 168, padR: 118, max: 100, ticks: 5,
+      marker: "human",
+      axisLabel: "best reported task success, %",
+      tickFmt: function (v) { return fmt(v, 0) + "%"; },
+      markerFmt: function (v) { return "human " + fmt(v, 0) + "%"; },
+      valueFmt: function (v) { return fmt(v, 1) + "%"; },
+      tipHtml: function (r) {
+        return "<b>" + r.name + "</b><em>" + r.what + "</em>" +
+          "<br>best reported " + fmt(r.score, 1) + "%" +
+          (r.human ? "<br>human baseline " + fmt(r.human, 2) + "%" +
+            "<br>gap " + fmt(r.human - r.score, 1) + " points"
+            : "<br><em>no human baseline reported</em>") +
+          "<br><em>AI Index 2026, Grade B</em>";
+      }
+    });
+    table("bench-table",
+      [{ label: "Benchmark" }, { label: "Capability" }, { label: "Best reported", num: true },
+       { label: "Human", num: true }, { label: "Gap", num: true }, { label: "Grade" }],
+      BENCH.map(function (b) {
+        return [b.name, b.what, fmt(b.score, 1) + "%",
+                b.human ? fmt(b.human, 2) + "%" : "not reported",
+                b.human ? fmt(b.human - b.score, 1) + " pts" : "not applicable",
+                "B institutional"];
+      }));
+    document.getElementById("bench-source").textContent = SRC.bench;
+  }
+
+  var scenario = "base";
+
+  function drawEnergy() {
+    var rows = [
+      { name: ENERGY.base.label, v: ENERGY.base.median, lo: ENERGY.base.lo, hi: ENERGY.base.hi,
+        note: ENERGY.base.note, on: scenario === "base" },
+      { name: ENERGY.scaled.label, v: ENERGY.scaled.median, lo: null, hi: null,
+        note: ENERGY.scaled.note, on: scenario === "scaled" }
+    ];
+    var s1 = css("--s1"), muted = css("--rule-strong");
+
+    var svg = document.getElementById("energy-chart");
+    var tip = document.getElementById("energy-tip");
+    var w = 760, labelW = 200, padR = 150, padT = 10, padB = 34;
+    var rowH = 44, gap = 22;
+    var h = padT + rows.length * (rowH + gap) + padB;
+    var max = 6;
+    var plotW = w - labelW - padR;
+    var x = function (v) { return labelW + (v / max) * plotW; };
+
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    svg.style.minWidth = (labelW + 280) + "px";
+    while (svg.firstChild) { svg.removeChild(svg.firstChild); }
+
+    var ink = css("--ink"), ink2 = css("--ink-2"), ink3 = css("--ink-3");
+    var rule = css("--rule"), surface = css("--surface");
+
+    for (var t = 0; t <= 6; t++) {
+      svg.appendChild(el("line", { x1: x(t), x2: x(t), y1: padT, y2: h - padB, stroke: rule, "stroke-width": 1 }));
+      svg.appendChild(el("text", { x: x(t), y: h - padB + 16, "text-anchor": "middle", "font-size": 11, fill: ink3 }, t));
+    }
+    svg.appendChild(el("text", {
+      x: labelW + plotW / 2, y: h - 2, "text-anchor": "middle", "font-size": 11, fill: ink3
+    }, "estimated energy per query, watt-hours (H100 node)"));
+
+    rows.forEach(function (r, i) {
+      var top = padT + i * (rowH + gap);
+      var barH = rowH - 14;
+      var y = top + 7;
+      var colour = r.on ? s1 : muted;
+      var len = Math.max(x(r.v) - labelW, 2);
+
+      svg.appendChild(el("text", {
+        x: labelW - 12, y: top + rowH / 2 + 4, "text-anchor": "end",
+        "font-size": 13, fill: r.on ? ink : ink3
+      }, r.name));
+
+      svg.appendChild(el("path", {
+        d: "M" + labelW + "," + y + "h" + Math.max(len - 4, 0) +
+           "a4,4 0 0 1 4,4v" + Math.max(barH - 8, 0) + "a4,4 0 0 1 -4,4h" + -Math.max(len - 4, 0) + "z",
+        fill: colour, stroke: surface, "stroke-width": 2, "paint-order": "stroke", class: "bar"
+      }));
+
+      if (r.lo !== null) {
+        var cy = top + rowH / 2;
+        svg.appendChild(el("line", { x1: x(r.lo), x2: x(r.hi), y1: cy, y2: cy, stroke: ink2, "stroke-width": 2 }));
+        [r.lo, r.hi].forEach(function (v) {
+          svg.appendChild(el("line", { x1: x(v), x2: x(v), y1: cy - 7, y2: cy + 7, stroke: ink2, "stroke-width": 2, "stroke-linecap": "round" }));
+        });
+      }
+
+      svg.appendChild(el("text", {
+        x: x(r.hi !== null ? r.hi : r.v) + 12, y: top + rowH / 2 + 4,
+        "font-size": 12, fill: r.on ? ink : ink3, "font-variant-numeric": "tabular-nums"
+      }, "median " + fmt(r.v, 2) + " Wh" + (r.lo !== null ? "  (IQR " + fmt(r.lo, 2) + " to " + fmt(r.hi, 2) + ")" : "")));
+
+      var hit = el("rect", { x: 0, y: top, width: w, height: rowH, fill: "transparent" });
+      hit.addEventListener("mouseenter", function () {
+        tip.innerHTML = "<b>" + r.name + "</b>median " + fmt(r.v, 2) + " Wh" +
+          (r.lo !== null ? "<br>interquartile range " + fmt(r.lo, 2) + " to " + fmt(r.hi, 2) + " Wh" : "") +
+          "<br>" + r.note + "<br><em>Oviedo et al. 2026, Grade A</em>";
+        tip.classList.add("on");
+      });
+      hit.addEventListener("mousemove", function (ev) {
+        var box = svg.parentNode.getBoundingClientRect();
+        tip.style.left = Math.min(Math.max(ev.clientX - box.left, 100), box.width - 100) + "px";
+        tip.style.top = (ev.clientY - box.top - 12) + "px";
+      });
+      hit.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
+      svg.appendChild(hit);
+    });
+
+    document.getElementById("energy-source").textContent =
+      (scenario === "scaled"
+        ? "Selected: 15 times test-time tokens, about 13 times the base median. "
+        : "Selected: representative query. ") + SRC.energy;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-scenario]"), function (btn) {
+    btn.addEventListener("click", function () {
+      scenario = btn.dataset.scenario;
+      Array.prototype.forEach.call(document.querySelectorAll("[data-scenario]"), function (b) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      drawEnergy();
+    });
+  });
+
+  /* ===================== table toggles ===================== */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-table]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var box = document.getElementById(btn.dataset.table);
+      var open = box.hidden;
+      box.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Hide data" : "Show data";
+    });
+  });
+
+  /* ===================== boot and theme reactivity ===================== */
+
+  function drawAll() { drawCost(); drawPrice(); drawMoe(); drawBench(); drawEnergy(); }
+
+  syncOutputs();
+  drawAll();
+
+  // Charts read colours from CSS tokens, so a theme change has to redraw.
+  new MutationObserver(drawAll).observe(document.documentElement, {
+    attributes: true, attributeFilter: ["data-theme"]
+  });
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) { mq.addEventListener("change", drawAll); }
+  }
+  window.addEventListener("resize", function () {
+    clearTimeout(window.__rz);
+    window.__rz = setTimeout(drawAll, 150);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var btn = document.getElementById("theme-toggle");
+  var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  function current() { return root.getAttribute("data-theme") || (prefersDark ? "dark" : "light"); }
+  function label() { btn.textContent = current() === "dark" ? "Light" : "Dark"; }
+  try {
+    var saved = localStorage.getItem("amr-theme");
+    if (saved === "dark" || saved === "light") { root.setAttribute("data-theme", saved); }
+  } catch (e) { /* storage unavailable; fall back to the OS preference */ }
+  label();
+  btn.addEventListener("click", function () {
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("amr-theme", next); } catch (e) { /* not persisted */ }
+    label();
+  });
+})();
+</script>
+
+</body>
+</html>
