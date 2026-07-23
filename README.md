@@ -313,3 +313,22 @@ Outstanding data gaps and unverified sources are tracked in [data-sources.md](da
 ## Licence
 
 Documentation and data are licensed under Creative Commons Attribution 4.0 International. Source code under `scripts/` and `notebooks/` is licensed under the MIT Licence. See [LICENSE](LICENSE).
+
+---
+
+## Peer Review
+
+The full independent academic peer review of this survey is in [PEER-REVIEW.md](PEER-REVIEW.md) (also available as [Word](peer-review/ai-models-research-Peer-Review.docx) under [`peer-review/`](peer-review/)).
+
+**Recommendation:** Minor revisions — the methodology, `limitations.md`, and the evidence taxonomy are described in the review as the best in the CoLab portfolio; the gap is between that apparatus and how little data currently sits under it.
+
+**What the review found:**
+
+- **After the evidence rules are applied, almost nothing is left to compare.** `benchmarks.csv` holds nine rows, all Grade C, each individually marked "excluded from ranked comparison" — zero rows are eligible for the comparison the survey exists to support, so RQ2 is answered entirely in prose. The review's recommendation is to publish this as the finding it is: as of July 2026, no public benchmark evidence for frontier commercial models survives a reproducibility bar. That is a result about the field's disclosure practices, not a to-do item.
+- **`energy-studies.csv` contains a header row and no data**, while energy is in the title and has its own chapter.
+- **`Not publicly disclosed` is used where the provider does disclose.** On all three Anthropic pricing rows, `cached_input_price_per_1m`, `reasoning_token_billing`, and `batch_discount_percent` are recorded as undisclosed; all three are documented by that provider. This records a source-review gap as a provider-transparency finding — the exact distinction the taxonomy exists to preserve. Recommended fix: add a fourth value (`Not extracted`) and re-audit every such cell.
+- **A blanket caveat that is false for a whole provider block** — every row carries "model_id is a normalised slug … replace with the exact string when the API reference is read", but the recorded Anthropic IDs *are* the exact API strings.
+- **The low-cost tier of a major family is missing** — Claude Haiku 4.5 (200K context, $1/$5) is absent, so the selection framework cannot express a cheap-tier recommendation there, and the one in-family counterexample to "context has converged at 1M" is gone.
+- Minor: the build-status line ("Phase 1 complete. Phases 2 to 5 are not yet written") contradicts the §18 table and the 21 chapters in the tree; sample sizes and grade distribution are stated nowhere a reader will see them; `release_date` is `Not publicly disclosed` for all 18 models; family-level Qwen rows sit in a per-model table.
+
+**Verified against the data layer:** the Anthropic rows check out — Claude Fable 5 at $10/$50 per MTok, Opus 4.8 at $5/$25, Sonnet 5 at $3/$15 with the introductory rate noted, all at 1M context and 128K max output, and the Sonnet 5 tokenizer note is accurate. The reviewer verified only the Anthropic block; a per-provider audit of the rest is recommended before publication.
