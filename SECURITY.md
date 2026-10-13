@@ -5,14 +5,14 @@
 Report privately through GitHub. **Please do not open a public issue for a
 security problem.**
 
-1. Open the **[Security](../../security)** tab of this repository
+1. Open the **[Security](https://github.com/Ethical-Tech-CoLab/AI-Models-Research/security)** tab of this repository
 2. Click **Report a vulnerability**
 
 That creates a private advisory visible only to the maintainers. Private
 vulnerability reporting is enabled on this repository.
 
 If you cannot use GitHub, open a public issue saying only that you have a
-security report and how to reach you — no details.
+security report and how to reach you. Give no details.
 
 ### What helps
 
@@ -36,21 +36,21 @@ branch is supported, and fixes are not backported.
 
 ## What this repository is
 
-A research knowledge base on AI models — architecture, training, evaluation, inference, hardware, and model profiles — published with MkDocs, with a Python data layer.
+A research knowledge base on AI models (architecture, training, evaluation, inference, hardware, and model profiles), published with MkDocs, with a Python data layer.
 
 ## Scope
 
-**In scope**
+### In scope
 
 - Anything that causes attacker-controlled input to execute in a visitor's
-  browser — cross-site scripting, HTML injection into rendered output, unsafe
+  browser: cross-site scripting, HTML injection into rendered output, unsafe
   URL schemes in generated links
 - Anything that causes the published page to load or execute code from a source
-  this repository did not intend — an unpinned or integrity-unverified
+  this repository did not intend: an unpinned or integrity-unverified
   third-party asset, a hijackable CDN path, dependency confusion
 - Exposure of a credential or token in committed code or in built output
 
-**Out of scope**
+### Out of scope
 
 - Findings that require the attacker to already control the visitor's machine
   or browser
@@ -60,7 +60,7 @@ A research knowledge base on AI models — architecture, training, evaluation, i
 ## Not a security issue
 
 Disagreement with the model, the numbers, the methodology, or the legal
-analysis is **not** a security report — but we do want to hear it. Open a
+analysis is **not** a security report, but we do want to hear it. Open a
 normal issue. If a peer review is published in this repository
 (`PEER-REVIEW.md`), read it first: the finding may already be recorded there.
 

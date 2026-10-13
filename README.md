@@ -5,7 +5,7 @@
 
 A technical reference, comparative research survey, and reproducible evaluation framework covering contemporary proprietary and open-weight AI model families. Maintained by [Ethical Tech CoLab](https://github.com/Ethical-Tech-CoLab).
 
-**Build status: Phase 1 (foundation) complete. Phases 2 to 5 are not yet written.** See [Repository status](#18-repository-status).
+**Build status: Phase 1 (foundation) complete; Phases 2, 4, and 5 partial; Phase 3 (model profiles) not started.** See [Repository status](#18-repository-status).
 
 ---
 
